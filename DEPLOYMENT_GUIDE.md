@@ -187,3 +187,5 @@ To deploy on Netlify:
     *   `NEXT_PUBLIC_SUPABASE_URL` = *(Your Supabase URL)*
     *   `NEXT_PUBLIC_SUPABASE_ANON_KEY` = *(Your Supabase Anon Key)*
 4.  Trigger the deploy. Netlify will build and host the application seamlessly.
+
+5.  luqmaan yes
