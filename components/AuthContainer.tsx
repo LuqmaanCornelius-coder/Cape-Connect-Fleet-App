@@ -80,9 +80,9 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
         <span className="text-[10px] uppercase font-extrabold tracking-widest text-teal-400 bg-teal-950/80 px-3 py-1 rounded-full border border-teal-800">
           🔒 Professional Fleet System
         </span>
-        <h1 className="text-3xl font-extrabold text-white tracking-tight mt-3">INYATHI</h1>
+        <h1 className="text-3xl font-extrabold text-white tracking-tight mt-3">CCS</h1>
         <p className="text-xs text-slate-400 mt-1 max-w-sm">
-          High-performance fleet logistics, cost reconciliations, and pre-trip driver compliance.
+         Cape Connect Shuttles High-performance fleet logistics, cost reconciliations, and pre-trip driver compliance.
         </p>
       </div>
 
@@ -106,7 +106,7 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
               <input
                 type="email"
                 required
-                placeholder="e.g. name@inyathi.co.za"
+                placeholder="e.g. name@ccshuttles.co.za"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 className="w-full bg-slate-950 border border-slate-700/80 rounded-xl py-2.5 pl-10 pr-4 text-xs text-white focus:outline-none focus:border-teal-500 placeholder-slate-600 transition-colors"
@@ -206,7 +206,7 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
                     <input
                       type="email"
                       required
-                      placeholder="e.g. name@inyathi.co.za"
+                      placeholder="e.g. name@ccshuttles.co.za"
                       value={resetEmail}
                       onChange={e => setResetEmail(e.target.value)}
                       className="w-full bg-slate-950 border border-slate-700/80 rounded-xl py-2.5 pl-10 pr-4 text-xs text-white focus:outline-none focus:border-teal-500 placeholder-slate-600 transition-colors"
