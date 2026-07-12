@@ -1,7 +1,7 @@
 {
-  "name": "INYATHI Fleet Management",
-  "short_name": "INYATHI",
-  "description": "INYATHI Fleet Management - Reconciliations, Fleet, and Booking System",
+  "name": "Cape Connect Shuttles App Management",
+  "short_name": "CCShuttles",
+  "description": "Cape Connect Shuttles App Management - Reconciliations, Fleet, and Booking System",
   "icons": [
     { "src": "/icon.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
     { "src": "/apple-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
