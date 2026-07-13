@@ -97,6 +97,16 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
           </p>
         </div>
 
+          {/* Login card */}
+      <div className="bg-slate-800/80 border border-slate-700/60 backdrop-blur-md w-full max-w-md rounded-2xl shadow-2xl p-6 z-10">
+        <div className="mb-5">
+          <h2 className="text-sm font-extrabold text-white tracking-wide">Sign In to Portal</h2>
+          <p className="text-[11px] text-slate-500 mt-0.5">
+            Drivers receive access via invite. Admins are provisioned through the dashboard.
+          </p>
+        </div>
+
+
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Email */}
           <div>
