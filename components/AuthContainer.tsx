@@ -70,33 +70,26 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Brand header */}
-      <div className="text-center mb-8 z-10 flex flex-col items-center">
-        <div className="mb-4 flex items-center justify-center">
-          <div className="relative w-28 h-28 rounded-2xl overflow-hidden shadow-2xl ring-2 ring-teal-500/30 bg-white/5 backdrop-blur-sm">
-            <Image src={logoSrc} alt="INYATHI Logo" fill className="object-contain p-1" priority draggable={false} />
-          </div>
-        </div>
-        <span className="text-[10px] uppercase font-extrabold tracking-widest text-teal-400 bg-teal-950/80 px-3 py-1 rounded-full border border-teal-800">
-          🔒 Professional Fleet System
-        </span>
-        <h1 className="text-5xl font-black text-white tracking-[-2px] mt-3">
-  CCS
-</h1>
-        <p className="text-xs text-slate-400 mt-1 max-w-sm">
-         Cape Connect Shuttles High-performance fleet logistics, cost reconciliations, and pre-trip driver compliance.
-        </p>
-      </div>
-
-      {/* Login card */}
-      <div className="bg-slate-800/80 border border-slate-700/60 backdrop-blur-md w-full max-w-md rounded-2xl shadow-2xl p-6 z-10">
-        <div className="mb-5">
-          <h2 className="text-sm font-extrabold text-white tracking-wide">Sign In to Portal</h2>
-          <p className="text-[11px] text-slate-500 mt-0.5">
-            Drivers receive access via invite. Admins are provisioned through the dashboard.
-          </p>
-        </div>
-
+     {/* Brand header */}
+<div className="text-center mb-8 z-10 flex flex-col items-center">
+  <div className="mb-4 flex items-center justify-center">
+    <div className="relative w-28 h-28 rounded-2xl overflow-hidden shadow-2xl ring-2 ring-teal-500/30 bg-white/5 backdrop-blur-sm">
+      <Image src={logoSrc} alt="INYATHI Logo" fill className="object-contain p-1" priority draggable={false} />
+    </div>
+  </div>
+  
+  <span className="text-[10px] uppercase font-extrabold tracking-widest text-teal-400 bg-teal-950/80 px-3 py-1 rounded-full border border-teal-800">
+    🔒 Professional Fleet System
+  </span>
+  
+  <h1 className="text-5xl font-black text-white tracking-[-3px] mt-3 drop-shadow-[0_0_25px_rgb(45,212,191)]">
+    CCS
+  </h1>
+  
+  <p className="text-xs text-slate-400 mt-1 max-w-sm">
+   Cape Connect Shuttles High-performance fleet logistics, cost reconciliations, and pre-trip driver compliance.
+  </p>
+</div>
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Email */}
           <div>
