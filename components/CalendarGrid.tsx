@@ -32,38 +32,22 @@ export default function CalendarGrid({
 
   const getMidnight = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
 
-  // Generate grid
-  const firstDayIndexOffset = firstDayIndex;
-  const totalSlots = Math.ceil((firstDayIndexOffset + daysInMonth) / 7) * 7;
-  const gridDates: Date[] = [];
-  for (let i = 0; i < totalSlots; i++) {
-    gridDates.push(new Date(year, month, 1 - firstDayIndexOffset + i));
+  const gridDates = [];
+  for (let i = 0; i < 42; i++) { // 6 weeks
+    gridDates.push(new Date(year, month, 1 - firstDayIndex + i));
   }
 
-  const weeks: Date[][] = [];
+  const weeks = [];
   for (let i = 0; i < gridDates.length; i += 7) {
     weeks.push(gridDates.slice(i, i + 7));
   }
 
-  const getBookingsOnDate = (date: Date): Booking[] => {
-    const checkTime = getMidnight(date);
-    return bookings.filter(b => {
-      const start = getMidnight(new Date(b.start_date));
-      const end = getMidnight(new Date(b.end_date));
-      return checkTime >= start && checkTime <= end;
-    });
-  };
-
-  const getBookingColor = (b: Booking) => {
-    if (b.is_rented_vehicle) return '#6366F1';
-    const vehicle = vehicles.find(v => v.registration_no === b.assigned_vehicle_reg);
-    return vehicle?.color || '#FFB81C';
-  };
+  const getBookingColor = (b: Booking) => b.is_rented_vehicle ? '#6366F1' : '#FFB81C';
 
   const dayLabels = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
   return (
-    <div className="bg-[#1F2937] border border-[#374151] rounded-2xl p-4 shadow-xl text-white overflow-hidden">
+    <div className="bg-[#1F2937] border border-[#374151] rounded-2xl p-4 shadow-xl text-white overflow-hidden relative">
       {/* Header */}
       <div className="flex items-center justify-between mb-4 px-2">
         <div className="flex items-center gap-3">
@@ -83,47 +67,51 @@ export default function CalendarGrid({
         ))}
       </div>
 
-      {/* Calendar Body */}
-      <div className="relative grid grid-cols-7 gap-px bg-[#111827] rounded-b-xl">
-        {weeks.flat().map((date, idx) => {
-          const isCurrentMonth = date.getMonth() === month;
-          const dayBookings = getBookingsOnDate(date);
-          const isToday = new Date().toDateString() === date.toDateString();
+      {/* Calendar Grid */}
+      <div className="grid grid-cols-7 gap-px bg-[#111827] rounded-b-xl relative" style={{ height: 'auto' }}>
+        {weeks.flatMap((week, weekIdx) => 
+          week.map((date, dayIdx) => {
+            const isCurrentMonth = date.getMonth() === month;
+            const isToday = new Date().toDateString() === date.toDateString();
 
-          return (
-            <div
-              key={idx}
-              onClick={() => onSelectDate(date)}
-              className={`min-h-[110px] p-1.5 border border-[#374151] hover:bg-[#2A3749] cursor-pointer relative ${!isCurrentMonth ? 'opacity-60' : ''}`}
-            >
-              <div className="text-right">
-                <span className={`text-sm font-bold ${isToday ? 'text-[#FFB81C]' : ''}`}>
+            return (
+              <div
+                key={`${weekIdx}-${dayIdx}`}
+                onClick={() => onSelectDate(date)}
+                className={`min-h-[100px] p-1 border border-[#374151] hover:bg-[#2A3749] cursor-pointer relative ${!isCurrentMonth ? 'bg-[#111827] opacity-70' : 'bg-[#1F2937]'}`}
+              >
+                <div className="text-right text-sm font-bold mb-1">
                   {date.getDate()}
-                </span>
-              </div>
+                </div>
 
-              {/* Multi-day spanning booking bars */}
-              <div className="absolute inset-x-0 bottom-1 px-1 space-y-0.5">
-                {dayBookings.slice(0, 3).map((booking, i) => {
-                  const startDate = new Date(booking.start_date);
-                  const endDate = new Date(booking.end_date);
-                  const spansMultipleDays = startDate.getDate() !== endDate.getDate() || startDate.getMonth() !== endDate.getMonth();
-
-                  return (
-                    <div
-                      key={i}
-                      onClick={(e) => { e.stopPropagation(); onSelectBooking(booking); }}
-                      className="text-[10px] px-2 py-0.5 rounded bg-[#374151] hover:bg-[#4B5563] text-white font-medium truncate cursor-pointer transition-colors"
-                      title={`${booking.client_name} • ${booking.route}`}
-                    >
-                      {booking.client_name}
-                    </div>
-                  );
-                })}
+                {/* Spanning Booking Bars */}
+                <div className="absolute inset-x-0 bottom-0 h-6 flex items-center px-0.5 overflow-hidden">
+                  {bookings
+                    .filter(b => {
+                      const start = new Date(b.start_date);
+                      const end = new Date(b.end_date);
+                      return date >= start && date <= end;
+                    })
+                    .slice(0, 2)
+                    .map((booking, i) => (
+                      <div
+                        key={i}
+                        onClick={(e) => { e.stopPropagation(); onSelectBooking(booking); }}
+                        className="h-5 mx-0.5 rounded bg-[#FFB81C] text-black text-[9px] font-bold flex items-center px-1.5 cursor-pointer hover:brightness-110 transition-all overflow-hidden whitespace-nowrap"
+                        style={{
+                          minWidth: '60px',
+                          maxWidth: '100%',
+                        }}
+                        title={`${booking.client_name} (${booking.route})`}
+                      >
+                        {booking.client_name}
+                      </div>
+                    ))}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </div>
   );
