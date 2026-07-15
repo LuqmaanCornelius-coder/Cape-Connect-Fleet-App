@@ -114,7 +114,7 @@ export default function RentalClientForm({ mode, editTarget, onSave, onClose }: 
             <input
               type="text"
               required
-              placeholder={isExternalDriver ? 'e.g. Michael Dlamini' : 'e.g. Sarah van der Berg'}
+              placeholder={isExternalDriver ? 'e.g. Michael Dlamini' : 'e.g. Nadeem Sasman'}
               value={form.full_name}
               onChange={e => setForm(prev => ({ ...prev, full_name: e.target.value }))}
               className="w-full bg-[#111827] border border-[#374151] px-3 py-2 rounded-lg text-white font-semibold focus:outline-none focus:border-[#FFB81C]"
