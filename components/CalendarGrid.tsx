@@ -12,77 +12,54 @@ interface CalendarGridProps {
 }
 
 const PALETTE_COLORS = [
-  '#3B82F6', // Blue
-  '#10B981', // Emerald
-  '#EF4444', // Red
+  '#FFB81C', // Gold (primary)
+  '#007A4D', // SA Green
+  '#DE3831', // Red
+  '#002395', // Blue
   '#F59E0B', // Amber
   '#8B5CF6', // Violet
   '#EC4899', // Pink
-  '#F97316', // Orange
   '#14B8A6', // Teal
-  '#06B6D4', // Cyan
-  '#6366F1', // Indigo
 ];
 
-export default function CalendarGrid({
-  bookings,
-  vehicles,
-  onSelectDate,
-  onSelectBooking
+export default function CalendarGrid({ 
+  bookings, 
+  vehicles, 
+  onSelectDate, 
+  onSelectBooking 
 }: CalendarGridProps) {
-  const [currentDate, setCurrentDate] = useState<Date>(() => new Date());
-
+  const [currentDate, setCurrentDate] = useState(() => new Date());
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
-  // Month names
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  // Days in month
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  // First day of month index (0-6)
   const firstDayIndex = new Date(year, month, 1).getDay();
 
-  // Navigate months
-  const prevMonth = () => {
-    setCurrentDate(new Date(year, month - 1, 1));
-  };
+  const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
+  const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
+  const jumpToToday = () => setCurrentDate(new Date());
 
-  const nextMonth = () => {
-    setCurrentDate(new Date(year, month + 1, 1));
-  };
+  const getMidnight = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
 
-  const jumpToToday = () => {
-    setCurrentDate(new Date());
-  };
-
-  // Helper to normalize to start of day
-  const getMidnight = (d: Date) => {
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
-  };
-
-  // Generate complete grid dates including leading/trailing padding
   const firstDayIndexOffset = firstDayIndex;
   const totalSlots = Math.ceil((firstDayIndexOffset + daysInMonth) / 7) * 7;
-  
   const gridDates: Date[] = [];
   for (let i = 0; i < totalSlots; i++) {
     gridDates.push(new Date(year, month, 1 - firstDayIndexOffset + i));
   }
 
-  // Partition into weeks
   const weeks: Date[][] = [];
   for (let i = 0; i < gridDates.length; i += 7) {
     weeks.push(gridDates.slice(i, i + 7));
   }
 
-  // Find active bookings on a specific date
   const getBookingsOnDate = (date: Date): Booking[] => {
     const checkTime = getMidnight(date);
-    
     return bookings.filter(b => {
       const start = getMidnight(new Date(b.start_date));
       const end = getMidnight(new Date(b.end_date));
@@ -90,255 +67,97 @@ export default function CalendarGrid({
     });
   };
 
-  // Assign deterministic color
   const getBookingColor = (b: Booking) => {
-    if (b.is_rented_vehicle) {
-      return '#6366F1'; // Indigo for rented vehicles
-    }
+    if (b.is_rented_vehicle) return '#6366F1';
     const vehicle = vehicles.find(v => v.registration_no === b.assigned_vehicle_reg);
-    if (vehicle?.color) {
-      return vehicle.color;
-    }
+    if (vehicle?.color) return vehicle.color;
     const hash = b.invoice_no.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     return PALETTE_COLORS[hash % PALETTE_COLORS.length];
-  };
-
-  // Get and allocate tracks for bookings overlapping a week
-  const getWeekTracks = (week: Date[]) => {
-    const weekStart = getMidnight(week[0]);
-    const weekEnd = getMidnight(week[6]);
-
-    // Find all bookings overlapping with this week
-    const weekBookings = bookings.filter(b => {
-      const start = getMidnight(new Date(b.start_date));
-      const end = getMidnight(new Date(b.end_date));
-      return start <= weekEnd && end >= weekStart;
-    });
-
-    // Sort: earlier start first, longer duration second
-    const sortedBookings = [...weekBookings].sort((a, b) => {
-      const startA = getMidnight(new Date(a.start_date));
-      const startB = getMidnight(new Date(b.start_date));
-      if (startA !== startB) return startA - startB;
-
-      const durationA = getMidnight(new Date(a.end_date)) - startA;
-      const durationB = getMidnight(new Date(b.end_date)) - startB;
-      return durationB - durationA;
-    });
-
-    const allocated: { 
-      booking: Booking; 
-      startCol: number; 
-      endCol: number; 
-      track: number;
-      startsInWeek: boolean;
-      endsInWeek: boolean;
-    }[] = [];
-
-    sortedBookings.forEach(booking => {
-      const bookingStart = getMidnight(new Date(booking.start_date));
-      const bookingEnd = getMidnight(new Date(booking.end_date));
-
-      const startsInWeek = bookingStart >= weekStart;
-      const endsInWeek = bookingEnd <= weekEnd;
-
-      // Determine starting column index (0-6)
-      let startCol = 0;
-      if (startsInWeek) {
-        for (let i = 0; i < 7; i++) {
-          if (getMidnight(week[i]) === bookingStart) {
-            startCol = i;
-            break;
-          }
-        }
-      }
-
-      // Determine ending column index (0-6)
-      let endCol = 6;
-      if (endsInWeek) {
-        for (let i = 0; i < 7; i++) {
-          if (getMidnight(week[i]) === bookingEnd) {
-            endCol = i;
-            break;
-          }
-        }
-      }
-
-      // Find first available track
-      let track = 0;
-      while (true) {
-        const overlaps = allocated.some(item => 
-          item.track === track && 
-          !(endCol < item.startCol || startCol > item.endCol)
-        );
-        if (!overlaps) {
-          break;
-        }
-        track++;
-      }
-
-      allocated.push({
-        booking,
-        startCol,
-        endCol,
-        track,
-        startsInWeek,
-        endsInWeek
-      });
-    });
-
-    return allocated;
   };
 
   const dayLabels = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+    <div className="bg-[#1F2937] border border-[#374151] rounded-2xl p-4 shadow-xl text-white">
       {/* Calendar Header */}
-      <div className="flex items-center justify-between p-5 border-b border-slate-100 bg-slate-50/50">
-        <div className="flex items-center gap-2.5">
-          <Calendar className="w-5 h-5 text-teal-600" />
-          <h2 className="text-base font-extrabold text-slate-850">
+      <div className="flex items-center justify-between mb-4 px-2">
+        <div className="flex items-center gap-3">
+          <button onClick={prevMonth} className="p-2 hover:bg-[#374151] rounded-lg transition-colors">
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <h2 className="text-xl font-bold text-[#FFB81C]">
             {monthNames[month]} {year}
           </h2>
+          <button onClick={nextMonth} className="p-2 hover:bg-[#374151] rounded-lg transition-colors">
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={jumpToToday}
-            className="text-xs font-bold px-3 py-1.5 bg-white border border-slate-200 hover:border-slate-300 rounded-lg shadow-xs transition-all hover:bg-slate-50 text-slate-700"
-          >
-            Today
-          </button>
-          
-          <div className="flex items-center border border-slate-200 rounded-lg bg-white shadow-xs overflow-hidden">
-            <button
-              onClick={prevMonth}
-              className="p-1.5 hover:bg-slate-50 border-r border-slate-100 transition-colors text-slate-600"
-              title="Previous Month"
-            >
-              <ChevronLeft className="w-4.5 h-4.5" />
-            </button>
-            <button
-              onClick={nextMonth}
-              className="p-1.5 hover:bg-slate-50 transition-colors text-slate-600"
-              title="Next Month"
-            >
-              <ChevronRight className="w-4.5 h-4.5" />
-            </button>
-          </div>
-        </div>
+        <button 
+          onClick={jumpToToday}
+          className="bg-[#374151] hover:bg-[#4B5563] px-4 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors"
+        >
+          <Calendar className="w-4 h-4" />
+          Today
+        </button>
       </div>
 
-      {/* Days of Week Row */}
-      <div className="grid grid-cols-7 border-b border-slate-100 text-center bg-slate-50/20">
+      {/* Days of Week */}
+      <div className="grid grid-cols-7 gap-px bg-[#111827] rounded-xl overflow-hidden mb-1">
         {dayLabels.map((day, idx) => (
-          <div key={idx} className="py-3 text-[11px] font-extrabold text-slate-400 tracking-widest uppercase">
+          <div key={idx} className="bg-[#1F2937] p-2 text-center text-xs font-bold text-[#9CA3AF]">
             {day}
           </div>
         ))}
       </div>
 
-      {/* Calendar Weeks & Days Grid */}
-      <div className="flex flex-col bg-slate-100/60 gap-[1px]">
-        {weeks.map((week, weekIdx) => {
-          const weekTracks = getWeekTracks(week);
-          const maxTrack = weekTracks.reduce((max, t) => Math.max(max, t.track), -1);
-          // Dynamically adjust height of week row based on total stacked tracks
-          const rowHeightClass = maxTrack >= 4 ? 'min-h-[145px]' : 'min-h-[115px]';
+      {/* Calendar Grid */}
+      <div className="grid grid-cols-7 gap-px bg-[#111827] rounded-xl overflow-hidden">
+        {weeks.map((week, weekIdx) => (
+          <React.Fragment key={weekIdx}>
+            {week.map((date, dayIdx) => {
+              const isCurrentMonth = date.getMonth() === month;
+              const dayBookings = getBookingsOnDate(date);
+              const isToday = new Date().toDateString() === date.toDateString();
 
-          return (
-            <div key={weekIdx} className={`relative bg-white ${rowHeightClass} transition-all duration-200`}>
-              {/* Day cells grid */}
-              <div className="grid grid-cols-7 h-full absolute inset-0">
-                {week.map((date, dayIdx) => {
-                  const isCurrentMonth = date.getMonth() === month;
-                  const dayBookings = getBookingsOnDate(date);
-                  const isToday = new Date().toDateString() === date.toDateString();
+              return (
+                <div
+                  key={dayIdx}
+                  onClick={() => onSelectDate(date)}
+                  className={`min-h-[110px] p-2 flex flex-col border border-[#374151] hover:bg-[#2A3749] cursor-pointer transition-all relative ${
+                    !isCurrentMonth ? 'bg-[#111827] opacity-60' : 'bg-[#1F2937]'
+                  }`}
+                >
+                  <div className="flex justify-between items-start">
+                    <span className={`text-sm font-bold ${isToday ? 'text-[#FFB81C]' : isCurrentMonth ? 'text-white' : 'text-[#6B7280]'}`}>
+                      {date.getDate()}
+                    </span>
+                    {dayBookings.length > 0 && (
+                      <div className="w-2 h-2 bg-[#FFB81C] rounded-full mt-1" />
+                    )}
+                  </div>
 
-                  return (
-                    <div
-                      key={dayIdx}
-                      onClick={() => onSelectDate(date)}
-                      className={`p-2 flex flex-col justify-between hover:bg-slate-50/40 cursor-pointer transition-colors border-r border-slate-100/70 last:border-r-0 ${
-                        !isCurrentMonth ? 'bg-slate-50/20' : ''
-                      }`}
-                    >
-                      {/* Day Number and Dot Indicator */}
-                      <div className="flex flex-col items-center self-start gap-1">
-                        {isCurrentMonth ? (
-                          <span
-                            className={`text-xs font-extrabold rounded-full w-6 h-6 flex items-center justify-center transition-colors ${
-                              isToday
-                                ? 'bg-teal-600 text-white shadow-sm font-black'
-                                : 'text-slate-700'
-                            }`}
-                          >
-                            {date.getDate()}
-                          </span>
-                        ) : (
-                          // Faded or empty space to perfectly align with the design
-                          <span className="w-6 h-6 text-slate-300 font-extrabold text-xs flex items-center justify-center">
-                            {date.getDate()}
-                          </span>
-                        )}
-
-                        {/* Event indicator orange dot, like in the attached image */}
-                        {dayBookings.length > 0 && isCurrentMonth && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                        )}
+                  {/* Booking bars */}
+                  <div className="flex-1 relative mt-1">
+                    {dayBookings.slice(0, 3).map((booking, i) => (
+                      <div
+                        key={i}
+                        onClick={(e) => { e.stopPropagation(); onSelectBooking(booking); }}
+                        className="text-[10px] px-1.5 py-0.5 mb-0.5 rounded bg-[#374151] text-white truncate cursor-pointer hover:bg-[#4B5563] transition-colors"
+                        title={`${booking.client_name} - ${booking.route}`}
+                      >
+                        {booking.client_name}
                       </div>
-
-                      {/* Flex spacer */}
-                      <div className="flex-1" />
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Absolute overlay for booking bars */}
-              <div className="absolute top-[34px] left-0 right-0 bottom-2 pointer-events-none z-10">
-                {weekTracks.map(({ booking, startCol, endCol, track, startsInWeek, endsInWeek }) => {
-                  const barColor = getBookingColor(booking);
-                  
-                  // Horizontal position math
-                  const leftPercent = (startCol / 7) * 100;
-                  const widthPercent = ((endCol - startCol + 1) / 7) * 105; // Slightly overlap cell border
-                  
-                  // Adjust padding and rounding so it looks incredibly clean
-                  const paddingLeft = startsInWeek ? 6 : 0;
-                  const paddingRight = endsInWeek ? 6 : 0;
-                  const roundedClass = `${startsInWeek ? 'rounded-l-full' : ''} ${endsInWeek ? 'rounded-r-full' : ''}`;
-
-                  const leftStyle = `calc(${leftPercent}% + ${paddingLeft}px)`;
-                  // Subtract padding from both sides
-                  const widthStyle = `calc(${((endCol - startCol + 1) / 7) * 100}% - ${paddingLeft + paddingRight}px)`;
-                  const topStyle = `${track * 11}px`; // 6px bar + 5px gap
-
-                  const infoTooltip = `Invoice: ${booking.invoice_no}\nClient: ${booking.client_name}\nRoute: ${booking.route}\nVehicle: ${booking.assigned_vehicle_reg}\nStatus: ${booking.status} (${booking.payment_status})`;
-
-                  return (
-                    <div
-                      key={booking.invoice_no}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onSelectBooking(booking);
-                      }}
-                      title={infoTooltip}
-                      style={{
-                        left: leftStyle,
-                        width: widthStyle,
-                        top: topStyle,
-                        backgroundColor: barColor,
-                      }}
-                      className={`absolute h-1.5 pointer-events-auto transition-all cursor-pointer duration-150 hover:brightness-110 hover:scale-y-125 hover:shadow-xs active:scale-95 ${roundedClass}`}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
+                    ))}
+                    {dayBookings.length > 3 && (
+                      <div className="text-[9px] text-[#9CA3AF] mt-1">+{dayBookings.length - 3} more</div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
