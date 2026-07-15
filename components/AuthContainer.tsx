@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import {
   KeyRound, ShieldAlert, Mail, ArrowRight, Lock, CheckCircle, X, Send,
@@ -7,7 +6,7 @@ import {
 import { authApi, isSupabaseConfigured } from '@/lib/storage';
 import type { Profile } from '@/lib/storage';
 import Image from 'next/image';
-import logoSrc from '@/app/assets/823.png';
+import logoSrc from '@/app/assets/823.png';   // ← You can change this to your new logo later
 
 interface AuthContainerProps {
   onLoginSuccess: (profile: Profile) => void;
@@ -18,7 +17,7 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  
   // ── Forgot-password modal state ──────────────────────────────────
   const [showForgot, setShowForgot] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
@@ -43,7 +42,7 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
   };
 
   const openForgot = () => {
-    setResetEmail(email); // pre-fill from login field if already typed
+    setResetEmail(email);
     setResetError('');
     setResetSuccess(false);
     setShowForgot(true);
@@ -65,47 +64,46 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans">
-      {/* Background blobs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-[#111827] flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans">
+      {/* Background blobs - updated colors */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFB81C]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#007A4D]/10 rounded-full blur-3xl pointer-events-none" />
 
-     {/* Brand header */}
-<div className="text-center mb-8 z-10 flex flex-col items-center">
-  <div className="mb-4 flex items-center justify-center">
-    <div className="relative w-28 h-28 rounded-2xl overflow-hidden shadow-2xl ring-2 ring-teal-500/30 bg-white/5 backdrop-blur-sm">
-      <Image src={logoSrc} alt="INYATHI Logo" fill className="object-contain p-1" priority draggable={false} />
-    </div>
-  </div>
-  
-  <span className="text-[10px] uppercase font-extrabold tracking-widest text-teal-400 bg-teal-950/80 px-3 py-1 rounded-full border border-teal-800">
-    🔒 Professional Fleet System
-  </span>
-  
-  <h1 className="text-5xl font-black text-white tracking-[-3px] mt-3 drop-shadow-[0_0_25px_rgb(45,212,191)]">
-    CCS
-  </h1>
-  
-  <p className="text-xs text-slate-400 mt-1 max-w-sm">
-   Cape Connect Shuttles High-performance fleet logistics, cost reconciliations, and pre-trip driver compliance.
-  </p>
-</div>
+      {/* Brand header */}
+      <div className="text-center mb-8 z-10 flex flex-col items-center">
+        <div className="mb-4 flex items-center justify-center">
+          <div className="relative w-28 h-28 rounded-2xl overflow-hidden shadow-2xl ring-2 ring-[#FFB81C]/30 bg-white/5 backdrop-blur-sm">
+            <Image src={logoSrc} alt="Cape Connect Logo" fill className="object-contain p-1" priority draggable={false} />
+          </div>
+        </div>
 
-  {/* Login card */}
-      <div className="bg-slate-800/80 border border-slate-700/60 backdrop-blur-md w-full max-w-md rounded-2xl shadow-2xl p-6 z-10">
+        <span className="text-[10px] uppercase font-extrabold tracking-widest text-[#FFB81C] bg-[#1F2937] px-3 py-1 rounded-full border border-[#FFB81C]/30">
+          🔒 Professional Fleet System
+        </span>
+
+        <h1 className="text-5xl font-black text-white tracking-[-3px] mt-3 drop-shadow-[0_0_25px_#FFB81C]">
+          CCS
+        </h1>
+
+        <p className="text-xs text-slate-400 mt-1 max-w-sm">
+          Cape Connect Shuttles High-performance fleet logistics, cost reconciliations, and pre-trip driver compliance.
+        </p>
+      </div>
+
+      {/* Login card */}
+      <div className="bg-[#1F2937] border border-[#374151] backdrop-blur-md w-full max-w-md rounded-2xl shadow-2xl p-6 z-10">
         <div className="mb-5">
           <h2 className="text-sm font-extrabold text-white tracking-wide">Sign In to Portal</h2>
-          <p className="text-[11px] text-slate-500 mt-0.5">
+          <p className="text-[11px] text-slate-400 mt-0.5">
             Drivers receive access via invite. Admins are provisioned through the dashboard.
           </p>
         </div>
 
-      
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Email */}
           <div>
             <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">
-              Portal Email Address
+              PORTAL EMAIL ADDRESS
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-3 w-4 h-4 text-slate-500" />
@@ -115,7 +113,7 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
                 placeholder="e.g. name@ccshuttles.co.za"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl py-2.5 pl-10 pr-4 text-xs text-white focus:outline-none focus:border-teal-500 placeholder-slate-600 transition-colors"
+                className="w-full bg-[#111827] border border-[#374151] rounded-xl py-2.5 pl-10 pr-4 text-xs text-white focus:outline-none focus:border-[#FFB81C] placeholder-slate-600 transition-colors"
               />
             </div>
           </div>
@@ -124,12 +122,12 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
           <div>
             <div className="flex items-center justify-between mb-1">
               <label className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                Portal Password
+                PORTAL PASSWORD
               </label>
               <button
                 type="button"
                 onClick={openForgot}
-                className="text-[10px] text-teal-400 hover:text-teal-300 font-semibold transition-colors cursor-pointer"
+                className="text-[10px] text-[#FFB81C] hover:text-[#E6A000] font-semibold transition-colors cursor-pointer"
               >
                 Forgot password?
               </button>
@@ -142,13 +140,11 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required={isSupabaseConfigured}
-                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl py-2.5 pl-10 pr-4 text-xs text-white focus:outline-none focus:border-teal-500 placeholder-slate-600 transition-colors"
+                className="w-full bg-[#111827] border border-[#374151] rounded-xl py-2.5 pl-10 pr-4 text-xs text-white focus:outline-none focus:border-[#FFB81C] placeholder-slate-600 transition-colors"
               />
             </div>
             <span className="text-[10px] text-slate-500 mt-1 block">
-              {isSupabaseConfigured
-                ? 'Authenticates securely via Supabase.'
-                : 'Enter password to authenticate.'}
+              {isSupabaseConfigured ? 'Authenticates securely via Supabase.' : 'Enter password to authenticate.'}
             </span>
           </div>
 
@@ -161,7 +157,7 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
 
           <button
             type="submit"
-            className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-2.5 rounded-xl text-xs transition-colors shadow-md flex items-center justify-center gap-1"
+            className="w-full btn-primary py-3 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg"
           >
             Enter Portal Access
             <ArrowRight className="w-4 h-4" />
@@ -169,21 +165,17 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
         </form>
       </div>
 
-      {/* ── Forgot Password Modal ────────────────────────────────── */}
+      {/* Forgot Password Modal - Updated */}
       {showForgot && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl w-full max-w-sm p-6 relative">
-            {/* Close */}
-            <button
-              onClick={() => setShowForgot(false)}
-              className="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors cursor-pointer"
-            >
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#111827]/90 backdrop-blur-sm">
+          <div className="bg-[#1F2937] border border-[#374151] rounded-2xl shadow-2xl w-full max-w-sm p-6 relative">
+            <button onClick={() => setShowForgot(false)} className="absolute top-4 right-4 text-slate-400 hover:text-white">
               <X className="w-4 h-4" />
             </button>
 
             <div className="mb-5">
-              <div className="w-10 h-10 bg-teal-900/40 border border-teal-800/60 rounded-xl flex items-center justify-center mb-3">
-                <KeyRound className="w-5 h-5 text-teal-400" />
+              <div className="w-10 h-10 bg-[#007A4D]/20 border border-[#007A4D]/30 rounded-xl flex items-center justify-center mb-3">
+                <KeyRound className="w-5 h-5 text-[#007A4D]" />
               </div>
               <h3 className="text-sm font-extrabold text-white">Reset your password</h3>
               <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
@@ -197,7 +189,7 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
                 <div>
                   <p className="text-xs font-bold text-emerald-300">Reset link sent!</p>
                   <p className="text-[11px] text-emerald-400/70 mt-0.5">
-                    Check your inbox at <strong>{resetEmail}</strong>. Follow the link to set a new password.
+                    Check your inbox at <strong>{resetEmail}</strong>.
                   </p>
                 </div>
               </div>
@@ -215,7 +207,7 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
                       placeholder="e.g. name@ccshuttles.co.za"
                       value={resetEmail}
                       onChange={e => setResetEmail(e.target.value)}
-                      className="w-full bg-slate-950 border border-slate-700/80 rounded-xl py-2.5 pl-10 pr-4 text-xs text-white focus:outline-none focus:border-teal-500 placeholder-slate-600 transition-colors"
+                      className="w-full bg-[#111827] border border-[#374151] rounded-xl py-2.5 pl-10 pr-4 text-xs text-white focus:outline-none focus:border-[#FFB81C]"
                     />
                   </div>
                 </div>
@@ -230,16 +222,9 @@ export default function AuthContainer({ onLoginSuccess }: AuthContainerProps) {
                 <button
                   type="submit"
                   disabled={resetLoading}
-                  className="w-full bg-teal-600 hover:bg-teal-500 disabled:bg-teal-800 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-xl text-xs transition-colors shadow-md flex items-center justify-center gap-1.5"
+                  className="w-full btn-primary py-3 rounded-xl text-sm flex items-center justify-center gap-1.5 disabled:opacity-70"
                 >
-                  {resetLoading ? (
-                    <>Sending…</>
-                  ) : (
-                    <>
-                      <Send className="w-3.5 h-3.5" />
-                      Send Reset Link
-                    </>
-                  )}
+                  {resetLoading ? 'Sending…' : 'Send Reset Link'}
                 </button>
               </form>
             )}

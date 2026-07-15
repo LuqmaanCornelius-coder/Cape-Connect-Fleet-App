@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import AuthContainer from '@/components/AuthContainer';
 import DriverDashboard from '@/components/DriverDashboard';
@@ -49,14 +48,14 @@ export default function HomePage() {
     localStorage.removeItem('inyathi_auth_user');
   };
 
-  // Prevent hydration flash mismatch between client and server renders
+  // Prevent hydration flash mismatch
   if (!isMounted) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center font-sans">
+      <div className="min-h-screen bg-[#111827] flex items-center justify-center font-sans">
         <div className="text-center space-y-4">
-          <div className="w-10 h-10 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="text-[10px] font-black tracking-widest text-slate-500 uppercase animate-pulse">
-            Loading INYATHI Fleet Management Systems...
+          <div className="w-10 h-10 border-4 border-[#FFB81C] border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="text-[10px] font-black tracking-widest text-[#9CA3AF] uppercase animate-pulse">
+            Loading CAPE CONNECT Fleet System...
           </p>
         </div>
       </div>
@@ -64,12 +63,20 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-[#111827] text-[#E5E7EB]">
       {currentUser ? (
         currentUser.role === 'admin' ? (
-          <AdminDashboard key={`admin-${syncVersion}`} admin={currentUser} onLogout={handleLogout} />
+          <AdminDashboard 
+            key={`admin-${syncVersion}`} 
+            admin={currentUser} 
+            onLogout={handleLogout} 
+          />
         ) : (
-          <DriverDashboard key={`driver-${syncVersion}`} driver={currentUser} onLogout={handleLogout} />
+          <DriverDashboard 
+            key={`driver-${syncVersion}`} 
+            driver={currentUser} 
+            onLogout={handleLogout} 
+          />
         )
       ) : (
         <AuthContainer onLoginSuccess={handleLoginSuccess} />
