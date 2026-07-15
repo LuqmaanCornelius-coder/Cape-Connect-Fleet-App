@@ -16,21 +16,18 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas high DPI resolution
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width * 2;
     canvas.height = rect.height * 2;
     ctx.scale(2, 2);
-    ctx.strokeStyle = '#1e293b'; // Slate-800
+    ctx.strokeStyle = '#FFB81C'; // Gold signature line
     ctx.lineWidth = 2.5;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
-    // Draw saved signature if present
     if (savedSignature) {
       const img = new Image();
       img.onload = () => {
@@ -44,11 +41,9 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
   const getCoordinates = (e: React.MouseEvent | React.TouchEvent): { x: number; y: number } => {
     const canvas = canvasRef.current;
     if (!canvas) return { x: 0, y: 0 };
-
     const rect = canvas.getBoundingClientRect();
     let clientX = 0;
     let clientY = 0;
-
     if ('touches' in e) {
       if (e.touches.length === 0) return { x: 0, y: 0 };
       clientX = e.touches[0].clientX;
@@ -57,7 +52,6 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
       clientX = e.clientX;
       clientY = e.clientY;
     }
-
     return {
       x: clientX - rect.left,
       y: clientY - rect.top,
@@ -68,10 +62,8 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
     e.preventDefault();
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
     const coords = getCoordinates(e);
     ctx.beginPath();
     ctx.moveTo(coords.x, coords.y);
@@ -81,11 +73,9 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
   const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
     if (!isDrawing) return;
     e.preventDefault();
-
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) return;
-
     const coords = getCoordinates(e);
     ctx.lineTo(coords.x, coords.y);
     ctx.stroke();
@@ -103,7 +93,6 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) return;
-
     const rect = canvas.getBoundingClientRect();
     ctx.clearRect(0, 0, rect.width, rect.height);
     setIsEmpty(true);
@@ -120,15 +109,15 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-2">
-        <label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
-          <SquarePen className="w-4 h-4 text-teal-600" />
+        <label className="text-sm font-semibold text-white flex items-center gap-1.5">
+          <SquarePen className="w-4 h-4 text-[#FFB81C]" />
           Interactive Signature Sign-Off
         </label>
         {!isEmpty && (
           <button
             type="button"
             onClick={clearCanvas}
-            className="text-xs font-medium text-rose-600 hover:text-rose-800 flex items-center gap-1 bg-rose-50 px-2 py-1 rounded transition-colors"
+            className="text-xs font-medium text-rose-400 hover:text-rose-300 flex items-center gap-1 bg-rose-950/50 px-2 py-1 rounded transition-colors"
           >
             <Trash2 className="w-3.5 h-3.5" />
             Clear signature
@@ -136,7 +125,7 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
         )}
       </div>
 
-      <div className="relative border-2 border-dashed border-slate-300 rounded-lg overflow-hidden bg-slate-50 cursor-crosshair">
+      <div className="relative border-2 border-[#374151] rounded-lg overflow-hidden bg-[#111827] cursor-crosshair">
         <canvas
           ref={canvasRef}
           onMouseDown={startDrawing}
@@ -148,9 +137,8 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
           onTouchEnd={stopDrawing}
           className="w-full h-36 touch-none"
         />
-
         {isEmpty && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-slate-400">
+          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-[#9CA3AF]">
             <span className="text-xs">Draw signature here</span>
             <span className="text-[10px] opacity-75">(supports touch screens)</span>
           </div>
@@ -158,7 +146,7 @@ export default function SignaturePad({ onSave, savedSignature }: SignaturePadPro
       </div>
 
       {!isEmpty && (
-        <p className="text-[10px] text-teal-600 mt-1 flex items-center gap-1 justify-end">
+        <p className="text-[10px] text-[#FFB81C] mt-1 flex items-center gap-1 justify-end">
           <CheckCircle className="w-3 h-3" />
           Signature captured & auto-saved
         </p>
