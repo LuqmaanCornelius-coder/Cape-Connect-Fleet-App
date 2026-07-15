@@ -1,8 +1,46 @@
 @import "tailwindcss";
+@import "tailwindcss";
+
 :root {
   --primary-gold: #FFB81C;
   --secondary-green: #007A4D;
   --accent-red: #DE3831;
   --accent-blue: #002395;
   --dark-bg: #111827;
+  --card-bg: #1F2937;
+  --text-light: #E5E7EB;
+  --text-muted: #9CA3AF;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+}
+
+/* Enhanced Button */
+.btn-primary {
+  background-color: var(--primary-gold);
+  color: #000000;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #E6A000;
+  transform: translateY(-1px);
+}
+
+/* Login Card */
+.login-card {
+  background-color: var(--card-bg);
+  border: 1px solid #374151;
+}
+
+/* Accent Text */
+.accent-green {
+  color: var(--secondary-green);
+}
+
+.accent-gold {
+  color: var(--primary-gold);
 }
