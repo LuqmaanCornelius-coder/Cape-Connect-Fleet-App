@@ -54,58 +54,24 @@ export default function CalendarGrid({
     return PALETTE_COLORS[hash % PALETTE_COLORS.length];
   };
 
-  // Calculate position and span for each booking
-  const bookingBars = useMemo(() => {
-    const monthStart = new Date(year, month, 1);
-    const monthEnd = new Date(year, month + 1, 0);
+  // Get bookings that touch this month
+  const monthBookings = useMemo(() => {
+    const monthStart = new Date(year, month, 1).getTime();
+    const monthEnd = new Date(year, month + 1, 0).getTime();
 
-    return bookings
-      .map((booking, index) => {
-        const start = new Date(booking.start_date);
-        const end = new Date(booking.end_date);
-
-        // Only show bookings that overlap this month
-        if (end < monthStart || start > monthEnd) return null;
-
-        // Clamp to current month
-        const displayStart = start < monthStart ? monthStart : start;
-        const displayEnd = end > monthEnd ? monthEnd : end;
-
-        // Find positions in the grid
-        const startIndex = allDates.findIndex(d => 
-          d.getFullYear() === displayStart.getFullYear() &&
-          d.getMonth() === displayStart.getMonth() &&
-          d.getDate() === displayStart.getDate()
-        );
-
-        const endIndex = allDates.findIndex(d => 
-          d.getFullYear() === displayEnd.getFullYear() &&
-          d.getMonth() === displayEnd.getMonth() &&
-          d.getDate() === displayEnd.getDate()
-        );
-
-        if (startIndex === -1 || endIndex === -1) return null;
-
-        const startCol = (startIndex % 7) + 1; // 1-based for grid-column
-        const span = endIndex - startIndex + 1;
-
-        return {
-          booking,
-          startCol,
-          span,
-          color: getBookingColor(booking),
-          row: Math.floor(startIndex / 7),
-          index,
-        };
-      })
-      .filter(Boolean);
-  }, [bookings, allDates, year, month]);
+    return bookings.filter(b => {
+      const start = getMidnight(b.start_date);
+      const end = getMidnight(b.end_date);
+      return end >= monthStart && start <= monthEnd;
+    });
+  }, [bookings, year, month]);
 
   const isToday = (date: Date) => new Date().toDateString() === date.toDateString();
+
   const dayLabels = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
   return (
-    <div className="bg-[#1F2937] border border-[#374151] rounded-2xl p-4 shadow-xl text-white overflow-hidden">
+    <div className="bg-[#1F2937] border border-[#374151] rounded-2xl p-4 shadow-xl text-white overflow-hidden relative">
       {/* Header */}
       <div className="flex items-center justify-between mb-4 px-2">
         <div className="flex items-center gap-3">
@@ -129,28 +95,42 @@ export default function CalendarGrid({
         ))}
       </div>
 
+      {/* Calendar Grid with Booking Bars Overlay */}
       <div className="relative">
-        {/* Spanning Booking Bars */}
-        <div className="absolute inset-0 grid grid-cols-7 gap-px z-10 pointer-events-none">
-          {bookingBars.map(({ booking, startCol, span, color }, idx) => (
-            <div
-              key={`${booking.invoice_no}-${idx}`}
-              className="relative"
-              style={{
-                gridColumn: `${startCol} / span ${span}`,
-                marginTop: `${idx * 26 + 52}px`, // Vertical staggering
-              }}
-            >
+        {/* Booking Bars Layer */}
+        <div className="absolute inset-0 grid grid-cols-7 gap-px pointer-events-none z-10">
+          {monthBookings.map((booking, idx) => {
+            const startDate = new Date(booking.start_date);
+            const endDate = new Date(booking.end_date);
+            const color = getBookingColor(booking);
+
+            return (
               <div
-                onClick={(e) => { e.stopPropagation(); onSelectBooking(booking); }}
-                className="h-6 rounded-md cursor-pointer hover:brightness-110 active:scale-[0.985] transition-all flex items-center px-2.5 text-xs font-medium text-white shadow-md border border-white/20"
-                style={{ backgroundColor: color }}
-                title={`${booking.client_name} • ${booking.route || ''}`}
+                key={`${booking.invoice_no}-${idx}`}
+                className="relative h-full"
+                style={{
+                  gridColumn: 'span 7',
+                  marginTop: `${idx * 22 + 48}px`, // stagger bars vertically
+                }}
               >
-                <span className="truncate">{booking.client_name}</span>
+                <div
+                  onClick={(e) => { e.stopPropagation(); onSelectBooking(booking); }}
+                  className="absolute h-5 rounded cursor-pointer hover:brightness-110 transition-all flex items-center px-2 text-xs font-medium text-white shadow-sm"
+                  style={{
+                    backgroundColor: color,
+                    left: '0',
+                    right: '0',
+                    top: '0',
+                    opacity: 0.9,
+                    minWidth: '20px',
+                  }}
+                  title={`${booking.client_name} - ${booking.route || ''}`}
+                >
+                  <span className="truncate">{booking.client_name}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Date Cells */}
@@ -160,23 +140,32 @@ export default function CalendarGrid({
               {week.map((date) => {
                 const isCurrentMonth = date.getMonth() === month;
                 const today = isToday(date);
+                const dayBookings = bookings.filter(b => {
+                  const d = getMidnight(date);
+                  return d >= getMidnight(b.start_date) && d <= getMidnight(b.end_date);
+                });
 
                 return (
                   <div
                     key={date.toISOString()}
                     onClick={() => onSelectDate(date)}
-                    className={`min-h-[138px] p-2 flex flex-col border border-[#374151] hover:bg-[#2A3749] cursor-pointer transition-all relative
+                    className={`min-h-[110px] p-2 flex flex-col border border-[#374151] hover:bg-[#2A3749] cursor-pointer transition-all relative
                       ${!isCurrentMonth ? 'bg-[#111827] opacity-70' : 'bg-[#1F2937]'}`}
                   >
-                    <div className="flex justify-between items-start mb-2">
+                    <div className="flex justify-between items-start mb-1">
                       <span className={`text-sm font-bold ${today ? 'text-[#FFB81C]' : isCurrentMonth ? 'text-white' : 'text-[#6B7280]'}`}>
                         {date.getDate()}
                       </span>
+                      {dayBookings.length > 0 && <div className="w-1.5 h-1.5 bg-[#FFB81C] rounded-full mt-1" />}
                     </div>
 
-                    {/* Optional: small indicators for bookings */}
-                    <div className="mt-auto text-[10px] text-white/60">
-                      {/* You can add more info here if needed */}
+                    {/* Small client names fallback (if needed) */}
+                    <div className="flex-1 text-[9px] space-y-0.5 overflow-hidden">
+                      {dayBookings.slice(0, 2).map((b, i) => (
+                        <div key={i} className="truncate text-white/80" onClick={(e) => { e.stopPropagation(); onSelectBooking(b); }}>
+                          {b.client_name}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 );
