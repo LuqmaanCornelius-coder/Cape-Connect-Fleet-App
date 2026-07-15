@@ -830,31 +830,31 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
   return (
     <div className="min-h-screen bg-slate-900 font-sans text-slate-100 selection:bg-teal-500 selection:text-white flex flex-col md:flex-row">
       
-      {/* MOBILE HEADER BAR */}
-      <header className="md:hidden bg-slate-950 border-b border-slate-800 p-4 sticky top-0 z-40 flex items-center justify-between">
+       {/* MOBILE HEADER BAR */}
+      <header className="md:hidden bg-[#0a1424] border-b border-[#1F2937] p-4 sticky top-0 z-40 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-900 rounded-lg transition-colors mr-1 cursor-pointer"
+            className="p-1.5 text-[#9CA3AF] hover:text-white hover:bg-[#1F2937] rounded-lg transition-colors mr-1 cursor-pointer"
           >
             <Menu className="w-5 h-5" />
           </button>
           <div className="w-7 h-7 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center shrink-0 relative">
-            <Image src={logoSrc} alt="INYATHI Logo" fill className="object-contain p-0.5" />
+            <Image src={logoSrc} alt="Cape Connect" fill className="object-contain p-0.5" />
           </div>
           <div>
-            <h1 className="text-[10px] font-black tracking-widest text-slate-400 leading-none">INYATHI PWA</h1>
-            <p className="text-xs font-bold text-teal-400 leading-tight mt-0.5">{driver.name}</p>
+            <h1 className="text-[10px] font-black tracking-widest text-[#FFB81C] leading-none">CAPE CONNECT</h1>
+            <p className="text-xs font-bold text-[#9CA3AF] leading-tight mt-0.5">{driver.name}</p>
           </div>
         </div>
-        
+       
         <div className="flex items-center gap-1">
-          <span className="text-[9px] font-bold bg-slate-800 px-2 py-1 rounded-full border border-slate-700 text-teal-300">
+          <span className="text-[9px] font-bold bg-[#1F2937] px-2 py-1 rounded-full border border-[#374151] text-[#FFB81C]">
             {driver.driver_id}
           </span>
           <button
             onClick={onLogout}
-            className="p-1.5 text-rose-400 hover:bg-slate-900 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-rose-400 hover:bg-[#1F2937] rounded-lg transition-colors cursor-pointer"
             title="Log out"
           >
             <LogOut className="w-4 h-4" />
@@ -864,12 +864,12 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
 
       {/* BACKDROP FOR MOBILE DRAWER */}
       {isSidebarOpen && (
-        <div 
+        <div
           onClick={() => setIsSidebarOpen(false)}
-          className="md:hidden fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 transition-opacity"
+          className="md:hidden fixed inset-0 bg-[#111827]/70 backdrop-blur-sm z-50 transition-opacity"
         />
       )}
-
+      
       {/* RESPONSIVE LEFT SIDEBAR */}
       <aside className={`
         fixed inset-y-0 left-0 z-50 w-64 bg-[#0a1424] border-r border-slate-800/85 p-5 flex flex-col justify-between transition-transform duration-300 ease-in-out shrink-0
