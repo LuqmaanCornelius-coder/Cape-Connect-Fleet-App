@@ -5,11 +5,11 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 
 export const metadata: Metadata = {
-  title: 'INYATHI Fleet Management Portal',
+  title: 'Cape Connect Shuttles Management Portal',
   description: 'INYATHI Fleet Management - Reconciliations, Fleet, and Booking System',
   manifest: '/manifest.json',
   appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: 'INYATHI' },
-  applicationName: 'INYATHI',
+  applicationName: 'Cape Connect Shuttles',
   formatDetection: { telephone: false },
 };
 
