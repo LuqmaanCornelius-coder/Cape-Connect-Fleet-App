@@ -3065,12 +3065,12 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
 
       </div>
 
-      {/* Driver Footer Navigation Panel */}
-      <footer className="fixed bottom-0 left-0 right-0 z-40 bg-slate-950 border-t border-slate-850 grid grid-cols-6 text-center">
+          {/* Driver Footer Navigation Panel */}
+      <footer className="fixed bottom-0 left-0 right-0 z-40 bg-[#0a1424] border-t border-[#1F2937] grid grid-cols-6 text-center">
         <button
           onClick={() => setActiveTab('tasks')}
           className={`py-2 text-[10px] font-bold flex flex-col items-center justify-center gap-1 ${
-            activeTab === 'tasks' ? 'text-teal-400 bg-slate-900/60' : 'text-slate-500 hover:text-slate-300'
+            activeTab === 'tasks' ? 'text-[#FFB81C] bg-[#1F2937]' : 'text-[#9CA3AF] hover:text-white'
           }`}
         >
           <Compass className="w-5 h-5" />
@@ -3079,7 +3079,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
         <button
           onClick={() => setActiveTab('completed')}
           className={`py-2 text-[10px] font-bold flex flex-col items-center justify-center gap-1 ${
-            activeTab === 'completed' ? 'text-emerald-400 bg-slate-900/60' : 'text-slate-500 hover:text-slate-300'
+            activeTab === 'completed' ? 'text-emerald-400 bg-[#1F2937]' : 'text-[#9CA3AF] hover:text-white'
           }`}
         >
           <Sparkles className="w-5 h-5" />
@@ -3088,7 +3088,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
         <button
           onClick={() => setActiveTab('recon')}
           className={`py-2 text-[10px] font-bold flex flex-col items-center justify-center gap-1 ${
-            activeTab === 'recon' ? 'text-teal-400 bg-slate-900/60' : 'text-slate-500 hover:text-slate-300'
+            activeTab === 'recon' ? 'text-[#FFB81C] bg-[#1F2937]' : 'text-[#9CA3AF] hover:text-white'
           }`}
         >
           <FileText className="w-5 h-5" />
@@ -3097,7 +3097,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
         <button
           onClick={() => setActiveTab('transfer')}
           className={`py-2 text-[10px] font-bold flex flex-col items-center justify-center gap-1 ${
-            activeTab === 'transfer' ? 'text-teal-400 bg-slate-900/60' : 'text-slate-500 hover:text-slate-300'
+            activeTab === 'transfer' ? 'text-[#FFB81C] bg-[#1F2937]' : 'text-[#9CA3AF] hover:text-white'
           }`}
         >
           <FileText className="w-5 h-5" />
@@ -3106,7 +3106,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
         <button
           onClick={() => setActiveTab('logging')}
           className={`py-2 text-[10px] font-bold flex flex-col items-center justify-center gap-1 ${
-            activeTab === 'logging' ? 'text-teal-400 bg-slate-900/60' : 'text-slate-500 hover:text-slate-300'
+            activeTab === 'logging' ? 'text-[#FFB81C] bg-[#1F2937]' : 'text-[#9CA3AF] hover:text-white'
           }`}
         >
           <ClipboardCheck className="w-5 h-5" />
@@ -3115,14 +3115,13 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
         <button
           onClick={() => setActiveTab('documents')}
           className={`py-2 text-[10px] font-bold flex flex-col items-center justify-center gap-1 ${
-            activeTab === 'documents' ? 'text-teal-400 bg-slate-900/60' : 'text-slate-500 hover:text-slate-300'
+            activeTab === 'documents' ? 'text-[#FFB81C] bg-[#1F2937]' : 'text-[#9CA3AF] hover:text-white'
           }`}
         >
           <Briefcase className="w-5 h-5" />
           Vault
         </button>
       </footer>
-
     </div>
   );
 }
