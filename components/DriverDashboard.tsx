@@ -1270,14 +1270,14 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                       </button>
                     </div>
 
-                    {/* Display photos of any flagged/failed checks */}
+                                    {/* Display photos of any flagged/failed checks */}
                     {ins.checklist_json && (
-                      <div className="pt-2 border-t border-slate-900/80">
-                        <span className="text-[9px] text-slate-500 uppercase font-black block mb-1">Safety Checklist Points</span>
+                      <div className="pt-2 border-t border-[#374151]">
+                        <span className="text-[9px] text-[#9CA3AF] uppercase font-black block mb-1">Safety Checklist Points</span>
                         <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
                           {Object.entries(ins.checklist_json).map(([k, v]) => (
-                            <div key={k} className="bg-slate-900 p-1.5 rounded border border-slate-850 text-[10px] text-center">
-                              <p className="text-slate-400 capitalize truncate text-[9px]">{k.replace(/_/g, ' ')}</p>
+                            <div key={k} className="bg-[#111827] p-1.5 rounded border border-[#374151] text-[10px] text-center">
+                              <p className="text-[#9CA3AF] capitalize truncate text-[9px]">{k.replace(/_/g, ' ')}</p>
                               <span className={`font-bold text-[9px] uppercase ${
                                 v === 'pass' ? 'text-emerald-400' : v === 'flag' ? 'text-amber-400' : 'text-rose-400'
                               }`}>
@@ -1293,9 +1293,9 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                       <div className="bg-rose-950/20 p-2.5 rounded-lg border border-rose-900/30 space-y-1">
                         <span className="text-[9px] text-rose-400 uppercase font-black block">Flagged Mechanical Faults & Warnings</span>
                         {Object.entries(ins.faults_json).map(([item, desc]) => (
-                          <div key={item} className="text-[10px] text-slate-300 flex justify-between items-start">
+                          <div key={item} className="text-[10px] text-[#E5E7EB] flex justify-between items-start">
                             <span className="font-semibold capitalize text-rose-300">{item.replace(/_/g, ' ')}:</span>
-                            <span className="text-slate-400 italic text-right ml-2">{desc}</span>
+                            <span className="text-[#9CA3AF] italic text-right ml-2">{desc}</span>
                           </div>
                         ))}
                       </div>
@@ -1304,18 +1304,18 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                     {/* Media attachments */}
                     {ins.media_urls && Object.keys(ins.media_urls).length > 0 && (
                       <div className="pt-2">
-                        <span className="text-[9px] text-slate-500 uppercase font-black block mb-1">Captured Mechanical Proof Photo Attachments</span>
+                        <span className="text-[9px] text-[#9CA3AF] uppercase font-black block mb-1">Captured Mechanical Proof Photo Attachments</span>
                         <div className="flex flex-wrap gap-2 mt-1">
                           {Object.entries(ins.media_urls).map(([key, url]) => (
-                            <div key={key} className="flex items-center gap-1.5 bg-slate-900 border border-slate-850 p-1.5 rounded-lg max-w-xs">
-                              <Camera className="w-3.5 h-3.5 text-teal-400 shrink-0" />
-                              <span className="capitalize text-[10px] text-slate-300 truncate max-w-[120px]">{key.replace(/_/g, ' ')}</span>
+                            <div key={key} className="flex items-center gap-1.5 bg-[#111827] border border-[#374151] p-1.5 rounded-lg max-w-xs">
+                              <Camera className="w-3.5 h-3.5 text-[#FFB81C] shrink-0" />
+                              <span className="capitalize text-[10px] text-[#E5E7EB] truncate max-w-[120px]">{key.replace(/_/g, ' ')}</span>
                               <button
                                 onClick={async () => {
                                   const signed = await getSignedUrlForView(url);
                                   window.open(signed, '_blank');
                                 }}
-                                className="text-[9px] text-teal-400 font-bold hover:underline ml-1 cursor-pointer"
+                                className="text-[9px] text-[#FFB81C] font-bold hover:underline ml-1 cursor-pointer"
                               >
                                 View Photo
                               </button>
@@ -1326,9 +1326,9 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                     )}
 
                     {ins.notes && (
-                      <div className="bg-slate-900/60 border border-slate-850 p-2.5 rounded-lg">
-                        <span className="text-[9px] text-slate-500 uppercase font-black block">Additional Observations Notes</span>
-                        <p className="text-slate-300 italic text-[11px] mt-0.5">&ldquo;{ins.notes}&rdquo;</p>
+                      <div className="bg-[#111827] border border-[#374151] p-2.5 rounded-lg">
+                        <span className="text-[9px] text-[#9CA3AF] uppercase font-black block">Additional Observations Notes</span>
+                        <p className="text-[#E5E7EB] italic text-[11px] mt-0.5">&ldquo;{ins.notes}&rdquo;</p>
                       </div>
                     )}
                   </div>
