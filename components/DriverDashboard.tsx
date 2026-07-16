@@ -955,21 +955,20 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
       {/* MAIN VIEWPORT */}
       <div className="flex-1 flex flex-col min-w-0">
         
-        {/* DESKTOP-ONLY HEADER */}
-        <header className="hidden md:flex bg-slate-950 border-b border-slate-850 p-4 justify-between items-center z-10 sticky top-0">
+            {/* DESKTOP-ONLY HEADER */}
+        <header className="hidden md:flex bg-[#0a1424] border-b border-[#1F2937] p-4 justify-between items-center z-10 sticky top-0">
           <div>
-            <h1 className="text-xs font-black tracking-widest text-slate-500">INYATHI OPERATIONAL PORTAL</h1>
-            <p className="text-xs font-extrabold text-teal-400 uppercase mt-0.5">{activeTab.toUpperCase()} VIEW</p>
+            <h1 className="text-xs font-black tracking-widest text-[#9CA3AF]">CAPE CONNECT OPERATIONAL PORTAL</h1>
+            <p className="text-xs font-extrabold text-[#FFB81C] uppercase mt-0.5">{activeTab.toUpperCase()} VIEW</p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold bg-slate-900 px-3 py-1.5 rounded-full border border-slate-800 text-teal-400">
+            <span className="text-[10px] font-bold bg-[#1F2937] px-3 py-1.5 rounded-full border border-[#374151] text-[#FFB81C]">
               {driver.name} ({driver.driver_id}) • {driver.location}
             </span>
           </div>
         </header>
 
-        <main className="flex-1 p-4 md:p-6 lg:p-8 max-w-5xl w-full mx-auto pb-24 md:pb-8">
-        
+        <main className="flex-1 p-4 md:p-6 lg:p-8 max-w-5xl w-full mx-auto pb-24 md:pb-8 bg-[#111827]">
         
         {/* ==================== TASKS TAB ==================== */}
 {activeTab === 'tasks' && (
