@@ -870,27 +870,27 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
         />
       )}
       
-      {/* RESPONSIVE LEFT SIDEBAR */}
+           {/* RESPONSIVE LEFT SIDEBAR */}
       <aside className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-[#0a1424] border-r border-slate-800/85 p-5 flex flex-col justify-between transition-transform duration-300 ease-in-out shrink-0
+        fixed inset-y-0 left-0 z-50 w-64 bg-[#0a1424] border-r border-[#1F2937] p-5 flex flex-col justify-between transition-transform duration-300 ease-in-out shrink-0
         md:sticky md:top-0 md:h-screen md:translate-x-0
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
       `}>
         <div className="space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+          <div className="flex items-center justify-between border-b border-[#1F2937] pb-4">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center shrink-0 shadow relative">
-                <Image src={logoSrc} alt="INYATHI Logo" fill className="object-contain p-0.5" />
+                <Image src={logoSrc} alt="Cape Connect" fill className="object-contain p-0.5" />
               </div>
               <div>
-                <h2 className="text-xs font-black tracking-widest text-teal-400 uppercase leading-none">INYATHI</h2>
-                <p className="text-xs font-semibold text-slate-400 leading-none mt-1">{driver.name}</p>
-                <p className="text-[9px] font-bold uppercase text-slate-500 tracking-wider mt-0.5">DRIVER PORTAL</p>
+                <h2 className="text-xs font-black tracking-widest text-[#FFB81C] uppercase leading-none">CAPE CONNECT</h2>
+                <p className="text-xs font-semibold text-[#9CA3AF] leading-none mt-1">{driver.name}</p>
+                <p className="text-[9px] font-bold uppercase text-[#6B7280] tracking-wider mt-0.5">DRIVER PORTAL</p>
               </div>
             </div>
-            <button 
+            <button
               onClick={() => setIsSidebarOpen(false)}
-              className="md:hidden text-slate-400 hover:text-white p-1 text-xs font-bold cursor-pointer"
+              className="md:hidden text-[#9CA3AF] hover:text-white p-1 text-xs font-bold cursor-pointer"
             >
               ✕
             </button>
@@ -907,7 +907,6 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
               { id: 'logging', label: 'Log Expense / Damage', icon: PlusCircle },
               { id: 'transfer', label: 'Transfer Recon', icon: FileText },
               { id: 'documents', label: 'My Documents', icon: Briefcase },
-              
             ].map(item => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -919,9 +918,9 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                     setIsSidebarOpen(false);
                   }}
                   className={`w-full flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                    isActive 
-                      ? 'bg-teal-600 text-white font-extrabold shadow-md' 
-                      : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200'
+                    isActive
+                      ? 'bg-[#FFB81C] text-black font-extrabold shadow-md'
+                      : 'text-[#9CA3AF] hover:bg-[#1F2937] hover:text-white'
                   }`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
@@ -932,14 +931,14 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
           </nav>
         </div>
 
-        <div className="border-t border-slate-800 pt-4 mt-auto">
-          <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800/50 text-[10px] space-y-1 mb-3">
+        <div className="border-t border-[#1F2937] pt-4 mt-auto">
+          <div className="bg-[#1F2937] p-3 rounded-xl border border-[#374151] text-[10px] space-y-1 mb-3">
             <div className="flex justify-between">
-              <span className="text-slate-500 font-bold">Driver ID:</span>
-              <strong className="text-teal-400">{driver.driver_id}</strong>
+              <span className="text-[#9CA3AF] font-bold">Driver ID:</span>
+              <strong className="text-[#FFB81C]">{driver.driver_id}</strong>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-500 font-bold">Region:</span>
+              <span className="text-[#9CA3AF] font-bold">Region:</span>
               <strong className="text-white">{driver.location}</strong>
             </div>
           </div>
