@@ -1338,13 +1338,13 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
           </div>
         )}
 
-        {/* ==================== WEEKLY RECON TAB ==================== */}
+              {/* ==================== WEEKLY RECON TAB ==================== */}
         {activeTab === 'recon' && (
           <div className="space-y-4">
-            
+           
             <div className="flex items-center justify-between">
               <h2 className="text-base font-bold flex items-center gap-1.5">
-                <FileText className="w-5 h-5 text-teal-500" />
+                <FileText className="w-5 h-5 text-[#FFB81C]" />
                 Weekly Cost Recons
               </h2>
               {!showNewRecon && (
@@ -1382,7 +1382,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                     });
                     setShowNewRecon(true);
                   }}
-                  className="bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center gap-1"
+                  className="bg-[#FFB81C] hover:bg-[#E6A000] text-black text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center gap-1 shadow"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   Create Recon
@@ -1392,12 +1392,12 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
 
             {/* CREATE / EDIT RECON VIEW */}
             {showNewRecon ? (
-              <div className="bg-slate-950/90 border border-slate-800 rounded-xl p-4 shadow-xl space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                  <h3 className="text-xs uppercase tracking-wider font-extrabold text-teal-400">New Weekly trip Recon</h3>
+              <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 shadow-xl space-y-4">
+                <div className="flex items-center justify-between border-b border-[#374151] pb-3">
+                  <h3 className="text-xs uppercase tracking-wider font-extrabold text-[#FFB81C]">New Weekly trip Recon</h3>
                   <button
                     onClick={() => setShowNewRecon(false)}
-                    className="text-slate-400 hover:text-white text-xs font-bold"
+                    className="text-[#9CA3AF] hover:text-white text-xs font-bold"
                   >
                     Cancel
                   </button>
