@@ -1499,65 +1499,65 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                   </div>
                 </div>
                 
-                {/* Financial line items */}
+                              {/* Financial line items */}
                 <div className="space-y-2">
-                  <h4 className="text-[10px] font-bold uppercase text-teal-400">Core Tour Finances</h4>
+                  <h4 className="text-[10px] font-bold uppercase text-[#FFB81C]">Core Tour Finances</h4>
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div>
-                      <span className="text-slate-400 block mb-1">Trip Budget Received</span>
+                      <span className="text-[#9CA3AF] block mb-1">Trip Budget Received</span>
                       <input
                         type="number"
                         placeholder="ZAR Allocation"
                         value={reconForm.trip_budget || ''}
                         onChange={(e) => setReconForm(prev => ({ ...prev, trip_budget: Number(e.target.value) }))}
-                        className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                        className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                       />
                     </div>
                     <div>
-                      <span className="text-slate-400 block mb-1">My Daily Rate Claim</span>
+                      <span className="text-[#9CA3AF] block mb-1">My Daily Rate Claim</span>
                       <input
                         type="number"
                         placeholder="Wages"
                         value={reconForm.driver_rate || ''}
                         onChange={(e) => setReconForm(prev => ({ ...prev, driver_rate: Number(e.target.value) }))}
-                        className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                        className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                       />
                     </div>
                     <div>
-                      <span className="text-slate-400 block mb-1">Food Allowance</span>
+                      <span className="text-[#9CA3AF] block mb-1">Food Allowance</span>
                       <input
                         type="number"
                         value={reconForm.driver_food || ''}
                         onChange={(e) => setReconForm(prev => ({ ...prev, driver_food: Number(e.target.value) }))}
-                        className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                        className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                       />
                     </div>
                     <div>
-                      <span className="text-slate-400 block mb-1">Accommodation Cost</span>
+                      <span className="text-[#9CA3AF] block mb-1">Accommodation Cost</span>
                       <input
                         type="number"
                         value={reconForm.accommodation || ''}
                         onChange={(e) => setReconForm(prev => ({ ...prev, accommodation: Number(e.target.value) }))}
-                        className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                        className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Custom Expenses List */}
-                <div className="space-y-2 border-t border-slate-800 pt-3">
-                  <h4 className="text-[10px] font-bold uppercase text-teal-400">Other Custom Trip Expenses</h4>
+                <div className="space-y-2 border-t border-[#374151] pt-3">
+                  <h4 className="text-[10px] font-bold uppercase text-[#FFB81C]">Other Custom Trip Expenses</h4>
                   {(reconForm.cost_lines || []).length > 0 && (
-                    <div className="space-y-1 bg-slate-900 p-2 rounded border border-slate-800">
+                    <div className="space-y-1 bg-[#111827] p-2 rounded border border-[#374151]">
                       {(reconForm.cost_lines || []).map(line => (
                         <div key={line.id} className="flex justify-between items-center text-xs">
-                          <span className="text-slate-300 font-medium">{line.description}</span>
+                          <span className="text-white font-medium">{line.description}</span>
                           <div className="flex items-center gap-1.5">
                             <span className="font-extrabold text-white">R {line.amount}</span>
                             <button
                               type="button"
                               onClick={() => handleRemoveCustomCost(line.id)}
-                              className="text-rose-400 hover:text-rose-200"
+                              className="text-rose-400 hover:text-rose-300"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
@@ -1573,19 +1573,19 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                       placeholder="e.g. Toll Gate Fees"
                       value={customCostDesc}
                       onChange={(e) => setCustomCostDesc(e.target.value)}
-                      className="col-span-2 bg-slate-900 border border-slate-800 rounded p-1 text-xs text-white"
+                      className="col-span-2 bg-[#111827] border border-[#374151] rounded p-1 text-xs text-white"
                     />
                     <input
                       type="number"
                       placeholder="Amount ZAR"
                       value={customCostAmount}
                       onChange={(e) => setCustomCostAmount(e.target.value)}
-                      className="bg-slate-900 border border-slate-800 rounded p-1 text-xs text-white"
+                      className="bg-[#111827] border border-[#374151] rounded p-1 text-xs text-white"
                     />
                     <button
                       type="button"
                       onClick={handleAddCustomCost}
-                      className="col-span-3 text-[10px] font-bold text-center bg-slate-800 hover:bg-slate-700 py-1.5 rounded transition-colors text-teal-300 flex items-center justify-center gap-1"
+                      className="col-span-3 text-[10px] font-bold text-center bg-[#1F2937] hover:bg-[#374151] py-1.5 rounded transition-colors text-[#FFB81C] flex items-center justify-center gap-1"
                     >
                       <PlusCircle className="w-3.5 h-3.5" />
                       Add Custom Cost Line
@@ -1594,28 +1594,28 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                 </div>
 
                 {/* Wellness fields */}
-                <div className="space-y-2 border-t border-slate-800 pt-3 text-xs">
-                  <h4 className="text-[10px] font-bold uppercase text-teal-400">My Wellness & Condition Log</h4>
+                <div className="space-y-2 border-t border-[#374151] pt-3 text-xs">
+                  <h4 className="text-[10px] font-bold uppercase text-[#FFB81C]">My Wellness & Condition Log</h4>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <span>Fatigue Level (1-10)</span>
+                      <span className="text-white">Fatigue Level (1-10)</span>
                       <input
                         type="range" min="1" max="10"
                         value={reconForm.fatigue_level}
                         onChange={(e) => setReconForm(prev => ({ ...prev, fatigue_level: Number(e.target.value) }))}
-                        className="w-full accent-teal-600"
+                        className="w-full accent-[#FFB81C]"
                       />
-                      <span className="text-[9px] text-slate-400 text-right block font-black">Level: {reconForm.fatigue_level}/10</span>
+                      <span className="text-[9px] text-[#9CA3AF] text-right block font-black">Level: {reconForm.fatigue_level}/10</span>
                     </div>
                     <div>
-                      <span>Stress Level (1-10)</span>
+                      <span className="text-white">Stress Level (1-10)</span>
                       <input
                         type="range" min="1" max="10"
                         value={reconForm.stress_level}
                         onChange={(e) => setReconForm(prev => ({ ...prev, stress_level: Number(e.target.value) }))}
-                        className="w-full accent-teal-600"
+                        className="w-full accent-[#FFB81C]"
                       />
-                      <span className="text-[9px] text-slate-400 text-right block font-black">Level: {reconForm.stress_level}/10</span>
+                      <span className="text-[9px] text-[#9CA3AF] text-right block font-black">Level: {reconForm.stress_level}/10</span>
                     </div>
                   </div>
 
@@ -1624,19 +1624,19 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                       type="text" placeholder="Vehicle Issues? (e.g. steering tight, AC weak)"
                       value={reconForm.vehicle_issues}
                       onChange={(e) => setReconForm(prev => ({ ...prev, vehicle_issues: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                      className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                     />
                     <input
                       type="text" placeholder="Accidents / Traffic violations? (details)"
                       value={reconForm.accidents_incidents}
                       onChange={(e) => setReconForm(prev => ({ ...prev, accidents_incidents: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                      className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                     />
                     <textarea
                       placeholder="General driver notes / wellness comments"
                       value={reconForm.driver_notes}
                       onChange={(e) => setReconForm(prev => ({ ...prev, driver_notes: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white h-12"
+                      className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white h-12"
                     />
                   </div>
                 </div>
