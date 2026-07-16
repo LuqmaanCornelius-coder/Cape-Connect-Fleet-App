@@ -1166,23 +1166,23 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
           </div>
         )}
 
-        {/* ==================== COMPLETED TOURS TAB ==================== */}
+               {/* ==================== COMPLETED TOURS TAB ==================== */}
         {activeTab === 'completed' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-base font-bold flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-emerald-500" />
+                <Sparkles className="w-5 h-5 text-emerald-400" />
                 Completed Tours
               </h2>
-              <span className="text-xs font-bold text-slate-400">
+              <span className="text-xs font-bold text-[#9CA3AF]">
                 {completedBookings.length} Trip{completedBookings.length !== 1 ? 's' : ''}
               </span>
             </div>
 
             {completedBookings.length === 0 ? (
-              <div className="bg-slate-950/60 border border-slate-800/80 p-8 rounded-xl text-center">
-                <p className="text-xs text-slate-500 font-medium">No completed tours yet.</p>
-                <p className="text-[10px] text-teal-500/80 mt-1 italic">Finished trips will appear here once marked complete.</p>
+              <div className="bg-[#1F2937] border border-[#374151] p-8 rounded-xl text-center">
+                <p className="text-xs text-[#9CA3AF] font-medium">No completed tours yet.</p>
+                <p className="text-[10px] text-[#FFB81C] mt-1 italic">Finished trips will appear here once marked complete.</p>
               </div>
             ) : (
               [...completedBookings]
@@ -1193,24 +1193,26 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                   const hasPost = bookingIns.some(ins => ins.inspection_type === 'post-trip');
 
                   return (
-                    <div key={b.invoice_no} className="bg-slate-950/80 border border-emerald-900/30 rounded-xl p-4 shadow-xl flex flex-col gap-3 opacity-90">
+                    <div key={b.invoice_no} className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 shadow-xl flex flex-col gap-3 opacity-90">
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-[9px] font-bold uppercase bg-emerald-900/40 text-emerald-300 border border-emerald-800/60 px-2 py-0.5 rounded">{b.invoice_no}</span>
-                          <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded border bg-slate-800 text-slate-300 border-slate-700">{b.status}</span>
+                          <span className="text-[9px] font-bold uppercase bg-emerald-900/40 text-emerald-300 border border-emerald-900/60 px-2 py-0.5 rounded">{b.invoice_no}</span>
+                          <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded border bg-[#374151] text-white border-[#4B5563]">{b.status}</span>
                         </div>
                         <h3 className="text-sm font-extrabold text-white mt-1.5 leading-snug">{b.client_name}</h3>
-                        <p className="text-xs text-slate-400 mt-0.5 font-medium">{b.route}</p>
+                        <p className="text-xs text-[#9CA3AF] mt-0.5 font-medium">{b.route}</p>
                       </div>
-                      <div className="grid grid-cols-2 gap-2 text-[11px] bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
-                        <div><p className="text-slate-500 font-bold uppercase text-[9px]">Tour Code</p><p className="text-slate-300 font-bold">{b.tour_reference}</p></div>
-                        <div><p className="text-slate-500 font-bold uppercase text-[9px]">Vehicle</p><p className="text-slate-300 font-bold">{b.is_rented_vehicle ? `${b.rented_vehicle_model} (RENTED)` : b.assigned_vehicle_reg}</p></div>
-                        <div><p className="text-slate-500 font-bold uppercase text-[9px]">Departed</p><p className="text-slate-300 font-medium">{new Date(b.start_date).toLocaleDateString()}</p></div>
-                        <div><p className="text-slate-500 font-bold uppercase text-[9px]">Returned</p><p className="text-slate-300 font-medium">{new Date(b.end_date).toLocaleDateString()}</p></div>
+
+                      <div className="grid grid-cols-2 gap-2 text-[11px] bg-[#111827] p-2.5 rounded-lg border border-[#374151]">
+                        <div><p className="text-[#9CA3AF] font-bold uppercase text-[9px]">Tour Code</p><p className="text-white font-bold">{b.tour_reference}</p></div>
+                        <div><p className="text-[#9CA3AF] font-bold uppercase text-[9px]">Vehicle</p><p className="text-white font-bold">{b.is_rented_vehicle ? `${b.rented_vehicle_model} (RENTED)` : b.assigned_vehicle_reg}</p></div>
+                        <div><p className="text-[#9CA3AF] font-bold uppercase text-[9px]">Departed</p><p className="text-white font-medium">{new Date(b.start_date).toLocaleDateString()}</p></div>
+                        <div><p className="text-[#9CA3AF] font-bold uppercase text-[9px]">Returned</p><p className="text-white font-medium">{new Date(b.end_date).toLocaleDateString()}</p></div>
                       </div>
+
                       <div className="grid grid-cols-2 gap-2">
-                        <div className={`text-xs font-bold py-2 rounded-lg flex items-center justify-center gap-1.5 ${hasPre ? 'bg-emerald-950/40 border border-emerald-900/60 text-emerald-400' : 'bg-slate-800/60 border border-slate-700 text-slate-500'}`}><CheckCircle className="w-3.5 h-3.5" />{hasPre ? 'Pre-Trip Done' : 'No Pre-Trip'}</div>
-                        <div className={`text-xs font-bold py-2 rounded-lg flex items-center justify-center gap-1.5 ${hasPost ? 'bg-indigo-950/40 border border-indigo-900/60 text-indigo-400' : 'bg-slate-800/60 border border-slate-700 text-slate-500'}`}><CheckCircle className="w-3.5 h-3.5" />{hasPost ? 'Post-Trip Done' : 'No Post-Trip'}</div>
+                        <div className={`text-xs font-bold py-2 rounded-lg flex items-center justify-center gap-1.5 ${hasPre ? 'bg-emerald-900/40 border border-emerald-900/60 text-emerald-400' : 'bg-[#374151] border border-[#4B5563] text-[#9CA3AF]'}`}><CheckCircle className="w-3.5 h-3.5" />{hasPre ? 'Pre-Trip Done' : 'No Pre-Trip'}</div>
+                        <div className={`text-xs font-bold py-2 rounded-lg flex items-center justify-center gap-1.5 ${hasPost ? 'bg-indigo-900/40 border border-indigo-900/60 text-indigo-400' : 'bg-[#374151] border border-[#4B5563] text-[#9CA3AF]'}`}><CheckCircle className="w-3.5 h-3.5" />{hasPost ? 'Post-Trip Done' : 'No Post-Trip'}</div>
                       </div>
                     </div>
                   );
@@ -1219,6 +1221,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
           </div>
         )}
 
+          
         {/* ==================== INSPECTION SHEET TAB ==================== */}
         {activeTab === 'inspections' && (
           <div className="space-y-4">
