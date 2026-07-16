@@ -1403,24 +1403,24 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                   </button>
                 </div>
 
-                {/* Week Start & End dates */}
+                             {/* Week Start & End dates */}
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="text-[10px] font-bold uppercase text-slate-400">Week Start</label>
+                    <label className="text-[10px] font-bold uppercase text-[#9CA3AF]">Week Start</label>
                     <input
                       type="date"
                       value={reconForm.week_start}
                       onChange={(e) => setReconForm(prev => ({ ...prev, week_start: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                      className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold uppercase text-slate-400">Week End</label>
+                    <label className="text-[10px] font-bold uppercase text-[#9CA3AF]">Week End</label>
                     <input
                       type="date"
                       value={reconForm.week_end}
                       onChange={(e) => setReconForm(prev => ({ ...prev, week_end: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                      className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                     />
                   </div>
                 </div>
@@ -1428,21 +1428,21 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                 {/* Tour Ref and Vehicle Select */}
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="text-[10px] font-bold uppercase text-slate-400">Tour Ref / Code</label>
+                    <label className="text-[10px] font-bold uppercase text-[#9CA3AF]">Tour Ref / Code</label>
                     <input
                       type="text"
                       placeholder="e.g. WINELANDS-88A"
                       value={reconForm.tour_reference}
                       onChange={(e) => setReconForm(prev => ({ ...prev, tour_reference: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                      className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold uppercase text-slate-400">Vehicle Reg</label>
+                    <label className="text-[10px] font-bold uppercase text-[#9CA3AF]">Vehicle Reg</label>
                     <select
                       value={reconForm.vehicle_reg}
                       onChange={(e) => setReconForm(prev => ({ ...prev, vehicle_reg: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                      className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
                     >
                       {vehicles.map(v => (
                         <option key={v.registration_no} value={v.registration_no}>
@@ -1454,51 +1454,51 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                 </div>
 
                 {/* Mileage and stats */}
-                <div className="grid grid-cols-3 gap-2 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
+                <div className="grid grid-cols-3 gap-2 bg-[#111827] p-2.5 rounded-lg border border-[#374151]">
                   <div>
-                    <label className="text-[9px] font-bold uppercase text-slate-500">Start KM</label>
+                    <label className="text-[9px] font-bold uppercase text-[#9CA3AF]">Start KM</label>
                     <input
                       type="number"
                       value={reconForm.start_km || ''}
                       onChange={(e) => setReconForm(prev => ({ ...prev, start_km: Number(e.target.value) }))}
-                      className="w-full bg-slate-950 border border-slate-800 rounded p-1 text-xs text-white font-bold"
+                      className="w-full bg-[#0a1424] border border-[#374151] rounded p-1 text-xs text-white font-bold"
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold uppercase text-slate-500">End KM</label>
+                    <label className="text-[9px] font-bold uppercase text-[#9CA3AF]">End KM</label>
                     <input
                       type="number"
                       value={reconForm.end_km || ''}
                       onChange={(e) => setReconForm(prev => ({ ...prev, end_km: Number(e.target.value) }))}
-                      className="w-full bg-slate-950 border border-slate-800 rounded p-1 text-xs text-white font-bold"
+                      className="w-full bg-[#0a1424] border border-[#374151] rounded p-1 text-xs text-white font-bold"
                     />
                   </div>
                   <div>
-                    <label className="text-[9px] font-bold uppercase text-slate-500">Total KM</label>
-                    <div className="w-full bg-slate-950/40 p-1 text-xs text-slate-400 font-black text-center mt-0.5 rounded border border-slate-800">
+                    <label className="text-[9px] font-bold uppercase text-[#9CA3AF]">Total KM</label>
+                    <div className="w-full bg-[#0a1424] p-1 text-xs text-[#9CA3AF] font-black text-center mt-0.5 rounded border border-[#374151]">
                       {((reconForm.end_km || 0) - (reconForm.start_km || 0)) || 0} km
                     </div>
                   </div>
                   <div className="mt-1.5 col-span-2">
-                    <label className="text-[9px] font-bold uppercase text-slate-500">Total Hours Driven</label>
+                    <label className="text-[9px] font-bold uppercase text-[#9CA3AF]">Total Hours Driven</label>
                     <input
                       type="number"
                       value={reconForm.total_hours || ''}
                       onChange={(e) => setReconForm(prev => ({ ...prev, total_hours: Number(e.target.value) }))}
-                      className="w-full bg-slate-950 border border-slate-800 rounded p-1 text-xs text-white font-bold"
+                      className="w-full bg-[#0a1424] border border-[#374151] rounded p-1 text-xs text-white font-bold"
                     />
                   </div>
                   <div className="mt-1.5">
-                    <label className="text-[9px] font-bold uppercase text-slate-500">Trips Run</label>
+                    <label className="text-[9px] font-bold uppercase text-[#9CA3AF]">Trips Run</label>
                     <input
                       type="number"
                       value={reconForm.trips_completed || ''}
                       onChange={(e) => setReconForm(prev => ({ ...prev, trips_completed: Number(e.target.value) }))}
-                      className="w-full bg-slate-950 border border-slate-800 rounded p-1 text-xs text-white font-bold"
+                      className="w-full bg-[#0a1424] border border-[#374151] rounded p-1 text-xs text-white font-bold"
                     />
                   </div>
                 </div>
-
+                
                 {/* Financial line items */}
                 <div className="space-y-2">
                   <h4 className="text-[10px] font-bold uppercase text-teal-400">Core Tour Finances</h4>
