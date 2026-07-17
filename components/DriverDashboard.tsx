@@ -2174,12 +2174,12 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
             ) : (
 
             
-                /* Empty week sheet banner if no sheet has been started */
-                <div className="bg-slate-950/90 border border-slate-800 rounded-2xl p-8 text-center space-y-3">
-                  <p className="text-slate-400 italic text-xs">
+                             /* Empty week sheet banner if no sheet has been started */
+                <div className="bg-[#1F2937] border border-[#374151] rounded-2xl p-8 text-center space-y-3">
+                  <p className="text-[#9CA3AF] italic text-xs">
                     You have not started a transfer recon sheet for the current week period:
                   </p>
-                  <p className="text-sm font-bold text-slate-300 font-mono bg-slate-900 border border-slate-800 py-1.5 px-3 inline-block rounded-lg">
+                  <p className="text-sm font-bold text-white font-mono bg-[#111827] border border-[#374151] py-1.5 px-3 inline-block rounded-lg">
                     {formatRangeDisplay(currentWeekRange.week_start, currentWeekRange.week_end)}
                   </p>
                   <div>
@@ -2215,7 +2215,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                           }));
                         }
                       }}
-                      className="bg-teal-600 hover:bg-teal-500 text-white text-xs font-extrabold py-2 px-4 rounded-xl transition-all shadow-xs inline-flex items-center gap-1 cursor-pointer"
+                      className="bg-[#FFB81C] hover:bg-[#E6A000] text-black text-xs font-extrabold py-2 px-4 rounded-xl transition-all shadow-xs inline-flex items-center gap-1 cursor-pointer"
                     >
                       <Plus className="w-4 h-4" />
                       Create Transfer Sheet
@@ -2223,18 +2223,16 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                   </div>
                 </div>
               )}
-
               {/* PREVIOUS SUBMISSIONS SECTION */}
-              <div className="space-y-3 pt-4 border-t border-slate-800">
-                <h3 className="text-xs uppercase tracking-wider font-extrabold text-slate-400">Previous Submissions</h3>
-                
+              <div className="space-y-3 pt-4 border-t border-[#374151]">
+                <h3 className="text-xs uppercase tracking-wider font-extrabold text-[#9CA3AF]">Previous Submissions</h3>
+               
                 {(() => {
                   const previousSheets = transfersSheets.filter(ts => ts.week_start !== currentWeekRange.week_start);
-                  
+                 
                   if (previousSheets.length === 0) {
-                    return <p className="text-xs text-slate-400 italic py-3">No previous sheets found.</p>;
+                    return <p className="text-xs text-[#9CA3AF] italic py-3">No previous sheets found.</p>;
                   }
-
                   return (
                     <div className="grid gap-3 sm:grid-cols-2">
                       {[...previousSheets]
@@ -2242,22 +2240,22 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                         .map(ts => {
                         const totalWage = ts.transfers.reduce((sum, curr) => sum + Number(curr.amount || 0), 0);
                         return (
-                          <div key={ts.id} className="bg-slate-950 border border-slate-800 rounded-xl p-4 shadow-xs flex flex-col justify-between gap-3">
+                          <div key={ts.id} className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 shadow-xs flex flex-col justify-between gap-3">
                             <div className="flex justify-between items-start">
                               <div>
-                                <p className="text-xs font-bold text-slate-200">
+                                <p className="text-xs font-bold text-white">
                                   {formatRangeDisplay(ts.week_start, ts.week_end)}
                                 </p>
-                                <p className="text-[10px] text-slate-400 mt-0.5">
-                                  {ts.transfers.length} entries • Payout: <strong className="text-teal-400 font-bold">R {totalWage.toFixed(2)}</strong>
+                                <p className="text-[10px] text-[#9CA3AF] mt-0.5">
+                                  {ts.transfers.length} entries • Payout: <strong className="text-[#FFB81C] font-bold">R {totalWage.toFixed(2)}</strong>
                                 </p>
                               </div>
                               <span className={`text-[9px] uppercase font-black px-2 py-0.5 rounded border ${
-                                ts.status === 'reviewed' 
-                                  ? 'bg-emerald-950/60 text-emerald-400 border-emerald-800/80' 
+                                ts.status === 'reviewed'
+                                  ? 'bg-emerald-900/40 text-emerald-400 border-emerald-900/60'
                                   : ts.status === 'submitted'
-                                  ? 'bg-blue-950/60 text-blue-300 border-blue-900/60'
-                                  : 'bg-slate-800 text-slate-400 border-slate-700'
+                                  ? 'bg-[#FFB81C]/10 text-[#FFB81C] border-[#FFB81C]/30'
+                                  : 'bg-[#374151] text-[#9CA3AF] border-[#374151]'
                               }`}>
                                 {ts.status}
                               </span>
@@ -2282,14 +2280,14 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                                   placeholder="Why do you need to edit this?"
                                   value={editRequestReason}
                                   onChange={(e) => setEditRequestReason(e.target.value)}
-                                  className="w-full bg-slate-900 border border-slate-800 rounded p-1 text-[11px] text-white"
+                                  className="w-full bg-[#111827] border border-[#374151] rounded p-1 text-[11px] text-white"
                                   required
                                 />
                                 <div className="flex gap-1 justify-end">
                                   <button
                                     type="button"
                                     onClick={() => setActiveReconForEditRequest(null)}
-                                    className="text-[10px] text-slate-400 hover:text-white px-2 py-1"
+                                    className="text-[10px] text-[#9CA3AF] hover:text-white px-2 py-1"
                                   >
                                     Cancel
                                   </button>
@@ -2303,48 +2301,46 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                               </form>
                             )}
 
-                            <div className="flex gap-2 justify-end border-t border-slate-800 pt-3">
+                            <div className="flex gap-2 justify-end border-t border-[#374151] pt-3">
                               <button
                                 onClick={() => downloadTransferReconPDF(ts, driver.name)}
-                                className="text-[10px] font-bold text-teal-400 hover:bg-slate-900 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors"
+                                className="text-[10px] font-bold text-[#FFB81C] hover:bg-[#1F2937] border border-[#374151] px-2.5 py-1.5 rounded-lg transition-colors"
                               >
                                 PDF Report
                               </button>
-                              
+                             
                               {ts.status === 'draft' && (
                                 <button
                                   onClick={() => {
                                     setTransferForm(ts);
                                     setShowNewTransferSheet(true);
                                   }}
-                                  className="bg-teal-600 hover:bg-teal-500 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition-all"
+                                  className="bg-[#FFB81C] hover:bg-[#E6A000] text-black text-[10px] font-bold py-1.5 px-3 rounded-lg transition-all"
                                 >
                                   Edit Draft
                                 </button>
                               )}
 
-                            {ts.status === 'submitted' && ts.edit_request_status === 'none' && !ts.was_edited && (
+                              {ts.status === 'submitted' && ts.edit_request_status === 'none' && !ts.was_edited && (
                                 <button
                                   onClick={() => {
                                     setActiveReconForEditRequest(ts.id);
                                   }}
-                                  className="text-[10px] font-bold text-amber-400 hover:bg-slate-900 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors"
+                                  className="text-[10px] font-bold text-amber-400 hover:bg-[#1F2937] border border-[#374151] px-2.5 py-1.5 rounded-lg transition-colors"
                                 >
                                   Request Edit
                                 </button>
                               )}
                               {ts.was_edited && ts.status === 'submitted' && (
-  <span className="text-[10px] text-slate-500 italic px-2.5 py-1.5">
-    Edit already used — contact admin for further changes.
-  </span>
-)}
-
+                                <span className="text-[10px] text-[#9CA3AF] italic px-2.5 py-1.5">
+                                  Edit already used — contact admin for further changes.
+                                </span>
+                              )}
                               {ts.edit_request_status === 'pending' && (
                                 <span className="text-[10px] font-bold text-amber-400 bg-amber-950/30 border border-amber-900/60 px-2.5 py-1.5 rounded-lg">
                                   ⏳ Edit Pending
                                 </span>
                               )}
-
                               {ts.edit_request_status === 'rejected' && (
                                 <span className="text-[10px] font-bold text-rose-400 bg-rose-950/30 border border-rose-900/60 px-2.5 py-1.5 rounded-lg" title={ts.edit_request_rejection_reason}>
                                   ❌ Edit Rejected
@@ -2358,11 +2354,11 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                   );
                 })()}
               </div>
-
             </div>
           );
         })()}
 
+          
         {/* ==================== VEHICLE CHECKLISTS TAB ==================== */}
         {activeTab === 'checklists' && (
           <div className="space-y-4">
