@@ -1641,10 +1641,10 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                   </div>
                 </div>
 
-                {/* Subtotals display */}
-                <div className="border-t border-slate-800 pt-3 flex justify-between items-center">
+                              {/* Subtotals display */}
+                <div className="border-t border-[#374151] pt-3 flex justify-between items-center">
                   <div>
-                    <span className="text-[9px] uppercase font-bold text-slate-500">Projected Balance</span>
+                    <span className="text-[9px] uppercase font-bold text-[#9CA3AF]">Projected Balance</span>
                     <p className={`text-sm font-black ${calculateReconTotal(reconForm) >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                       R {calculateReconTotal(reconForm).toFixed(2)}
                     </p>
@@ -1654,22 +1654,22 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                     <button
                       type="button"
                       onClick={() => handleSaveRecon(false)}
-                      className="bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-1.5 px-3 rounded text-xs transition-colors"
+                      className="bg-[#1F2937] hover:bg-[#374151] text-white font-bold py-1.5 px-3 rounded text-xs transition-colors border border-[#374151]"
                     >
                       Save Draft
                     </button>
                     <button
                       type="button"
                       onClick={() => handleSaveRecon(true)}
-                      className="bg-teal-600 hover:bg-teal-500 text-white font-black py-1.5 px-4 rounded text-xs transition-colors shadow"
+                      className="bg-[#FFB81C] hover:bg-[#E6A000] text-black font-black py-1.5 px-4 rounded text-xs transition-colors shadow"
                     >
                       Submit Sheet
                     </button>
                   </div>
                 </div>
-
               </div>
             ) : (
+            
               /* RECONS LIST VIEW */
               <div className="space-y-2">
                 {recons.length === 0 ? (
