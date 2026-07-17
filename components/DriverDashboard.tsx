@@ -2567,30 +2567,31 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
         )}
 
           
-        {/* ==================== LOG EXPENSE / DAMAGE TAB ==================== */}
+              {/* ==================== LOG EXPENSE / DAMAGE TAB ==================== */}
         {activeTab === 'logging' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-base font-bold flex items-center gap-1.5">
-                <PlusCircle className="w-5 h-5 text-teal-500 animate-pulse" />
+                <PlusCircle className="w-5 h-5 text-[#FFB81C] animate-pulse" />
                 Log Trip Expense or Damage Costs
               </h2>
             </div>
-            <p className="text-[10px] text-slate-400">
+            <p className="text-[10px] text-[#9CA3AF]">
               Submit trip expenses like fuel slips, tyres, toll gates, or emergency fleet repairs with real receipt uploads.
             </p>
 
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 shadow-lg space-y-3">
+            <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 shadow-lg space-y-3">
               <h3 className="text-sm font-bold text-white flex items-center gap-1">
-                <Camera className="w-4 h-4 text-teal-500" />
+                <Camera className="w-4 h-4 text-[#FFB81C]" />
                 Upload slip / Receipt Expense
               </h3>
+
               <form onSubmit={handleLogExpense} className="space-y-2 text-xs">
                 <div className="grid grid-cols-2 gap-2">
                   <select
                     value={expenseForm.vehicle_reg}
                     onChange={(e) => setExpenseForm(prev => ({ ...prev, vehicle_reg: e.target.value }))}
-                    className="bg-slate-900 border border-slate-800 rounded p-1.5 text-slate-200"
+                    className="bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                   >
                     <option value="">Select Vehicle...</option>
                     {vehicles.map(v => (
@@ -2600,7 +2601,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                   <select
                     value={expenseForm.expense_type}
                     onChange={(e) => setExpenseForm(prev => ({ ...prev, expense_type: e.target.value as any }))}
-                    className="bg-slate-900 border border-slate-800 rounded p-1.5 text-slate-200"
+                    className="bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                   >
                     <option value="Tyres">Tyres</option>
                     <option value="Service">Service</option>
@@ -2610,32 +2611,34 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                     <option value="Other">Other Expense</option>
                   </select>
                 </div>
+
                 <div className="grid grid-cols-3 gap-2">
                   <input
                     type="number" required placeholder="ZAR Amount"
                     value={expenseForm.amount}
                     onChange={(e) => setExpenseForm(prev => ({ ...prev, amount: e.target.value }))}
-                    className="col-span-2 bg-slate-900 border border-slate-800 rounded p-1.5 text-white"
+                    className="col-span-2 bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                   />
                   <input
                     type="date"
                     value={expenseForm.expense_date}
                     onChange={(e) => setExpenseForm(prev => ({ ...prev, expense_date: e.target.value }))}
-                    className="bg-slate-900 border border-slate-800 rounded p-1.5 text-white"
+                    className="bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                   />
                 </div>
+
                 <input
                   type="text" required placeholder="Expense description (e.g. Fuel tank top-up)"
                   value={expenseForm.description}
                   onChange={(e) => setExpenseForm(prev => ({ ...prev, description: e.target.value }))}
-                  className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-white"
+                  className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                 />
-                
+
                 {/* Real Cloudinary file selector */}
-                <div className="border border-dashed border-slate-700 bg-slate-900 p-3 text-center rounded-xl flex flex-col items-center justify-center gap-2 relative">
+                <div className="border border-dashed border-[#374151] bg-[#111827] p-3 text-center rounded-xl flex flex-col items-center justify-center gap-2 relative">
                   {uploadingFile ? (
-                    <div className="flex items-center gap-1.5 text-[10px] text-teal-400 font-bold justify-center">
-                      <RefreshCw className="w-4 h-4 animate-spin text-teal-400" /> Uploading to Cloudinary...
+                    <div className="flex items-center gap-1.5 text-[10px] text-[#FFB81C] font-bold justify-center">
+                      <RefreshCw className="w-4 h-4 animate-spin text-[#FFB81C]" /> Uploading to Cloudinary...
                     </div>
                   ) : expenseUrl ? (
                     <div className="flex flex-col items-center gap-1">
@@ -2645,10 +2648,10 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                     </div>
                   ) : (
                     <>
-                      <FileUp className="w-5 h-5 text-slate-400" />
-                      <span className="text-[9px] text-slate-400 block">Select Slip / Receipt File</span>
-                      <input 
-                        type="file" 
+                      <FileUp className="w-5 h-5 text-[#9CA3AF]" />
+                      <span className="text-[9px] text-[#9CA3AF] block">Select Slip / Receipt File</span>
+                      <input
+                        type="file"
                         accept="image/*,application/pdf"
                         onChange={handleExpenseFileChange}
                         className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
@@ -2659,13 +2662,12 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
 
                 <button
                   type="submit"
-                  className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-2 rounded-lg text-xs transition-colors"
+                  className="w-full bg-[#FFB81C] hover:bg-[#E6A000] text-black font-bold py-2 rounded-lg text-xs transition-colors shadow"
                 >
                   File Expense Slip
                 </button>
               </form>
             </div>
-
           </div>
         )}
 
