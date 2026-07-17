@@ -1670,42 +1670,42 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
               </div>
             ) : (
             
-              /* RECONS LIST VIEW */
+                          /* RECONS LIST VIEW */
               <div className="space-y-2">
                 {recons.length === 0 ? (
-                  <p className="text-xs text-slate-500 italic text-center py-6">No reconciliation sheets logged yet.</p>
+                  <p className="text-xs text-[#9CA3AF] italic text-center py-6">No reconciliation sheets logged yet.</p>
                 ) : (
                   [...recons]
                     .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                     .map(rec => (
-                    <div key={rec.id} className="bg-slate-950/90 border border-slate-800 rounded-xl p-4 shadow flex flex-col gap-2">
+                    <div key={rec.id} className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 shadow flex flex-col gap-2">
                       <div className="flex justify-between items-center">
                         <div>
-                          <p className="text-[11px] font-black text-slate-400">Period: {rec.week_start} - {rec.week_end}</p>
+                          <p className="text-[11px] font-black text-[#9CA3AF]">Period: {rec.week_start} - {rec.week_end}</p>
                           <h4 className="text-xs font-bold text-white mt-0.5">Tour Code: {rec.tour_reference || 'N/A'}</h4>
                         </div>
                         <span className={`text-[10px] uppercase font-extrabold px-2 py-0.5 rounded border ${
                           rec.status === 'reviewed'
-                            ? 'bg-emerald-950/60 text-emerald-400 border-emerald-800/80'
+                            ? 'bg-emerald-900/40 text-emerald-400 border-emerald-900/60'
                             : rec.status === 'submitted'
-                            ? 'bg-teal-950/60 text-teal-300 border-teal-800/80'
-                            : 'bg-slate-800 text-slate-400 border-slate-700'
+                            ? 'bg-[#FFB81C]/10 text-[#FFB81C] border-[#FFB81C]/30'
+                            : 'bg-[#374151] text-[#9CA3AF] border-[#374151]'
                         }`}>
                           {rec.status}
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-2 text-[10px] text-slate-400 border-t border-b border-slate-900 py-2 my-1">
+                      <div className="grid grid-cols-3 gap-2 text-[10px] text-[#9CA3AF] border-t border-b border-[#374151] py-2 my-1">
                         <div>
-                          <span className="block text-[8px] uppercase text-slate-500">Distance</span>
-                          <span className="font-bold text-slate-300">{rec.total_distance_km} km</span>
+                          <span className="block text-[8px] uppercase text-[#6B7280]">Distance</span>
+                          <span className="font-bold text-white">{rec.total_distance_km} km</span>
                         </div>
                         <div>
-                          <span className="block text-[8px] uppercase text-slate-500">Trip Expenses</span>
-                          <span className="font-bold text-slate-300">R {(Number(rec.trip_budget || 0) - Number(rec.total_profit_loss || 0)).toFixed(2)}</span>
+                          <span className="block text-[8px] uppercase text-[#6B7280]">Trip Expenses</span>
+                          <span className="font-bold text-white">R {(Number(rec.trip_budget || 0) - Number(rec.total_profit_loss || 0)).toFixed(2)}</span>
                         </div>
                         <div>
-                          <span className="block text-[8px] uppercase text-slate-500">Net Return</span>
+                          <span className="block text-[8px] uppercase text-[#6B7280]">Net Return</span>
                           <span className={`font-bold ${Number(rec.total_profit_loss || 0) >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                             R {Number(rec.total_profit_loss || 0).toFixed(2)}
                           </span>
@@ -1713,10 +1713,10 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                       </div>
 
                       {rec.edit_request_status && rec.edit_request_status !== 'none' && (
-                        <div className="text-[10px] bg-slate-900 px-2 py-1.5 rounded flex items-center justify-between border border-slate-800">
-                          <span className="text-slate-400">Edit request status:</span>
+                        <div className="text-[10px] bg-[#111827] px-2 py-1.5 rounded flex items-center justify-between border border-[#374151]">
+                          <span className="text-[#9CA3AF]">Edit request status:</span>
                           <span className={`font-bold uppercase text-[9px] ${
-                            rec.edit_request_status === 'pending' ? 'text-amber-400' : rec.edit_request_status === 'approved' ? 'text-teal-400' : 'text-rose-400'
+                            rec.edit_request_status === 'pending' ? 'text-amber-400' : rec.edit_request_status === 'approved' ? 'text-[#FFB81C]' : 'text-rose-400'
                           }`}>
                             {rec.edit_request_status}
                           </span>
@@ -1726,7 +1726,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                       <div className="flex gap-1.5 pt-1.5 justify-end">
                         <button
                           onClick={() => downloadReconPDF(rec, driver.name)}
-                          className="text-[10px] font-bold text-teal-400 hover:bg-slate-900 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors"
+                          className="text-[10px] font-bold text-[#FFB81C] hover:bg-[#1F2937] border border-[#374151] px-2.5 py-1.5 rounded-lg transition-colors"
                         >
                           Download PDF Report
                         </button>
@@ -1737,7 +1737,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                               setReconForm(rec);
                               setShowNewRecon(true);
                             }}
-                            className="bg-teal-600 hover:bg-teal-500 text-white text-[10px] font-bold py-1.5 px-3 rounded-lg transition-all"
+                            className="bg-[#FFB81C] hover:bg-[#E6A000] text-black text-[10px] font-bold py-1.5 px-3 rounded-lg transition-all"
                           >
                             Edit Draft
                           </button>
@@ -1746,21 +1746,21 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                         {rec.status === 'submitted' && rec.edit_request_status === 'none' && !rec.was_edited && (
                           <button
                             onClick={() => setActiveReconForEditRequest(rec.id)}
-                            className="text-[10px] font-bold text-amber-400 hover:bg-slate-900 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-colors"
+                            className="text-[10px] font-bold text-amber-400 hover:bg-[#1F2937] border border-[#374151] px-2.5 py-1.5 rounded-lg transition-colors"
                           >
                             Request Edit
                           </button>
                         )}
                         {rec.was_edited && rec.status === 'submitted' && (
-  <span className="text-[10px] text-slate-500 italic px-2.5 py-1.5">
-    Edit already used — contact admin for further changes.
-  </span>
-)}
+                          <span className="text-[10px] text-[#9CA3AF] italic px-2.5 py-1.5">
+                            Edit already used — contact admin for further changes.
+                          </span>
+                        )}
                       </div>
 
                       {/* Request Edit Dialog inline */}
                       {activeReconForEditRequest === rec.id && (
-                        <form onSubmit={handleRequestEdit} className="mt-2.5 p-3 border border-slate-800 rounded bg-slate-950 shadow space-y-2 animate-scale-up">
+                        <form onSubmit={handleRequestEdit} className="mt-2.5 p-3 border border-[#374151] rounded bg-[#111827] shadow space-y-2 animate-scale-up">
                           <p className="text-[9px] font-bold uppercase text-amber-400">Request Edit Authorization</p>
                           <input
                             type="text"
@@ -1768,13 +1768,13 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                             placeholder="Enter detailed reason for editing..."
                             value={editRequestReason}
                             onChange={(e) => setEditRequestReason(e.target.value)}
-                            className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-white"
+                            className="w-full bg-[#0a1424] border border-[#374151] rounded p-1.5 text-xs text-white"
                           />
                           <div className="flex gap-1 justify-end">
                             <button
                               type="button"
                               onClick={() => setActiveReconForEditRequest(null)}
-                              className="text-[10px] text-slate-400 hover:text-white px-2 py-1"
+                              className="text-[10px] text-[#9CA3AF] hover:text-white px-2 py-1"
                             >
                               Cancel
                             </button>
@@ -1787,16 +1787,14 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                           </div>
                         </form>
                       )}
-
                     </div>
                   ))
                 )}
               </div>
             )}
-
           </div>
         )}
-
+          
         {/* ==================== TRANSFER RECON TAB ==================== */}
         {activeTab === 'transfer' && (() => {
           // Calculate current week Monday to Sunday
