@@ -2466,27 +2466,27 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
             </div>
           </div>
         )}
-          
-        {/* ==================== INCIDENT REPORTS TAB ==================== */}
+
+          {/* ==================== INCIDENT REPORTS TAB ==================== */}
         {activeTab === 'incidents' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-base font-bold flex items-center gap-1.5">
-                <AlertTriangle className="w-5 h-5 text-rose-500 animate-pulse" />
+                <AlertTriangle className="w-5 h-5 text-rose-400 animate-pulse" />
                 Incident Reports
               </h2>
             </div>
-            <p className="text-[10px] text-slate-400">
+            <p className="text-[10px] text-[#9CA3AF]">
               Report breakdowns, physical damage, collisions, medical issues, or theft incidents immediately to dispatch and safety admins.
             </p>
 
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 shadow-lg space-y-3">
+            <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 shadow-lg space-y-3">
               <form onSubmit={handleLogIncident} className="space-y-2.5 text-xs">
                 <div className="grid grid-cols-2 gap-2">
                   <select
                     value={incidentForm.vehicle_reg}
                     onChange={(e) => setIncidentForm(prev => ({ ...prev, vehicle_reg: e.target.value }))}
-                    className="bg-slate-900 border border-slate-800 rounded p-1.5 text-slate-200"
+                    className="bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                   >
                     <option value="">Select Vehicle...</option>
                     {vehicles.map(v => (
@@ -2496,7 +2496,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                   <select
                     value={incidentForm.incident_type}
                     onChange={(e) => setIncidentForm(prev => ({ ...prev, incident_type: e.target.value }))}
-                    className="bg-slate-900 border border-slate-800 rounded p-1.5 text-slate-200"
+                    className="bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                   >
                     <option value="Accident">Accident / Collision</option>
                     <option value="Breakdown">Breakdown</option>
@@ -2504,35 +2504,36 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                     <option value="Theft">Vandalism / Theft</option>
                   </select>
                 </div>
+
                 <input
                   type="text" required placeholder="Incident Location (e.g. N1 highway outbound)"
                   value={incidentForm.location}
                   onChange={(e) => setIncidentForm(prev => ({ ...prev, location: e.target.value }))}
-                  className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-white"
+                  className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                 />
-                
-                <div className="flex items-center gap-2 bg-slate-900 p-2 rounded border border-slate-800">
+               
+                <div className="flex items-center gap-2 bg-[#111827] p-2 rounded border border-[#374151]">
                   <input
                     type="checkbox" id="injuries-chk"
                     checked={incidentForm.injuries}
                     onChange={(e) => setIncidentForm(prev => ({ ...prev, injuries: e.target.checked }))}
-                    className="accent-teal-600 w-4 h-4"
+                    className="accent-[#FFB81C] w-4 h-4"
                   />
-                  <label htmlFor="injuries-chk" className="text-slate-300 font-bold">Passenger or Driver Injuries occurred?</label>
+                  <label htmlFor="injuries-chk" className="text-white font-bold">Passenger or Driver Injuries occurred?</label>
                 </div>
 
                 <textarea
                   required placeholder="Detailed description of what occurred, damage, next actions..."
                   value={incidentForm.description}
                   onChange={(e) => setIncidentForm(prev => ({ ...prev, description: e.target.value }))}
-                  className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-white h-20"
+                  className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white h-20"
                 />
 
                 {/* Real Cloudinary file selector for Incidents */}
-                <div className="border border-dashed border-slate-700 bg-slate-900 p-3 text-center rounded-xl flex flex-col items-center justify-center gap-2 relative">
+                <div className="border border-dashed border-[#374151] bg-[#111827] p-3 text-center rounded-xl flex flex-col items-center justify-center gap-2 relative">
                   {uploadingIncident ? (
-                    <div className="flex items-center gap-1.5 text-[10px] text-teal-400 font-bold justify-center">
-                      <RefreshCw className="w-4 h-4 animate-spin text-teal-400" /> Uploading photo...
+                    <div className="flex items-center gap-1.5 text-[10px] text-[#FFB81C] font-bold justify-center">
+                      <RefreshCw className="w-4 h-4 animate-spin text-[#FFB81C]" /> Uploading photo...
                     </div>
                   ) : incidentUrl ? (
                     <div className="flex flex-col items-center gap-1">
@@ -2542,10 +2543,10 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                     </div>
                   ) : (
                     <>
-                      <Camera className="w-5 h-5 text-slate-400" />
-                      <span className="text-[9px] text-slate-400 block">Select Incident Photo / Document</span>
-                      <input 
-                        type="file" 
+                      <Camera className="w-5 h-5 text-[#9CA3AF]" />
+                      <span className="text-[9px] text-[#9CA3AF] block">Select Incident Photo / Document</span>
+                      <input
+                        type="file"
                         accept="image/*,application/pdf"
                         onChange={handleIncidentFileChange}
                         className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
@@ -2565,6 +2566,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
           </div>
         )}
 
+          
         {/* ==================== LOG EXPENSE / DAMAGE TAB ==================== */}
         {activeTab === 'logging' && (
           <div className="space-y-4">
