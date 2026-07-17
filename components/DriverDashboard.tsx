@@ -2023,9 +2023,10 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                               </tr>
                             ))
                           )}
-                        {/* Inline Add New Row Form inside the table if sheet is editable */}
+                          
+                                           {/* Inline Add New Row Form inside the table if sheet is editable */}
                         {isSheetEditable && (
-                          <tr className="bg-teal-950/10 border-t border-slate-800">
+                          <tr className="bg-[#1F2937] border-t border-[#374151]">
                             <td className="p-2">
                               <select
                                 value={newTransferRow.vehicle_reg}
@@ -2038,7 +2039,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                                     vehicle_name: veh ? `${veh.make} ${veh.model}` : ''
                                   }));
                                 }}
-                                className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs text-white font-bold focus:ring-1 focus:ring-teal-500"
+                                className="w-full bg-[#111827] border border-[#374151] rounded px-2 py-1 text-xs text-white font-bold focus:ring-1 focus:ring-[#FFB81C]"
                               >
                                 <option value="">Select Reg</option>
                                 {vehicles.map(v => (
@@ -2052,7 +2053,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                                 placeholder="Vehicle Name"
                                 value={newTransferRow.vehicle_name}
                                 onChange={(e) => setNewTransferRow(prev => ({ ...prev, vehicle_name: e.target.value }))}
-                                className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-teal-500"
+                                className="w-full bg-[#111827] border border-[#374151] rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-[#FFB81C]"
                               />
                             </td>
                             <td className="p-2">
@@ -2060,7 +2061,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                                 type="date"
                                 value={newTransferRow.date}
                                 onChange={(e) => setNewTransferRow(prev => ({ ...prev, date: e.target.value }))}
-                                className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-teal-500"
+                                className="w-full bg-[#111827] border border-[#374151] rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-[#FFB81C]"
                               />
                             </td>
                             <td className="p-2">
@@ -2069,14 +2070,14 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                                 placeholder="INV-2026-X"
                                 value={newTransferRow.invoice_or_tour_ref}
                                 onChange={(e) => setNewTransferRow(prev => ({ ...prev, invoice_or_tour_ref: e.target.value }))}
-                                className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs text-white font-mono focus:ring-1 focus:ring-teal-500"
+                                className="w-full bg-[#111827] border border-[#374151] rounded px-2 py-1 text-xs text-white font-mono focus:ring-1 focus:ring-[#FFB81C]"
                               />
                             </td>
                             <td className="p-2">
                               <select
                                 value={newTransferRow.tla_type}
                                 onChange={(e) => setNewTransferRow(prev => ({ ...prev, tla_type: e.target.value }))}
-                                className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-teal-500"
+                                className="w-full bg-[#111827] border border-[#374151] rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-[#FFB81C]"
                               >
                                 <option value="L = Long Transfer">L = Long Transfer</option>
                                 <option value="T = Tour">T = Tour</option>
@@ -2089,7 +2090,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                                 placeholder="e.g. Cape Town Airport"
                                 value={newTransferRow.description}
                                 onChange={(e) => setNewTransferRow(prev => ({ ...prev, description: e.target.value }))}
-                                className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-teal-500"
+                                className="w-full bg-[#111827] border border-[#374151] rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-[#FFB81C]"
                               />
                             </td>
                             <td className="p-2">
@@ -2098,14 +2099,14 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                                 placeholder="Notes"
                                 value={newTransferRow.notes}
                                 onChange={(e) => setNewTransferRow(prev => ({ ...prev, notes: e.target.value }))}
-                                className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-teal-500"
+                                className="w-full bg-[#111827] border border-[#374151] rounded px-2 py-1 text-xs text-white focus:ring-1 focus:ring-[#FFB81C]"
                               />
                             </td>
                             <td className="p-2 text-center">
                               <button
                                 type="button"
                                 onClick={handleAddTransferRow}
-                                className="bg-teal-600 hover:bg-teal-500 text-white font-extrabold px-3 py-1 rounded shadow-xs transition-colors text-xs cursor-pointer"
+                                className="bg-[#FFB81C] hover:bg-[#E6A000] text-black font-extrabold px-3 py-1 rounded shadow-xs transition-colors text-xs cursor-pointer"
                                 title="Add Row"
                               >
                                 Add
@@ -2116,61 +2117,63 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                       </tbody>
                     </table>
                   </div>
-</div>
-                  {/* Summary of entries and action buttons */}
-                  <div className="flex flex-col sm:flex-row justify-between items-center bg-slate-900 border border-slate-800 p-4 rounded-xl gap-3">
-                    <div className="text-xs text-slate-400">
-                      Entries in sheet: <strong className="text-white">{(activeSheet.transfers || []).length}</strong> | 
-                      Calculated wage payout: <strong className="text-teal-400 font-bold">R {(activeSheet.transfers || []).reduce((sum, curr) => sum + Number(curr.amount || 0), 0).toFixed(2)}</strong>
-                    </div>
+                </div>
 
-                    <div className="flex items-center gap-2">
-                      {showNewTransferSheet && (
-                        <button
-                          onClick={() => {
-                            setShowNewTransferSheet(false);
-                            setTransferForm({ week_start: '', week_end: '', transfers: [] });
-                          }}
-                          className="bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-1.5 px-3.5 rounded-xl text-xs transition-colors"
-                        >
-                          Cancel
-                        </button>
-                      )}
-
-                      {isSheetEditable && (
-                        <>
-                          <button
-                            onClick={() => handleSaveTransferSheet(false)}
-                            className="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:text-white font-bold py-1.5 px-3.5 rounded-xl text-xs transition-colors"
-                          >
-                            Save Draft
-                          </button>
-                          <button
-                            onClick={() => {
-                              if (confirm('Are you sure you want to submit this sheet? Once submitted, it will be locked.')) {
-                                handleSaveTransferSheet(true);
-                              }
-                            }}
-                            className="bg-teal-600 hover:bg-teal-500 text-white font-black py-1.5 px-4 rounded-xl text-xs transition-colors shadow"
-                          >
-                            Submit Sheet
-                          </button>
-                        </>
-                      )}
-
-                      {(!isSheetEditable && activeSheet.id) && (
-                        <button
-                          onClick={() => downloadTransferReconPDF(activeSheet as TransferReconSheet, driver.name)}
-                          className="bg-teal-600 hover:bg-teal-500 text-white font-bold py-1.5 px-3.5 rounded-xl text-xs transition-colors flex items-center gap-1"
-                        >
-                          Download PDF Report
-                        </button>
-                      )}
-                    </div>
+                {/* Summary of entries and action buttons */}
+                <div className="flex flex-col sm:flex-row justify-between items-center bg-[#1F2937] border border-[#374151] p-4 rounded-xl gap-3">
+                  <div className="text-xs text-[#9CA3AF]">
+                    Entries in sheet: <strong className="text-white">{(activeSheet.transfers || []).length}</strong> |
+                    Calculated wage payout: <strong className="text-[#FFB81C] font-bold">R {(activeSheet.transfers || []).reduce((sum, curr) => sum + Number(curr.amount || 0), 0).toFixed(2)}</strong>
                   </div>
 
+                  <div className="flex items-center gap-2">
+                    {showNewTransferSheet && (
+                      <button
+                        onClick={() => {
+                          setShowNewTransferSheet(false);
+                          setTransferForm({ week_start: '', week_end: '', transfers: [] });
+                        }}
+                        className="bg-[#1F2937] hover:bg-[#374151] text-white font-bold py-1.5 px-3.5 rounded-xl text-xs transition-colors border border-[#374151]"
+                      >
+                        Cancel
+                      </button>
+                    )}
+
+                    {isSheetEditable && (
+                      <>
+                        <button
+                          onClick={() => handleSaveTransferSheet(false)}
+                          className="bg-[#1F2937] hover:bg-[#374151] text-white border border-[#374151] hover:text-white font-bold py-1.5 px-3.5 rounded-xl text-xs transition-colors"
+                        >
+                          Save Draft
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (confirm('Are you sure you want to submit this sheet? Once submitted, it will be locked.')) {
+                              handleSaveTransferSheet(true);
+                            }
+                          }}
+                          className="bg-[#FFB81C] hover:bg-[#E6A000] text-black font-black py-1.5 px-4 rounded-xl text-xs transition-colors shadow"
+                        >
+                          Submit Sheet
+                        </button>
+                      </>
+                    )}
+
+                    {(!isSheetEditable && activeSheet.id) && (
+                      <button
+                        onClick={() => downloadTransferReconPDF(activeSheet as TransferReconSheet, driver.name)}
+                        className="bg-[#FFB81C] hover:bg-[#E6A000] text-black font-bold py-1.5 px-3.5 rounded-xl text-xs transition-colors flex items-center gap-1"
+                      >
+                        Download PDF Report
+                      </button>
+                    )}
+                  </div>
                 </div>
-              ) : (
+              </div>
+            ) : (
+
+            
                 /* Empty week sheet banner if no sheet has been started */
                 <div className="bg-slate-950/90 border border-slate-800 rounded-2xl p-8 text-center space-y-3">
                   <p className="text-slate-400 italic text-xs">
