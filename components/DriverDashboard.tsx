@@ -1794,8 +1794,8 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
             )}
           </div>
         )}
-          
-        {/* ==================== TRANSFER RECON TAB ==================== */}
+
+              {/* ==================== TRANSFER RECON TAB ==================== */}
         {activeTab === 'transfer' && (() => {
           // Calculate current week Monday to Sunday
           const getCurWeek = () => {
@@ -1804,17 +1804,15 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
             const diff = today.getDate() - day + (day === 0 ? -6 : 1);
             const mon = new Date(today.getFullYear(), today.getMonth(), diff);
             const sun = new Date(mon.getTime() + 6 * 24 * 60 * 60 * 1000);
-            
+           
             const pad = (n: number) => String(n).padStart(2, '0');
             return {
               week_start: `${mon.getFullYear()}-${pad(mon.getMonth() + 1)}-${pad(mon.getDate())}`,
               week_end: `${sun.getFullYear()}-${pad(sun.getMonth() + 1)}-${pad(sun.getDate())}`
             };
           };
-
           const currentWeekRange = getCurWeek();
           const currentWeekSheet = transfersSheets.find(ts => ts.week_start === currentWeekRange.week_start);
-
           // Format Date Range for display (e.g., "22 Jun 2026 — 28 Jun 2026")
           const formatRangeDisplay = (startStr: string, endStr: string) => {
             if (!startStr || !endStr) return '';
@@ -1826,19 +1824,17 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
             };
             return `${fmt(startStr)} — ${fmt(endStr)}`;
           };
-
           // Active sheet we are displaying/editing at the top
           // It can be either the current week's sheet (if exists) or a sheet being edited (showNewTransferSheet is true and transferForm is set)
           const activeSheet = showNewTransferSheet ? transferForm : currentWeekSheet;
           const isSheetEditable = activeSheet && activeSheet.status === 'draft';
-
           return (
             <div className="space-y-6">
-              
+             
               {/* Header Section */}
               <div className="flex items-center justify-between">
                 <h2 className="text-base font-bold flex items-center gap-1.5 text-white">
-                  <FileText className="w-5 h-5 text-teal-500" />
+                  <FileText className="w-5 h-5 text-[#FFB81C]" />
                   Transfer Recon for Weekly Payment
                 </h2>
                 {!activeSheet && (
@@ -1874,7 +1870,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                         }));
                       }
                     }}
-                    className="bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center gap-1"
+                    className="bg-[#FFB81C] hover:bg-[#E6A000] text-black text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center gap-1 shadow"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     Create Transfer Sheet
@@ -1883,7 +1879,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
               </div>
 
               {/* Alert Warning Box */}
-              <div className="bg-amber-950/30 border border-amber-900/60 text-slate-300 rounded-xl p-4 text-[11px] leading-relaxed shadow-xs">
+              <div className="bg-amber-950/30 border border-amber-900/60 text-[#E5E7EB] rounded-xl p-4 text-[11px] leading-relaxed shadow-xs">
                 <p>
                   All transfer information to be added here. Client reference numbers to be added to every date.{' '}
                   <strong className="text-amber-400">
@@ -1895,140 +1891,138 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
 
               {/* ACTIVE WEEK RECON SHEET FORM */}
               {activeSheet ? (
-                <div className="bg-slate-950/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div className="bg-[#1F2937] border border-[#374151] rounded-2xl p-6 shadow-xl space-y-5">
+                  <div className="flex items-center justify-between border-b border-[#374151] pb-3">
                     <div>
-                      <h3 className="text-xs uppercase tracking-wider font-extrabold text-teal-400">Weekly Transfer Sheet</h3>
+                      <h3 className="text-xs uppercase tracking-wider font-extrabold text-[#FFB81C]">Weekly Transfer Sheet</h3>
                       <p className="text-sm font-bold text-white mt-1">
                         {formatRangeDisplay(activeSheet.week_start || '', activeSheet.week_end || '')}
                       </p>
                     </div>
                     <span className={`text-[10px] uppercase font-black px-2.5 py-1 rounded border ${
                       activeSheet.status === 'submitted' || activeSheet.status === 'reviewed'
-                        ? 'bg-emerald-950/60 text-emerald-400 border-emerald-800/80'
-                        : 'bg-slate-800 text-slate-300 border-slate-700'
+                        ? 'bg-emerald-900/40 text-emerald-400 border-emerald-900/60'
+                        : 'bg-[#374151] text-white border-[#374151]'
                     }`}>
                       {activeSheet.status || 'draft'}
                     </span>
                   </div>
-
                   {/* Driver Name input box */}
                   <div className="max-w-md">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Driver Name</label>
+                    <label className="text-[10px] font-black text-[#9CA3AF] uppercase tracking-wider block mb-1">Driver Name</label>
                     <input
                       type="text"
                       readOnly
                       value={driver.name}
-                      className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-xs text-slate-300 font-bold"
+                      className="w-full bg-[#111827] border border-[#374151] rounded-xl px-4 py-2 text-xs text-white font-bold"
                     />
                   </div>
 
                   {/* Submission Success Alert if locked */}
                   {(activeSheet.status === 'submitted' || activeSheet.status === 'reviewed') && (
-                    <div className="bg-emerald-950/30 border border-emerald-900/60 text-emerald-400 rounded-xl p-3.5 text-xs font-bold flex items-center gap-2">
+                    <div className="bg-emerald-900/30 border border-emerald-900/60 text-emerald-400 rounded-xl p-3.5 text-xs font-bold flex items-center gap-2">
                       <span className="text-emerald-500 text-sm">✓</span> This transfer recon sheet has been submitted and is locked.
                     </div>
                   )}
 
                   {/* TRANSFER ENTRIES TABLE */}
-                  <div className="border border-slate-800 rounded-xl overflow-hidden shadow-xs">
-  <div className="overflow-x-auto">
-  <table className="w-full min-w-[680px] text-left text-xs border-collapse">
-                      <thead className="bg-slate-900 text-slate-200 text-[10px] uppercase tracking-wider font-extrabold border-b border-slate-800">
-                        <tr>
-                          <th className="p-3 w-[15%]">Vehicle Reg</th>
-                          <th className="p-3 w-[15%]">Vehicle Name</th>
-                          <th className="p-3 w-[12%]">Transfer Date</th>
-                          <th className="p-3 w-[15%]">Tour/Transfer Ref Nr *</th>
-                          <th className="p-3 w-[15%]">T/L/A Type</th>
-                          <th className="p-3 w-[15%]">Description</th>
-                          <th className="p-3 w-[13%]">Notes</th>
-                          {isSheetEditable && <th className="p-3 w-[5%] text-center">Action</th>}
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-800/60">
-                        {/* Render existing rows */}
-                        {(activeSheet.transfers || []).length === 0 ? (
+                  <div className="border border-[#374151] rounded-xl overflow-hidden shadow-xs">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[680px] text-left text-xs border-collapse">
+                        <thead className="bg-[#111827] text-white text-[10px] uppercase tracking-wider font-extrabold border-b border-[#374151]">
                           <tr>
-                            <td colSpan={isSheetEditable ? 8 : 7} className="p-6 text-center text-slate-500 italic text-xs bg-slate-900/20">
-                              No transfer rows added to this sheet yet.
-                            </td>
+                            <th className="p-3 w-[15%]">Vehicle Reg</th>
+                            <th className="p-3 w-[15%]">Vehicle Name</th>
+                            <th className="p-3 w-[12%]">Transfer Date</th>
+                            <th className="p-3 w-[15%]">Tour/Transfer Ref Nr *</th>
+                            <th className="p-3 w-[15%]">T/L/A Type</th>
+                            <th className="p-3 w-[15%]">Description</th>
+                            <th className="p-3 w-[13%]">Notes</th>
+                            {isSheetEditable && <th className="p-3 w-[5%] text-center">Action</th>}
                           </tr>
-                        ) : (
-                          (activeSheet.transfers || []).map((t) => (
-                            <tr key={t.id} className="hover:bg-slate-900/40 bg-slate-950/40 transition-colors">
-                              <td className="p-2">
-                                <input
-                                  type="text"
-                                  readOnly
-                                  value={t.vehicle_reg || ''}
-                                  className="w-full bg-slate-900/60 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300 font-bold"
-                                />
+                        </thead>
+                        <tbody className="divide-y divide-[#374151]">
+                          {/* Render existing rows */}
+                          {(activeSheet.transfers || []).length === 0 ? (
+                            <tr>
+                              <td colSpan={isSheetEditable ? 8 : 7} className="p-6 text-center text-[#9CA3AF] italic text-xs bg-[#111827]">
+                                No transfer rows added to this sheet yet.
                               </td>
-                              <td className="p-2">
-                                <input
-                                  type="text"
-                                  readOnly
-                                  value={t.vehicle_name || ''}
-                                  className="w-full bg-slate-900/60 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300 font-medium"
-                                />
-                              </td>
-                              <td className="p-2">
-                                <input
-                                  type="text"
-                                  readOnly
-                                  value={t.date || ''}
-                                  className="w-full bg-slate-900/60 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300 font-mono"
-                                />
-                              </td>
-                              <td className="p-2">
-                                <input
-                                  type="text"
-                                  readOnly
-                                  value={t.invoice_or_tour_ref || ''}
-                                  className="w-full bg-slate-900/60 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300 font-mono"
-                                />
-                              </td>
-                              <td className="p-2">
-                                <input
-                                  type="text"
-                                  readOnly
-                                  value={t.tla_type || ''}
-                                  className="w-full bg-slate-900/60 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300 font-medium"
-                                />
-                              </td>
-                              <td className="p-2">
-                                <input
-                                  type="text"
-                                  readOnly
-                                  value={t.description || ''}
-                                  className="w-full bg-slate-900/60 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300"
-                                />
-                              </td>
-                              <td className="p-2">
-                                <input
-                                  type="text"
-                                  readOnly
-                                  value={t.notes || ''}
-                                  className="w-full bg-slate-900/60 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300"
-                                />
-                              </td>
-                              {isSheetEditable && (
-                                <td className="p-2 text-center">
-                                  <button
-                                    type="button"
-                                    onClick={() => handleRemoveTransferRow(t.id)}
-                                    className="text-rose-400 hover:text-rose-300 font-black p-1 hover:bg-rose-950/40 rounded transition-all"
-                                    title="Remove Entry"
-                                  >
-                                    ✕
-                                  </button>
-                                </td>
-                              )}
                             </tr>
-                          ))
-                        )}
-
+                          ) : (
+                            (activeSheet.transfers || []).map((t) => (
+                              <tr key={t.id} className="hover:bg-[#111827] transition-colors">
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    readOnly
+                                    value={t.vehicle_reg || ''}
+                                    className="w-full bg-[#0a1424] border border-[#374151] rounded px-2 py-1 text-xs text-white font-bold"
+                                  />
+                                </td>
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    readOnly
+                                    value={t.vehicle_name || ''}
+                                    className="w-full bg-[#0a1424] border border-[#374151] rounded px-2 py-1 text-xs text-white font-medium"
+                                  />
+                                </td>
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    readOnly
+                                    value={t.date || ''}
+                                    className="w-full bg-[#0a1424] border border-[#374151] rounded px-2 py-1 text-xs text-white font-mono"
+                                  />
+                                </td>
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    readOnly
+                                    value={t.invoice_or_tour_ref || ''}
+                                    className="w-full bg-[#0a1424] border border-[#374151] rounded px-2 py-1 text-xs text-white font-mono"
+                                  />
+                                </td>
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    readOnly
+                                    value={t.tla_type || ''}
+                                    className="w-full bg-[#0a1424] border border-[#374151] rounded px-2 py-1 text-xs text-white font-medium"
+                                  />
+                                </td>
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    readOnly
+                                    value={t.description || ''}
+                                    className="w-full bg-[#0a1424] border border-[#374151] rounded px-2 py-1 text-xs text-white"
+                                  />
+                                </td>
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    readOnly
+                                    value={t.notes || ''}
+                                    className="w-full bg-[#0a1424] border border-[#374151] rounded px-2 py-1 text-xs text-white"
+                                  />
+                                </td>
+                                {isSheetEditable && (
+                                  <td className="p-2 text-center">
+                                    <button
+                                      type="button"
+                                      onClick={() => handleRemoveTransferRow(t.id)}
+                                      className="text-rose-400 hover:text-rose-300 font-black p-1 hover:bg-rose-950/40 rounded transition-all"
+                                      title="Remove Entry"
+                                    >
+                                      ✕
+                                    </button>
+                                  </td>
+                                )}
+                              </tr>
+                            ))
+                          )}
                         {/* Inline Add New Row Form inside the table if sheet is editable */}
                         {isSheetEditable && (
                           <tr className="bg-teal-950/10 border-t border-slate-800">
