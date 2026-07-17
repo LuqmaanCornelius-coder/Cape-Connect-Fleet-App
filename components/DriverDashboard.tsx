@@ -2359,76 +2359,77 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
         })()}
 
           
-        {/* ==================== VEHICLE CHECKLISTS TAB ==================== */}
+              {/* ==================== VEHICLE CHECKLISTS TAB ==================== */}
         {activeTab === 'checklists' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h2 className="text-base font-bold flex items-center gap-1.5">
-                <ClipboardCheck className="w-5 h-5 text-teal-500 animate-pulse" />
+                <ClipboardCheck className="w-5 h-5 text-[#FFB81C] animate-pulse" />
                 Weekly Vehicle Checklist Audit
               </h2>
             </div>
-            <p className="text-[10px] text-slate-400">
+            <p className="text-[10px] text-[#9CA3AF]">
               Submit your standard 12-point weekly safety checklist audit for compliance records. Use OK or WARN (Action Required) to log actual condition.
             </p>
-{/* Vehicle Selection */}
-<div>
-  <span className="text-[10px] text-slate-400 block mb-1">
-    Vehicle <span className="text-rose-400">*</span>
-  </span>
-  <select
-    required
-    value={checklistForm.vehicle_reg || ''}
-    onChange={(e) => setChecklistForm(prev => ({ ...prev, vehicle_reg: e.target.value }))}
-    className="w-full bg-slate-950 border border-slate-800 rounded p-1.5 text-xs text-white"
-  >
-    <option value="" disabled>Select a vehicle...</option>
-    {checklistVehicleOptions.map(opt => (
-      <option key={opt.value} value={opt.value}>{opt.label}</option>
-    ))}
-  </select>
-</div>
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 shadow-lg space-y-3">
+
+            {/* Vehicle Selection */}
+            <div>
+              <span className="text-[10px] text-[#9CA3AF] block mb-1">
+                Vehicle <span className="text-rose-400">*</span>
+              </span>
+              <select
+                required
+                value={checklistForm.vehicle_reg || ''}
+                onChange={(e) => setChecklistForm(prev => ({ ...prev, vehicle_reg: e.target.value }))}
+                className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
+              >
+                <option value="" disabled>Select a vehicle...</option>
+                {checklistVehicleOptions.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 shadow-lg space-y-3">
               <form onSubmit={submitPeriodicChecklist} className="space-y-3 text-xs">
-                <div className="grid grid-cols-2 gap-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                <div className="grid grid-cols-2 gap-2 bg-[#111827] p-2.5 rounded-lg border border-[#374151]">
                   <div>
-                    <span className="text-[10px] text-slate-400 block mb-1">Current Mileage (km)</span>
+                    <span className="text-[10px] text-[#9CA3AF] block mb-1">Current Mileage (km)</span>
                     <input
                       type="number" required placeholder="e.g. 124000"
                       value={checklistForm.mileage || ''}
                       onChange={(e) => setChecklistForm(prev => ({ ...prev, mileage: Number(e.target.value) }))}
-                      className="w-full bg-slate-950 border border-slate-800 rounded p-1 text-xs text-white"
+                      className="w-full bg-[#0a1424] border border-[#374151] rounded p-1 text-xs text-white"
                     />
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 block mb-1">Start Date</span>
+                    <span className="text-[10px] text-[#9CA3AF] block mb-1">Start Date</span>
                     <input
                       type="date"
                       value={checklistForm.week_start}
                       onChange={(e) => setChecklistForm(prev => ({ ...prev, week_start: e.target.value }))}
-                      className="w-full bg-slate-950 border border-slate-800 rounded p-1 text-xs text-white"
+                      className="w-full bg-[#0a1424] border border-[#374151] rounded p-1 text-xs text-white"
                     />
                   </div>
                 </div>
 
                 {/* 12 check points rating */}
-                <div className="space-y-1.5 border border-slate-800 rounded bg-slate-900/60 p-2">
-                  <p className="text-[9px] uppercase font-bold text-slate-400 border-b border-slate-800 pb-1 mb-1.5">Rating Audit</p>
-                  
+                <div className="space-y-1.5 border border-[#374151] rounded bg-[#111827] p-2">
+                  <p className="text-[9px] uppercase font-bold text-[#9CA3AF] border-b border-[#374151] pb-1 mb-1.5">Rating Audit</p>
+                 
                   {Object.keys(checklistForm.checklist_data || {}).map(key => {
                     const cleanKey = key.replace(/_/g, ' ');
                     const ratingValue = (checklistForm.checklist_data as any)[key];
                     const isOk = ratingValue === 'ok';
-
                     return (
-                      <div key={key} className="flex justify-between items-center text-[10px] py-1 border-b border-slate-950 last:border-0">
-                        <span className="text-slate-300 capitalize">{cleanKey}</span>
+                      <div key={key} className="flex justify-between items-center text-[10px] py-1 border-b border-[#111827] last:border-0">
+                        <span className="text-white capitalize">{cleanKey}</span>
                         <div className="flex gap-1.5">
                           <button
                             type="button"
                             onClick={() => handleChecklistValueChange(key, 'ok')}
                             className={`px-1.5 py-0.5 rounded text-[8px] font-extrabold cursor-pointer ${
-                              isOk ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400'
+                              isOk ? 'bg-emerald-600 text-white' : 'bg-[#374151] text-[#9CA3AF]'
                             }`}
                           >
                             OK
@@ -2437,7 +2438,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                             type="button"
                             onClick={() => handleChecklistValueChange(key, key.includes('tyre') || key.includes('light') ? 'action' : 'low')}
                             className={`px-1.5 py-0.5 rounded text-[8px] font-extrabold cursor-pointer ${
-                              !isOk ? 'bg-amber-600 text-white' : 'bg-slate-800 text-slate-400'
+                              !isOk ? 'bg-amber-600 text-white' : 'bg-[#374151] text-[#9CA3AF]'
                             }`}
                           >
                             WARN
@@ -2452,12 +2453,12 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
                   placeholder="Notes / Issues noticed during audit checklist"
                   value={checklistForm.notes}
                   onChange={(e) => setChecklistForm(prev => ({ ...prev, notes: e.target.value }))}
-                  className="w-full bg-slate-900 border border-slate-800 rounded p-2 text-white h-12"
+                  className="w-full bg-[#111827] border border-[#374151] rounded p-2 text-white h-12"
                 />
 
                 <button
                   type="submit"
-                  className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-2 rounded-lg text-xs transition-colors cursor-pointer"
+                  className="w-full bg-[#FFB81C] hover:bg-[#E6A000] text-black font-bold py-2 rounded-lg text-xs transition-colors cursor-pointer shadow"
                 >
                   File Checklist
                 </button>
@@ -2465,7 +2466,7 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
             </div>
           </div>
         )}
-
+          
         {/* ==================== INCIDENT REPORTS TAB ==================== */}
         {activeTab === 'incidents' && (
           <div className="space-y-4">
