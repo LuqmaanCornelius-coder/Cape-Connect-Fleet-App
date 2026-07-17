@@ -2670,36 +2670,35 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
             </div>
           </div>
         )}
-
         {/* ==================== DOCUMENTS TAB ==================== */}
         {activeTab === 'documents' && (
           <div className="space-y-4">
             <h2 className="text-base font-bold flex items-center gap-1.5">
-              <Briefcase className="w-5 h-5 text-teal-500" />
+              <Briefcase className="w-5 h-5 text-[#FFB81C]" />
               My Document Vault
             </h2>
-            <p className="text-[10px] text-slate-400">
+            <p className="text-[10px] text-[#9CA3AF]">
               Aggregated repository of tour manifests, itineraries, signed compliance checks, and weekly payroll spreadsheets.
             </p>
 
             {/* Compliance Document Uploader */}
-            <div className="bg-slate-950 p-4 border border-slate-800 rounded-xl space-y-3 shadow-md">
+            <div className="bg-[#1F2937] p-4 border border-[#374151] rounded-xl space-y-3 shadow-md">
               <p className="text-xs font-bold text-white flex items-center gap-1.5">
-                <FileUp className="w-4 h-4 text-teal-400" />
+                <FileUp className="w-4 h-4 text-[#FFB81C]" />
                 Upload New Compliance / Manifest Document to Vault
               </p>
-              <div className="border border-dashed border-slate-700 bg-slate-900 p-4 text-center rounded-xl flex flex-col items-center justify-center gap-2 relative">
+              <div className="border border-dashed border-[#374151] bg-[#111827] p-4 text-center rounded-xl flex flex-col items-center justify-center gap-2 relative">
                 {uploadingVaultDoc ? (
-                  <div className="flex items-center gap-1.5 text-[10px] text-teal-400 font-bold justify-center">
-                    <RefreshCw className="w-4 h-4 animate-spin text-teal-400" /> Uploading to secure vault...
+                  <div className="flex items-center gap-1.5 text-[10px] text-[#FFB81C] font-bold justify-center">
+                    <RefreshCw className="w-4 h-4 animate-spin text-[#FFB81C]" /> Uploading to secure vault...
                   </div>
                 ) : (
                   <>
-                    <FileUp className="w-6 h-6 text-slate-400" />
-                    <span className="text-[10px] text-slate-400 block font-medium">Drag & drop or Click to select document</span>
-                    <span className="text-[8px] text-slate-500 block">PDFs, PNG, JPG accepted</span>
-                    <input 
-                      type="file" 
+                    <FileUp className="w-6 h-6 text-[#9CA3AF]" />
+                    <span className="text-[10px] text-[#9CA3AF] block font-medium">Drag & drop or Click to select document</span>
+                    <span className="text-[8px] text-[#6B7280] block">PDFs, PNG, JPG accepted</span>
+                    <input
+                      type="file"
                       accept="image/*,application/pdf"
                       onChange={handleVaultFileUpload}
                       className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
@@ -2712,43 +2711,45 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
             <div className="grid grid-cols-1 gap-2">
               {/* Dynamic Vault Documents list */}
               {vaultDocs.map((doc, index) => (
-                <div key={index} className="bg-slate-950 p-4 border border-slate-800 rounded-xl flex items-center justify-between shadow-lg">
+                <div key={index} className="bg-[#1F2937] p-4 border border-[#374151] rounded-xl flex items-center justify-between shadow-lg">
                   <div className="min-w-0 flex-1 mr-4">
-                    <p className="text-xs font-bold text-teal-400 truncate">{doc.name}</p>
-                    <p className="text-[9px] text-slate-500 font-mono truncate">{doc.url}</p>
+                    <p className="text-xs font-bold text-[#FFB81C] truncate">{doc.name}</p>
+                    <p className="text-[9px] text-[#9CA3AF] font-mono truncate">{doc.url}</p>
                   </div>
                   <button
                     onClick={async () => {
                       const signedUrl = await getSignedUrlForView(doc.url);
                       window.open(signedUrl, '_blank');
                     }}
-                    className="text-xs font-bold text-teal-400 hover:underline border border-teal-800 px-3 py-1 rounded bg-teal-950/20 hover:bg-teal-950/40 transition-colors whitespace-nowrap"
+                    className="text-xs font-bold text-[#FFB81C] hover:underline border border-[#374151] px-3 py-1 rounded bg-[#1F2937] hover:bg-[#374151] transition-colors whitespace-nowrap"
                   >
                     Download
                   </button>
                 </div>
               ))}
-              <div className="bg-slate-950 p-4 border border-slate-800 rounded-xl flex items-center justify-between">
+
+              {/* Static Documents */}
+              <div className="bg-[#1F2937] p-4 border border-[#374151] rounded-xl flex items-center justify-between">
                 <div>
                   <p className="text-xs font-bold text-white">Driver Contract Agreement</p>
-                  <p className="text-[9px] text-slate-500">Employment_Contract_{driver.driver_id}.pdf</p>
+                  <p className="text-[9px] text-[#9CA3AF]">Employment_Contract_{driver.driver_id}.pdf</p>
                 </div>
                 <button
                   onClick={() => alert('📥 Downloader: Simulated downloading of Driver Employment Contract Agreement.')}
-                  className="text-xs font-bold text-teal-400 hover:underline border border-teal-800 px-2.5 py-1 rounded hover:bg-teal-950/20"
+                  className="text-xs font-bold text-[#FFB81C] hover:underline border border-[#374151] px-2.5 py-1 rounded hover:bg-[#374151]"
                 >
                   Download
                 </button>
               </div>
 
-              <div className="bg-slate-950 p-4 border border-slate-800 rounded-xl flex items-center justify-between">
+              <div className="bg-[#1F2937] p-4 border border-[#374151] rounded-xl flex items-center justify-between">
                 <div>
                   <p className="text-xs font-bold text-white">Medical & Insurance Compliance Cover</p>
-                  <p className="text-[9px] text-slate-500">Inyathi_Fleet_Insurance_Details.pdf</p>
+                  <p className="text-[9px] text-[#9CA3AF]">Inyathi_Fleet_Insurance_Details.pdf</p>
                 </div>
                 <button
                   onClick={() => alert('📥 Downloader: Simulated downloading of Medical & Insurance compliance certificate.')}
-                  className="text-xs font-bold text-teal-400 hover:underline border border-teal-800 px-2.5 py-1 rounded hover:bg-teal-950/20"
+                  className="text-xs font-bold text-[#FFB81C] hover:underline border border-[#374151] px-2.5 py-1 rounded hover:bg-[#374151]"
                 >
                   Download
                 </button>
@@ -2756,19 +2757,19 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
 
               {driverChecklists.length > 0 && (
                 <div className="pt-2">
-                  <h3 className="text-xs font-bold text-slate-400 mb-2">My Weekly Audited Checklists</h3>
+                  <h3 className="text-xs font-bold text-[#9CA3AF] mb-2">My Weekly Audited Checklists</h3>
                   <div className="space-y-1.5">
                     {[...driverChecklists]
                       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                       .map(c => (
-                      <div key={c.id} className="bg-slate-950 p-2.5 border border-slate-800 rounded-lg flex justify-between items-center text-[11px]">
+                      <div key={c.id} className="bg-[#1F2937] p-2.5 border border-[#374151] rounded-lg flex justify-between items-center text-[11px]">
                         <div>
                           <p className="font-extrabold text-white">Period: {c.week_start} - {c.week_end}</p>
-                          <p className="text-slate-400 text-[10px]">Mileage: {c.mileage} km</p>
+                          <p className="text-[#9CA3AF] text-[10px]">Mileage: {c.mileage} km</p>
                         </div>
                         <button
                           onClick={() => downloadChecklistPDF(c, driver.name)}
-                          className="text-xs text-teal-400 hover:underline bg-teal-950/40 border border-teal-850 px-2 py-0.5 rounded"
+                          className="text-xs text-[#FFB81C] hover:underline bg-[#1F2937] border border-[#374151] px-2 py-0.5 rounded"
                         >
                           PDF
                         </button>
@@ -2779,63 +2780,60 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
               )}
 
               {/* Traffic Fines Tracking */}
-              <div className="pt-4 border-t border-slate-800/80 mt-2">
-                <h3 className="text-xs font-bold text-slate-400 mb-2 flex items-center gap-1.5">
-                  <AlertTriangle className="w-4 h-4 text-amber-500" />
+              <div className="pt-4 border-t border-[#374151] mt-2">
+                <h3 className="text-xs font-bold text-[#9CA3AF] mb-2 flex items-center gap-1.5">
+                  <AlertTriangle className="w-4 h-4 text-amber-400" />
                   Traffic Fines & Violations Ledger
                 </h3>
                 {driverFines.length === 0 ? (
-                  <div className="bg-slate-950 p-4 border border-slate-850 rounded-xl text-center">
+                  <div className="bg-[#1F2937] p-4 border border-[#374151] rounded-xl text-center">
                     <p className="text-xs font-bold text-emerald-400 flex items-center justify-center gap-1.5">
                       <CheckCircle className="w-4 h-4" /> Perfect Driving Record
                     </p>
-                    <p className="text-[10px] text-slate-500 mt-1">No recorded traffic fines or violations found on your profile. Thank you for driving safely!</p>
+                    <p className="text-[10px] text-[#9CA3AF] mt-1">No recorded traffic fines or violations found on your profile. Thank you for driving safely!</p>
                   </div>
                 ) : (
                   <div className="space-y-2">
                     {[...driverFines]
                       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                       .map(f => (
-                      <div key={f.id} className="bg-slate-950 p-3.5 border border-slate-800 rounded-xl space-y-2 text-[11px]">
+                      <div key={f.id} className="bg-[#1F2937] p-3.5 border border-[#374151] rounded-xl space-y-2 text-[11px]">
                         <div className="flex justify-between items-start">
                           <div>
                             <span className="font-extrabold text-white block text-xs">{f.fine_reference}</span>
-                            <span className="text-slate-500 text-[9px] font-mono block mt-0.5">Vehicle: {f.vehicle_reg}</span>
+                            <span className="text-[#9CA3AF] text-[9px] font-mono block mt-0.5">Vehicle: {f.vehicle_reg}</span>
                           </div>
                           <div className="text-right">
                             <span className="text-xs font-black text-rose-400 block">R {f.amount}</span>
                             <span className={`inline-flex items-center px-2 py-0.5 rounded text-[9px] font-extrabold mt-1 border ${
                               f.status === 'paid'
-                                ? 'bg-emerald-950/30 text-emerald-400 border-emerald-900/60'
-                                : 'bg-amber-950/30 text-amber-400 border-amber-900/60 animate-pulse'
+                                ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/60'
+                                : 'bg-amber-900/30 text-amber-400 border-amber-900/60 animate-pulse'
                             }`}>
                               {f.status === 'paid' ? 'Paid / Settled' : 'Unpaid / Action Required'}
                             </span>
                           </div>
                         </div>
-
-                        <div className="grid grid-cols-2 gap-3 text-[10px] bg-slate-900/50 p-2 rounded-lg border border-slate-850">
+                        <div className="grid grid-cols-2 gap-3 text-[10px] bg-[#111827] p-2 rounded-lg border border-[#374151]">
                           <div>
-                            <span className="text-slate-500 block">Date & Time</span>
-                            <span className="text-slate-300 font-medium">{new Date(f.fine_timestamp).toLocaleString()}</span>
+                            <span className="text-[#9CA3AF] block">Date & Time</span>
+                            <span className="text-white font-medium">{new Date(f.fine_timestamp).toLocaleString()}</span>
                           </div>
                           <div>
-                            <span className="text-slate-500 block">Location</span>
-                            <span className="text-slate-300 font-medium truncate block" title={f.location}>{f.location}</span>
+                            <span className="text-[#9CA3AF] block">Location</span>
+                            <span className="text-white font-medium truncate block" title={f.location}>{f.location}</span>
                           </div>
                         </div>
-
                         {f.description && (
-                          <p className="text-slate-400 leading-relaxed text-[10px] bg-slate-900/30 px-2 py-1 rounded">
-                            <strong className="text-slate-500 text-[9px] uppercase tracking-wider block">Violation Details</strong>
+                          <p className="text-[#9CA3AF] leading-relaxed text-[10px] bg-[#111827] px-2 py-1 rounded">
+                            <strong className="text-[#6B7280] text-[9px] uppercase tracking-wider block">Violation Details</strong>
                             {f.description}
                           </p>
                         )}
-
-                        <div className="text-[9px] text-slate-500 flex justify-between items-center pt-1 border-t border-slate-900">
-                          <span>Notified driver email: <strong className="text-slate-400">{f.notification_email}</strong></span>
+                        <div className="text-[9px] text-[#9CA3AF] flex justify-between items-center pt-1 border-t border-[#374151]">
+                          <span>Notified driver email: <strong className="text-white">{f.notification_email}</strong></span>
                           {f.email_sent && f.email_sent_at && (
-                            <span className="text-emerald-500/80">Alert sent on {new Date(f.email_sent_at).toLocaleDateString()}</span>
+                            <span className="text-emerald-400">Alert sent on {new Date(f.email_sent_at).toLocaleDateString()}</span>
                           )}
                         </div>
                       </div>
@@ -2846,7 +2844,6 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
             </div>
           </div>
         )}
-
       </main>
 
       {/* ==================== INSPECTION DIALOG MODAL ==================== */}
