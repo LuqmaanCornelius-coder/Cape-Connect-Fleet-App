@@ -1181,7 +1181,7 @@ const handleApproveRecon = (id: string, notes: string) => {
               </button>
             </div>
 
-            {/* Nav */}
+                   {/* Nav */}
             <nav className="space-y-1 overflow-y-auto max-h-[60vh] scrollbar-none">
               {[
                 { id: 'dashboard', label: 'Month Calendar', icon: CalendarIcon },
@@ -1211,8 +1211,8 @@ const handleApproveRecon = (id: string, notes: string) => {
                     }}
                     className={`w-full flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                       isActive
-                        ? 'bg-teal-600 text-white font-extrabold shadow-md'
-                        : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200'
+                        ? 'bg-[#FFB81C] text-black font-extrabold shadow-md'
+                        : 'text-[#9CA3AF] hover:bg-[#1F2937] hover:text-white'
                     }`}
                   >
                     <Icon className="w-4 h-4 shrink-0" />
