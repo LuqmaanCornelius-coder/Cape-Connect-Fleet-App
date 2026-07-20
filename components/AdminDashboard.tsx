@@ -1605,11 +1605,11 @@ const handleApproveRecon = (id: string, notes: string) => {
           )}
 
           
-          {/* ==================== RENTED VEHICLES TAB ==================== */}
+                  {/* ==================== RENTED VEHICLES TAB ==================== */}
           {activeTab === 'rented' && (
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <h2 className="text-base font-bold text-slate-900">Rented-In Third-Party Vehicles</h2>
+                <h2 className="text-base font-bold text-white">Rented-In Third-Party Vehicles</h2>
                 <button
                   onClick={() => {
                     setRentedForm({
@@ -1619,15 +1619,15 @@ const handleApproveRecon = (id: string, notes: string) => {
                     });
                     setShowRentedModal(true);
                   }}
-                  className="bg-teal-600 text-white text-xs font-bold py-1.5 px-3 rounded-lg"
+                  className="bg-[#FFB81C] hover:bg-[#E6A000] text-black text-xs font-bold py-1.5 px-3 rounded-lg shadow"
                 >
                   Add Rental
                 </button>
               </div>
 
-              <div className="bg-white rounded-xl shadow-xs border border-slate-200 overflow-hidden">
+              <div className="bg-[#1F2937] rounded-xl shadow-xs border border-[#374151] overflow-hidden">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-50 border-b border-slate-200 font-extrabold text-[10px] uppercase text-slate-500">
+                  <thead className="bg-[#111827] border-b border-[#374151] font-extrabold text-[10px] uppercase text-[#9CA3AF]">
                     <tr>
                       <th className="p-3">Supplier Ref</th>
                       <th className="p-3">Model</th>
@@ -1637,29 +1637,29 @@ const handleApproveRecon = (id: string, notes: string) => {
                       <th className="p-3 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-[#374151]">
                     {rentedVehicles.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="p-4 text-center text-slate-400 italic">No rental vehicles listed currently.</td>
+                        <td colSpan={6} className="p-4 text-center text-[#9CA3AF] italic">No rental vehicles listed currently.</td>
                       </tr>
                     ) : (
                       rentedVehicles.map(rv => (
-                        <tr key={rv.id} className="hover:bg-slate-50/50">
+                        <tr key={rv.id} className="hover:bg-[#111827]">
                           <td className="p-3">
-                            <span className="font-extrabold block text-slate-800">{rv.supplier}</span>
-                            <span className="text-[10px] text-slate-400">Ref: {rv.supplier_ref}</span>
+                            <span className="font-extrabold block text-white">{rv.supplier}</span>
+                            <span className="text-[10px] text-[#9CA3AF]">Ref: {rv.supplier_ref}</span>
                           </td>
-                          <td className="p-3 font-bold text-slate-900">{rv.make} {rv.model}</td>
-                          <td className="p-3 font-mono font-bold">{rv.reg_no}</td>
-                          <td className="p-3 text-slate-600">{rv.start_date} to {rv.end_date}</td>
-                          <td className="p-3 font-bold text-slate-800">R {rv.daily_rate} / day</td>
+                          <td className="p-3 font-bold text-white">{rv.make} {rv.model}</td>
+                          <td className="p-3 font-mono font-bold text-white">{rv.reg_no}</td>
+                          <td className="p-3 text-[#9CA3AF]">{rv.start_date} to {rv.end_date}</td>
+                          <td className="p-3 font-bold text-white">R {rv.daily_rate} / day</td>
                           <td className="p-3 text-right">
                             <button
                               onClick={() => {
                                 setRentedForm(rv);
                                 setShowRentedModal(true);
                               }}
-                              className="text-teal-600 font-bold mr-2.5 hover:underline"
+                              className="text-[#FFB81C] font-bold mr-2.5 hover:underline"
                             >
                               Modify
                             </button>
@@ -1676,7 +1676,7 @@ const handleApproveRecon = (id: string, notes: string) => {
                                   true
                                 );
                               }}
-                              className="text-rose-600 font-bold hover:underline"
+                              className="text-rose-400 font-bold hover:underline"
                             >
                               Remove
                             </button>
@@ -1690,6 +1690,7 @@ const handleApproveRecon = (id: string, notes: string) => {
             </div>
           )}
 
+          
           {/* ==================== MANAGE DRIVERS TAB ==================== */}
           {activeTab === 'drivers' && (
             <div className="space-y-6">
