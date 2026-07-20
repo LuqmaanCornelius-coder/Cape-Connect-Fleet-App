@@ -1101,39 +1101,39 @@ const handleApproveRecon = (id: string, notes: string) => {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-800 selection:bg-teal-500 selection:text-white">
       
-      {/* MOBILE HEADER BAR - only visible on mobile */}
-      <header className="md:hidden bg-slate-950 border-b border-slate-800 px-4 py-3 sticky top-0 z-40 flex items-center justify-between">
+           {/* MOBILE HEADER BAR - only visible on mobile */}
+      <header className="md:hidden bg-[#0a1424] border-b border-[#1F2937] px-4 py-3 sticky top-0 z-40 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => setIsSidebarOpen(true)}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-900 rounded-lg transition-colors mr-1 cursor-pointer"
+            className="p-1.5 text-[#9CA3AF] hover:text-white hover:bg-[#1F2937] rounded-lg transition-colors mr-1 cursor-pointer"
             aria-label="Open admin navigation menu"
           >
             <Menu className="w-5 h-5" />
           </button>
           <div className="w-7 h-7 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center shrink-0 relative">
-            <Image src={logoSrc} alt="INYATHI Logo" fill className="object-contain p-0.5" />
+            <Image src={logoSrc} alt="Cape Connect" fill className="object-contain p-0.5" />
           </div>
           <div>
-            <h1 className="text-[10px] font-black tracking-widest text-slate-400 leading-none">INYATHI ADMIN</h1>
-            <p className="text-xs font-bold text-teal-400 leading-tight mt-0.5">{admin.name}</p>
+            <h1 className="text-[10px] font-black tracking-widest text-[#FFB81C] leading-none">CCS ADMIN</h1>
+            <p className="text-xs font-bold text-[#FFB81C] leading-tight mt-0.5">{admin.name}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex bg-slate-800 p-0.5 rounded-lg border border-slate-700">
+          <div className="flex bg-[#1F2937] p-0.5 rounded-lg border border-[#374151]">
             <button
               onClick={() => handleRegionSwitch('Cape Town')}
-              className={`px-2 py-1 rounded-md transition-all text-[10px] font-bold ${region === 'Cape Town' ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
+              className={`px-2 py-1 rounded-md transition-all text-[10px] font-bold ${region === 'Cape Town' ? 'bg-[#FFB81C] text-black shadow-sm' : 'text-[#9CA3AF] hover:text-white'}`}
             >CT</button>
             <button
               onClick={() => handleRegionSwitch('Joburg')}
-              className={`px-2 py-1 rounded-md transition-all text-[10px] font-bold ${region === 'Joburg' ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'}`}
+              className={`px-2 py-1 rounded-md transition-all text-[10px] font-bold ${region === 'Joburg' ? 'bg-[#FFB81C] text-black shadow-sm' : 'text-[#9CA3AF] hover:text-white'}`}
             >JHB</button>
           </div>
           <button
             onClick={onLogout}
-            className="p-1.5 text-rose-400 hover:bg-slate-900 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-rose-400 hover:bg-[#1F2937] rounded-lg transition-colors cursor-pointer"
             title="Sign out"
           >
             <LogOut className="w-4 h-4" />
