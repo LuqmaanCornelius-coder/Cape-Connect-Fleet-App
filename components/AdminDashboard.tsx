@@ -1820,27 +1820,132 @@ const handleApproveRecon = (id: string, notes: string) => {
             </div>
           )}
 
-          {/* ==================== RENTAL CLIENTS DASHBOARD TAB ==================== */}
+                  {/* ==================== RENTAL CLIENTS DASHBOARD TAB ==================== */}
           {activeTab === 'rental_clients' && (
             <div className="space-y-4">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                 <div>
-                  <h2 className="text-base font-bold text-slate-900">Rental Clients & External Drivers</h2>
-                  <p className="text-xs text-slate-500">View, add, export, download PDF profiles, and delete rental profiles with OTP verification.</p>
+                  <h2 className="text-base font-bold text-white">Rental Clients & External Drivers</h2>
+                  <p className="text-xs text-[#9CA3AF]">View, add, export, download PDF profiles, and delete rental profiles with OTP verification.</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  <button onClick={() => downloadCSV(filteredRentalClients, 'rental_clients_and_external_drivers.csv')} className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-1.5 px-3 rounded-lg border border-slate-300 flex items-center gap-1 transition-colors"><Download className="w-4 h-4" /> Export Sheet</button>
-                  <button onClick={() => openRentalClientModal('self_drive')} className="bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold py-1.5 px-3 rounded-lg flex items-center gap-1 transition-colors"><Plus className="w-4 h-4" /> Add Client</button>
-                  <button onClick={() => openRentalClientModal('external_driver')} className="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold py-1.5 px-3 rounded-lg flex items-center gap-1 transition-colors"><Plus className="w-4 h-4" /> Add External Driver</button>
+                  <button 
+                    onClick={() => downloadCSV(filteredRentalClients, 'rental_clients_and_external_drivers.csv')} 
+                    className="bg-[#1F2937] hover:bg-[#374151] text-white text-xs font-bold py-1.5 px-3 rounded-lg border border-[#374151] flex items-center gap-1 transition-colors"
+                  >
+                    <Download className="w-4 h-4" /> Export Sheet
+                  </button>
+                  <button 
+                    onClick={() => openRentalClientModal('self_drive')} 
+                    className="bg-[#FFB81C] hover:bg-[#E6A000] text-black text-xs font-bold py-1.5 px-3 rounded-lg flex items-center gap-1 transition-colors shadow"
+                  >
+                    <Plus className="w-4 h-4" /> Add Client
+                  </button>
+                  <button 
+                    onClick={() => openRentalClientModal('external_driver')} 
+                    className="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold py-1.5 px-3 rounded-lg flex items-center gap-1 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" /> Add External Driver
+                  </button>
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl border border-slate-200 p-3 flex flex-col md:flex-row gap-2">
-                <div className="relative flex-1"><Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" /><input value={rentalClientSearch} onChange={e => setRentalClientSearch(e.target.value)} placeholder="Search by name, contact, company, address, or notes..." className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-teal-500" /></div>
-                <select value={rentalClientTypeFilter} onChange={e => setRentalClientTypeFilter(e.target.value as any)} className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-bold text-slate-700"><option value="all">All Profiles</option><option value="self_drive">Clients / Renters</option><option value="external_driver">External Drivers</option></select>
+              <div className="bg-[#1F2937] rounded-xl border border-[#374151] p-3 flex flex-col md:flex-row gap-2">
+                <div className="relative flex-1">
+                  <Search className="w-4 h-4 absolute left-3 top-2.5 text-[#9CA3AF]" />
+                  <input 
+                    value={rentalClientSearch} 
+                    onChange={e => setRentalClientSearch(e.target.value)} 
+                    placeholder="Search by name, contact, company, address, or notes..." 
+                    className="w-full bg-[#111827] border border-[#374151] rounded-lg pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-[#FFB81C]" 
+                  />
+                </div>
+                <select 
+                  value={rentalClientTypeFilter} 
+                  onChange={e => setRentalClientTypeFilter(e.target.value as any)} 
+                  className="bg-[#111827] border border-[#374151] rounded-lg px-3 py-2 text-xs font-bold text-white"
+                >
+                  <option value="all">All Profiles</option>
+                  <option value="self_drive">Clients / Renters</option>
+                  <option value="external_driver">External Drivers</option>
+                </select>
               </div>
 
-              <div className="bg-white rounded-xl shadow-xs border border-slate-200 overflow-hidden"><div className="overflow-x-auto"><table className="w-full text-left text-xs min-w-[900px]"><thead className="bg-slate-50 border-b border-slate-200 text-[10px] uppercase font-bold text-slate-500"><tr><th className="p-3">Profile</th><th className="p-3">Type</th><th className="p-3">Contact</th><th className="p-3">Address</th><th className="p-3">Linked Company</th><th className="p-3">Agreement</th><th className="p-3 text-right">Actions</th></tr></thead><tbody className="divide-y divide-slate-100">{filteredRentalClients.length === 0 ? (<tr><td colSpan={7} className="p-6 text-center text-slate-400 italic">No rental clients or external drivers found.</td></tr>) : filteredRentalClients.map(client => { const profileType = client.profile_type || 'self_drive'; return (<tr key={client.id} className="hover:bg-slate-50/60"><td className="p-3"><span className="font-bold block text-slate-900">{client.full_name}</span><span className="text-[10px] text-slate-400">Created {new Date(client.created_at).toLocaleDateString()}</span></td><td className="p-3"><span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase ${profileType === 'external_driver' ? 'bg-amber-50 text-amber-700' : 'bg-violet-50 text-violet-700'}`}>{profileType === 'external_driver' ? 'External Driver' : 'Client / Renter'}</span></td><td className="p-3"><span className="block font-semibold text-slate-700">{client.phone || '—'}</span><span className="text-[10px] text-slate-400">{client.email || '—'}</span></td><td className="p-3 text-slate-600 max-w-[180px] truncate">{client.address || '—'}</td><td className="p-3 text-slate-600">{client.linked_client_company || '—'}</td><td className="p-3">{client.rental_agreement_url ? <button onClick={async () => window.open(await getSignedUrlForView(client.rental_agreement_url!), '_blank')} className="text-teal-600 hover:text-teal-800 font-bold">View</button> : <span className="text-slate-400">—</span>}</td><td className="p-3"><div className="flex justify-end gap-2"><button onClick={() => openRentalClientModal(profileType, client)} className="text-slate-600 hover:text-slate-900 font-bold">Edit</button><button onClick={() => downloadRentalClientPDF(client)} className="text-teal-600 hover:text-teal-800 font-bold">PDF</button><button onClick={() => requestRentalClientDelete(client)} className="text-rose-600 hover:text-rose-800 font-bold">Delete</button></div></td></tr>); })}</tbody></table></div></div>
+              <div className="bg-[#1F2937] rounded-xl shadow-xs border border-[#374151] overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs min-w-[900px]">
+                    <thead className="bg-[#111827] border-b border-[#374151] text-[10px] uppercase font-bold text-[#9CA3AF]">
+                      <tr>
+                        <th className="p-3">Profile</th>
+                        <th className="p-3">Type</th>
+                        <th className="p-3">Contact</th>
+                        <th className="p-3">Address</th>
+                        <th className="p-3">Linked Company</th>
+                        <th className="p-3">Agreement</th>
+                        <th className="p-3 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#374151]">
+                      {filteredRentalClients.length === 0 ? (
+                        <tr><td colSpan={7} className="p-6 text-center text-[#9CA3AF] italic">No rental clients or external drivers found.</td></tr>
+                      ) : filteredRentalClients.map(client => { 
+                        const profileType = client.profile_type || 'self_drive'; 
+                        return (
+                          <tr key={client.id} className="hover:bg-[#111827]">
+                            <td className="p-3">
+                              <span className="font-bold block text-white">{client.full_name}</span>
+                              <span className="text-[10px] text-[#9CA3AF]">Created {new Date(client.created_at).toLocaleDateString()}</span>
+                            </td>
+                            <td className="p-3">
+                              <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase ${profileType === 'external_driver' ? 'bg-amber-900/40 text-amber-300 border border-amber-900/60' : 'bg-violet-900/40 text-violet-300 border border-violet-900/60'}`}>
+                                {profileType === 'external_driver' ? 'External Driver' : 'Client / Renter'}
+                              </span>
+                            </td>
+                            <td className="p-3">
+                              <span className="block font-semibold text-white">{client.phone || '—'}</span>
+                              <span className="text-[10px] text-[#9CA3AF]">{client.email || '—'}</span>
+                            </td>
+                            <td className="p-3 text-[#9CA3AF] max-w-[180px] truncate">{client.address || '—'}</td>
+                            <td className="p-3 text-[#9CA3AF]">{client.linked_client_company || '—'}</td>
+                            <td className="p-3">
+                              {client.rental_agreement_url ? (
+                                <button 
+                                  onClick={async () => window.open(await getSignedUrlForView(client.rental_agreement_url!), '_blank')} 
+                                  className="text-[#FFB81C] hover:text-white font-bold"
+                                >
+                                  View
+                                </button>
+                              ) : <span className="text-[#9CA3AF]">—</span>}
+                            </td>
+                            <td className="p-3">
+                              <div className="flex justify-end gap-2">
+                                <button 
+                                  onClick={() => openRentalClientModal(profileType, client)} 
+                                  className="text-[#FFB81C] hover:text-white font-bold"
+                                >
+                                  Edit
+                                </button>
+                                <button 
+                                  onClick={() => downloadRentalClientPDF(client)} 
+                                  className="text-[#FFB81C] hover:text-white font-bold"
+                                >
+                                  PDF
+                                </button>
+                                <button 
+                                  onClick={() => requestRentalClientDelete(client)} 
+                                  className="text-rose-400 hover:text-rose-300 font-bold"
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           )}
 
