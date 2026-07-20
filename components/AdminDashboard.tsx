@@ -1519,23 +1519,23 @@ const handleApproveRecon = (id: string, notes: string) => {
             </div>
           )}
           
-          {/* ==================== FLEET TAB ==================== */}
+                    {/* ==================== FLEET TAB ==================== */}
           {activeTab === 'fleet' && (
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-base font-bold text-slate-900">Owned Fleet Fleet Management</h2>
-                  <p className="text-xs text-slate-500">Service schedule indicator highlights in red if mileage is within 2,000 km of service mileage.</p>
+                  <h2 className="text-base font-bold text-white">Owned Fleet Management</h2>
+                  <p className="text-xs text-[#9CA3AF]">Service schedule indicator highlights in red if mileage is within 2,000 km of service mileage.</p>
                 </div>
                 <button
                   onClick={() => {
                     setVehicleForm({
                       registration_no: '', make: '', model: '', year: 2023, current_mileage: 0,
-                      next_service_km: 10000, status: 'active', color: '#14b8a6', notes: ''
+                      next_service_km: 10000, status: 'active', color: '#FFB81C', notes: ''
                     });
                     setShowVehicleModal(true);
                   }}
-                  className="bg-teal-600 text-white text-xs font-bold py-1.5 px-3 rounded-lg"
+                  className="bg-[#FFB81C] hover:bg-[#E6A000] text-black text-xs font-bold py-1.5 px-3 rounded-lg shadow"
                 >
                   Add Vehicle
                 </button>
@@ -1545,55 +1545,54 @@ const handleApproveRecon = (id: string, notes: string) => {
                 {vehicles.map(v => {
                   const serviceDueRemaining = v.next_service_km - v.current_mileage;
                   const isServiceDue = serviceDueRemaining <= 2000;
-
                   return (
-                    <div key={v.registration_no} className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs flex flex-col justify-between gap-3">
+                    <div key={v.registration_no} className="bg-[#1F2937] border border-[#374151] p-4 rounded-xl shadow-xs flex flex-col justify-between gap-3">
                       <div className="flex justify-between items-start">
                         <div className="flex items-center gap-2">
                           <span className="w-3.5 h-3.5 rounded-full" style={{ backgroundColor: v.color }} />
                           <div>
-                            <span className="text-xs font-black text-slate-800">{v.registration_no}</span>
-                            <h3 className="text-sm font-extrabold text-slate-900">{v.make} {v.model}</h3>
+                            <span className="text-xs font-black text-white">{v.registration_no}</span>
+                            <h3 className="text-sm font-extrabold text-white">{v.make} {v.model}</h3>
                           </div>
                         </div>
                         <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase ${
-                          v.status === 'active' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'
+                          v.status === 'active' ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-900/60' : 'bg-rose-900/40 text-rose-400 border border-rose-900/60'
                         }`}>
                           {v.status}
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-2.5 rounded-lg border border-slate-150">
+                      <div className="grid grid-cols-2 gap-2 text-xs bg-[#111827] p-2.5 rounded-lg border border-[#374151]">
                         <div>
-                          <p className="text-slate-400 text-[10px] font-bold">CURRENT MILEAGE</p>
-                          <p className="text-slate-800 font-bold">{v.current_mileage} km</p>
+                          <p className="text-[#9CA3AF] text-[10px] font-bold">CURRENT MILEAGE</p>
+                          <p className="text-white font-bold">{v.current_mileage} km</p>
                         </div>
                         <div>
-                          <p className="text-slate-400 text-[10px] font-bold">NEXT SERVICE KM</p>
-                          <p className={`font-bold ${isServiceDue ? 'text-rose-600' : 'text-slate-800'}`}>{v.next_service_km} km</p>
+                          <p className="text-[#9CA3AF] text-[10px] font-bold">NEXT SERVICE KM</p>
+                          <p className={`font-bold ${isServiceDue ? 'text-rose-400' : 'text-white'}`}>{v.next_service_km} km</p>
                         </div>
                       </div>
 
                       {isServiceDue && (
-                        <div className="p-2.5 bg-rose-50 border border-rose-100 rounded text-[10px] text-rose-700 font-semibold flex items-center gap-1.5">
-                          <AlertOctagon className="w-4 h-4 shrink-0 text-rose-600 animate-pulse-slow" />
+                        <div className="p-2.5 bg-rose-950/40 border border-rose-900/60 rounded text-[10px] text-rose-300 font-semibold flex items-center gap-1.5">
+                          <AlertOctagon className="w-4 h-4 shrink-0 text-rose-400 animate-pulse-slow" />
                           <span>🚨 SERVICE ALERT: Scheduled maintenance limit is within {serviceDueRemaining} km! Email alert triggered to managers.</span>
                         </div>
                       )}
 
-                      <div className="flex gap-1 justify-end pt-1 border-t border-slate-100">
+                      <div className="flex gap-1 justify-end pt-1 border-t border-[#374151]">
                         <button
                           onClick={() => {
                             setVehicleForm(v);
                             setShowVehicleModal(true);
                           }}
-                          className="text-xs font-bold text-teal-600 hover:bg-teal-50 px-3 py-1.5 rounded transition-colors"
+                          className="text-xs font-bold text-[#FFB81C] hover:bg-[#1F2937] px-3 py-1.5 rounded transition-colors"
                         >
                           Modify
                         </button>
                         <button
                           onClick={() => deleteVehicle(v.registration_no)}
-                          className="text-xs font-bold text-rose-600 hover:bg-rose-50 px-3 py-1.5 rounded transition-colors"
+                          className="text-xs font-bold text-rose-400 hover:bg-rose-950/40 px-3 py-1.5 rounded transition-colors"
                         >
                           Remove
                         </button>
@@ -1605,6 +1604,7 @@ const handleApproveRecon = (id: string, notes: string) => {
             </div>
           )}
 
+          
           {/* ==================== RENTED VEHICLES TAB ==================== */}
           {activeTab === 'rented' && (
             <div className="space-y-4">
