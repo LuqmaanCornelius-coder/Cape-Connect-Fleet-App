@@ -1141,14 +1141,13 @@ const handleApproveRecon = (id: string, notes: string) => {
         </div>
       </header>
 
-      {/* Main flex container — sidebar + content */}
+          {/* Main flex container — sidebar + content */}
       <div className="flex flex-1 overflow-hidden">
-
         {/* BACKDROP for mobile drawer */}
         {isSidebarOpen && (
           <button
             type="button"
-            className="md:hidden fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm"
+            className="md:hidden fixed inset-0 z-40 bg-[#111827]/70 backdrop-blur-sm"
             aria-label="Close admin navigation menu overlay"
             onClick={() => setIsSidebarOpen(false)}
           />
@@ -1156,27 +1155,27 @@ const handleApproveRecon = (id: string, notes: string) => {
 
         {/* SIDEBAR — mobile: slide-out drawer | desktop: persistent sticky */}
         <aside className={`
-          fixed inset-y-0 left-0 z-50 w-64 bg-[#0a1424] border-r border-slate-800/85 p-5 flex flex-col justify-between transition-transform duration-300 ease-in-out shrink-0
+          fixed inset-y-0 left-0 z-50 w-64 bg-[#0a1424] border-r border-[#1F2937] p-5 flex flex-col justify-between transition-transform duration-300 ease-in-out shrink-0
           md:sticky md:top-0 md:h-screen md:translate-x-0
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
         `}>
           <div className="space-y-6">
             {/* Sidebar Header with Logo */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div className="flex items-center justify-between border-b border-[#1F2937] pb-4">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center shrink-0 shadow relative">
-                  <Image src={logoSrc} alt="INYATHI Logo" fill className="object-contain p-0.5" />
+                  <Image src={logoSrc} alt="Cape Connect" fill className="object-contain p-0.5" />
                 </div>
                 <div>
-                  <h2 className="text-xs font-black tracking-widest text-teal-400 uppercase leading-none">INYATHI</h2>
-                  <p className="text-xs font-semibold text-slate-400 leading-none mt-1">{admin.name}</p>
-                  <p className="text-[9px] font-bold uppercase text-slate-500 tracking-wider mt-0.5">ADMIN PORTAL</p>
+                  <h2 className="text-xs font-black tracking-widest text-[#FFB81C] uppercase leading-none">CAPE CONNECT</h2>
+                  <p className="text-xs font-semibold text-[#9CA3AF] leading-none mt-1">{admin.name}</p>
+                  <p className="text-[9px] font-bold uppercase text-[#6B7280] tracking-wider mt-0.5">ADMIN PORTAL</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setIsSidebarOpen(false)}
-                className="md:hidden text-slate-400 hover:text-white p-1 text-xs font-bold cursor-pointer"
+                className="md:hidden text-[#9CA3AF] hover:text-white p-1 text-xs font-bold cursor-pointer"
               >
                 ✕
               </button>
