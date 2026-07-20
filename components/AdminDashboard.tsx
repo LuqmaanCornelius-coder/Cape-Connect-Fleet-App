@@ -1222,31 +1222,32 @@ const handleApproveRecon = (id: string, notes: string) => {
               })}
             </nav>
           </div>
-
           {/* Sidebar footer — region + stats + logout */}
-          <div className="border-t border-slate-800 pt-4 mt-auto">
+          <div className="border-t border-[#1F2937] pt-4 mt-auto">
             {/* Region switcher */}
-            <div className="flex bg-slate-950/60 p-0.5 rounded-xl border border-slate-800/50 mb-3">
+            <div className="flex bg-[#1F2937] p-0.5 rounded-xl border border-[#374151] mb-3">
               <button
                 onClick={() => handleRegionSwitch('Cape Town')}
-                className={`flex-1 px-2 py-1.5 rounded-lg transition-all text-[10px] font-extrabold ${region === 'Cape Town' ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
+                className={`flex-1 px-2 py-1.5 rounded-lg transition-all text-[10px] font-extrabold ${region === 'Cape Town' ? 'bg-[#FFB81C] text-black shadow-sm' : 'text-[#9CA3AF] hover:text-white'}`}
               >Cape Town</button>
               <button
                 onClick={() => handleRegionSwitch('Joburg')}
-                className={`flex-1 px-2 py-1.5 rounded-lg transition-all text-[10px] font-extrabold ${region === 'Joburg' ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
+                className={`flex-1 px-2 py-1.5 rounded-lg transition-all text-[10px] font-extrabold ${region === 'Joburg' ? 'bg-[#FFB81C] text-black shadow-sm' : 'text-[#9CA3AF] hover:text-white'}`}
               >Joburg</button>
             </div>
+
             {/* Quick stats */}
-            <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800/50 text-[10px] space-y-1 mb-3">
+            <div className="bg-[#1F2937] p-3 rounded-xl border border-[#374151] text-[10px] space-y-1 mb-3">
               <div className="flex justify-between">
-                <span className="text-slate-500 font-bold">Active Bookings:</span>
+                <span className="text-[#9CA3AF] font-bold">Active Bookings:</span>
                 <strong className="text-white">{activeBookings.length}</strong>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500 font-bold">Service Alerts:</span>
+                <span className="text-[#9CA3AF] font-bold">Service Alerts:</span>
                 <strong className="text-amber-400">{vehicles.filter(v => (v.next_service_km - v.current_mileage) <= 2000).length} vehicles</strong>
               </div>
             </div>
+
             <button
               onClick={onLogout}
               className="w-full flex items-center justify-center gap-2 py-2 text-xs font-extrabold bg-rose-950/20 hover:bg-rose-900/30 text-rose-400 border border-rose-900/40 rounded-lg transition-colors cursor-pointer"
@@ -1256,7 +1257,7 @@ const handleApproveRecon = (id: string, notes: string) => {
             </button>
           </div>
         </aside>
-
+        
         {/* MAIN VIEWPORT */}
         <div className="flex-1 flex flex-col min-w-0">
 
