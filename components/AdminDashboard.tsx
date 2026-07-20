@@ -1691,135 +1691,134 @@ const handleApproveRecon = (id: string, notes: string) => {
           )}
 
           
-          {/* ==================== MANAGE DRIVERS TAB ==================== */}
+                 {/* ==================== MANAGE DRIVERS TAB ==================== */}
           {activeTab === 'drivers' && (
             <div className="space-y-6">
-              
+             
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
+               
                 {/* Invites Generation Column */}
-                <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-3">
-                  <h3 className="text-xs uppercase font-extrabold text-slate-800 tracking-wider">Generate Driver Signup Invite</h3>
+                <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 shadow-xs space-y-3">
+                  <h3 className="text-xs uppercase font-extrabold text-white tracking-wider">Generate Driver Signup Invite</h3>
                   <form onSubmit={handleSendInvite} className="space-y-3 text-xs">
                     <div>
-                      <span className="text-slate-400 block mb-1">Driver&apos;s Name</span>
+                      <span className="text-[#9CA3AF] block mb-1">Driver's Name</span>
                       <input
                         type="text" required placeholder="e.g. Johnathan Doe"
                         value={inviteName}
                         onChange={(e) => setInviteName(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 text-slate-800"
+                        className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                       />
                     </div>
                     <div>
-                      <span className="text-slate-400 block mb-1">Invited Email</span>
+                      <span className="text-[#9CA3AF] block mb-1">Invited Email</span>
                       <input
                         type="email" required placeholder="name@domain.com"
                         value={inviteEmail}
                         onChange={(e) => setInviteEmail(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 text-slate-800"
+                        className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
                       />
                       <div>
-  <span className="text-slate-400 block mb-1">
-    Mobile Number <span className="text-rose-500">*</span>
-  </span>
-  <input
-    type="tel"
-    required
-    placeholder="e.g. +27 82 123 4567"
-    value={invitePhone}
-    onChange={(e) => setInvitePhone(e.target.value)}
-    className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 text-slate-800"
-  />
-</div>
+                        <span className="text-[#9CA3AF] block mb-1">
+                          Mobile Number <span className="text-rose-400">*</span>
+                        </span>
+                        <input
+                          type="tel"
+                          required
+                          placeholder="e.g. +27 82 123 4567"
+                          value={invitePhone}
+                          onChange={(e) => setInvitePhone(e.target.value)}
+                          className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
+                        />
+                      </div>
                     </div>
                     <button
                       type="submit"
-                      className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 rounded-lg transition-colors shadow-xs"
+                      className="w-full bg-[#FFB81C] hover:bg-[#E6A000] text-black font-bold py-2 rounded-lg transition-colors shadow-xs"
                     >
                       Generate Invite voucher
                     </button>
                   </form>
 
                   {/* Active invites list */}
-                  <div className="pt-2 border-t border-slate-100">
-                    <span className="text-[10px] font-bold text-slate-400 block mb-1">Active Invite list</span>
+                  <div className="pt-2 border-t border-[#374151]">
+                    <span className="text-[10px] font-bold text-[#9CA3AF] block mb-1">Active Invite list</span>
                     <div className="space-y-1.5 max-h-48 overflow-y-auto">
                       {driverInvites.filter(i => !i.used_at).length === 0 ? (
-  <p className="text-[10px] text-slate-400 italic">No pending invites.</p>
-) : (
-  driverInvites.filter(i => !i.used_at).map(i => (
-    <div key={i.email} className="bg-slate-50 p-2 rounded border border-slate-150 text-[10px]">
-      <p className="font-bold text-slate-700">{i.full_name}</p>
-      <p className="text-slate-400">{i.email}</p>
-      <p className="text-[9px] text-amber-500 mt-0.5">⏳ Awaiting signup</p>
-    </div>
-  ))
-)}
+                        <p className="text-[10px] text-[#9CA3AF] italic">No pending invites.</p>
+                      ) : (
+                        driverInvites.filter(i => !i.used_at).map(i => (
+                          <div key={i.email} className="bg-[#111827] p-2 rounded border border-[#374151] text-[10px]">
+                            <p className="font-bold text-white">{i.full_name}</p>
+                            <p className="text-[#9CA3AF]">{i.email}</p>
+                            <p className="text-[9px] text-amber-400 mt-0.5">⏳ Awaiting signup</p>
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
                 </div>
 
                 {/* Drivers table list */}
-                <div className="col-span-2 bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
-  <div className="overflow-x-auto">
-  <table className="w-full text-left text-xs min-w-[600px]">
-    <thead className="bg-slate-50 border-b border-slate-200 text-[10px] uppercase font-bold text-slate-500">
-      <tr>
-        <th className="p-3">Driver ID</th>
-                        <th className="p-3">Name Details</th>
-                        <th className="p-3">Mobile Contact</th>
-                        <th className="p-3">Location</th>
-                        <th className="p-3">Status</th>
-                        <th className="p-3 text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {drivers.map(d => (
-                        <tr key={d.driver_id} className="hover:bg-slate-50/50">
-                          <td className="p-3 font-mono font-bold text-slate-800">{d.driver_id}</td>
-                          <td className="p-3">
-                            <span className="font-bold block text-slate-900">{d.name}</span>
-                            <span className="text-[10px] text-slate-400">{d.email}</span>
-                          </td>
-                          <td className="p-3 font-semibold text-slate-700">{d.phone}</td>
-                          <td className="p-3 font-semibold text-slate-600">{d.location}</td>
-                          <td className="p-3">
-                            <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase ${
-                              d.is_active ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'
-                            }`}>
-                              {d.is_active ? 'Active' : 'Suspended'}
-                            </span>
-                          </td>
-                          <td className="p-3 text-right flex gap-2 justify-end">
-  <button
-    onClick={() => {
-      const newPhone = prompt(`Update phone for ${d.name}:`, d.phone || '');
-      if (newPhone !== null) {
-        driversApi.saveDriver({ ...d, phone: newPhone });
-        refreshData();
-      }
-    }}
-    className="font-bold text-slate-500 hover:text-slate-800 text-xs"
-  >
-    Edit Phone
-  </button>
-  <button
-    onClick={() => handleDeactivateDriver(d.driver_id, d.is_active)}
-    className={`font-bold ${d.is_active ? 'text-rose-600 hover:text-rose-800' : 'text-emerald-600 hover:text-emerald-800'}`}
-  >
-    {d.is_active ? 'Suspend' : 'Activate'}
-  </button>
-</td>
+                <div className="col-span-2 bg-[#1F2937] rounded-xl border border-[#374151] overflow-hidden shadow-xs">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs min-w-[600px]">
+                      <thead className="bg-[#111827] border-b border-[#374151] text-[10px] uppercase font-bold text-[#9CA3AF]">
+                        <tr>
+                          <th className="p-3">Driver ID</th>
+                          <th className="p-3">Name Details</th>
+                          <th className="p-3">Mobile Contact</th>
+                          <th className="p-3">Location</th>
+                          <th className="p-3">Status</th>
+                          <th className="p-3 text-right">Actions</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y divide-[#374151]">
+                        {drivers.map(d => (
+                          <tr key={d.driver_id} className="hover:bg-[#111827]">
+                            <td className="p-3 font-mono font-bold text-white">{d.driver_id}</td>
+                            <td className="p-3">
+                              <span className="font-bold block text-white">{d.name}</span>
+                              <span className="text-[10px] text-[#9CA3AF]">{d.email}</span>
+                            </td>
+                            <td className="p-3 font-semibold text-white">{d.phone}</td>
+                            <td className="p-3 font-semibold text-white">{d.location}</td>
+                            <td className="p-3">
+                              <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase ${
+                                d.is_active ? 'bg-emerald-900/40 text-emerald-300 border border-emerald-900/60' : 'bg-rose-900/40 text-rose-300 border border-rose-900/60'
+                              }`}>
+                                {d.is_active ? 'Active' : 'Suspended'}
+                              </span>
+                            </td>
+                            <td className="p-3 text-right flex gap-2 justify-end">
+                              <button
+                                onClick={() => {
+                                  const newPhone = prompt(`Update phone for ${d.name}:`, d.phone || '');
+                                  if (newPhone !== null) {
+                                    driversApi.saveDriver({ ...d, phone: newPhone });
+                                    refreshData();
+                                  }
+                                }}
+                                className="font-bold text-[#FFB81C] hover:text-white text-xs"
+                              >
+                                Edit Phone
+                              </button>
+                              <button
+                                onClick={() => handleDeactivateDriver(d.driver_id, d.is_active)}
+                                className={`font-bold ${d.is_active ? 'text-rose-400 hover:text-rose-300' : 'text-emerald-400 hover:text-emerald-300'}`}
+                              >
+                                {d.is_active ? 'Suspend' : 'Activate'}
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-</div>
               </div>
             </div>
           )}
-
 
           {/* ==================== RENTAL CLIENTS DASHBOARD TAB ==================== */}
           {activeTab === 'rental_clients' && (
