@@ -1443,26 +1443,26 @@ const handleApproveRecon = (id: string, notes: string) => {
           )}
 
 
-          {/* ==================== BOOKINGS ARCHIVE TAB ==================== */}
+                 {/* ==================== BOOKINGS ARCHIVE TAB ==================== */}
           {activeTab === 'bookings_archive' && (
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
                 <div>
-                  <h2 className="text-base font-bold text-slate-900">Bookings Archive</h2>
-                  <p className="text-xs text-slate-500 mt-0.5">Completed, closed, cancelled & returned bookings</p>
+                  <h2 className="text-base font-bold text-white">Bookings Archive</h2>
+                  <p className="text-xs text-[#9CA3AF] mt-0.5">Completed, closed, cancelled & returned bookings</p>
                 </div>
                 <button
                   onClick={() => downloadCSV(archivedBookings, `bookings_archive_${region.replace(' ', '_')}.csv`)}
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-1.5 px-3 rounded-lg border border-slate-300 flex items-center justify-center gap-1 transition-colors"
+                  className="bg-[#1F2937] hover:bg-[#374151] text-white text-xs font-bold py-1.5 px-3 rounded-lg border border-[#374151] flex items-center justify-center gap-1 transition-colors"
                 >
                   <Download className="w-4 h-4" /> Export Archive
                 </button>
               </div>
 
-              <div className="bg-white rounded-xl shadow-xs border border-slate-200 overflow-hidden">
+              <div className="bg-[#1F2937] rounded-xl shadow-xs border border-[#374151] overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse min-w-[900px]">
-                    <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-extrabold text-[10px] uppercase">
+                    <thead className="bg-[#111827] border-b border-[#374151] text-[#9CA3AF] font-extrabold text-[10px] uppercase">
                       <tr>
                         <th className="p-3">Invoice / Ref</th>
                         <th className="p-3">Client</th>
@@ -1474,29 +1474,40 @@ const handleApproveRecon = (id: string, notes: string) => {
                         <th className="p-3">Inspections</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
+                    <tbody className="divide-y divide-[#374151]">
                       {archivedBookings.length === 0 ? (
-                        <tr><td colSpan={8} className="p-6 text-center text-slate-400 italic">No archived bookings yet.</td></tr>
+                        <tr><td colSpan={8} className="p-6 text-center text-[#9CA3AF] italic">No archived bookings yet.</td></tr>
                       ) : (
                         [...archivedBookings]
                           .sort((a, b) => new Date(b.end_date).getTime() - new Date(a.end_date).getTime())
                           .map(b => {
                             const preTrip = inspections.find(ins => ins.invoice_no === b.invoice_no && ins.inspection_type === 'pre-trip');
                             const postTrip = inspections.find(ins => ins.invoice_no === b.invoice_no && ins.inspection_type === 'post-trip');
-
                             return (
-                              <tr key={b.invoice_no} className="hover:bg-slate-50/50 bg-slate-50/30">
-                                <td className="p-3"><span className="font-extrabold text-slate-800">{b.invoice_no}</span><span className="block text-[10px] text-slate-400 font-medium">Ref: {b.tour_reference}</span></td>
-                                <td className="p-3 font-bold text-slate-900">{b.client_name}</td>
-                                <td className="p-3 text-slate-600 font-medium max-w-[160px]"><span className="truncate block">{b.route}</span></td>
-                                <td className="p-3"><span className="font-semibold block text-slate-700">{new Date(b.start_date).toLocaleDateString()} →</span><span className="text-[10px] text-slate-400">{new Date(b.end_date).toLocaleDateString()}</span></td>
-                                <td className="p-3 font-bold text-slate-700">{drivers.find(d => d.driver_id === b.assigned_driver_id)?.name || b.assigned_driver_id}</td>
-                                <td className="p-3 font-bold text-slate-700">{b.is_rented_vehicle ? `${b.rented_vehicle_model} (RENTED)` : b.assigned_vehicle_reg}</td>
-                                <td className="p-3"><span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase border ${b.status === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : b.status === 'cancelled' ? 'bg-rose-50 text-rose-700 border-rose-200' : b.status === 'closed' ? 'bg-slate-100 text-slate-600 border-slate-300' : b.status === 'returned' ? 'bg-indigo-50 text-indigo-700 border-indigo-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>{b.status}</span></td>
-                                <td className="p-3"><div className="flex gap-1 flex-wrap">
-                                  {preTrip ? <button onClick={() => setSelectedInspectionForModal(preTrip)} className="inline-flex items-center gap-0.5 text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 px-1.5 py-0.5 rounded font-black cursor-pointer"><Camera className="w-2.5 h-2.5" /> Pre-Trip</button> : <span className="text-[9px] text-slate-400 italic">No Pre</span>}
-                                  {postTrip ? <button onClick={() => setSelectedInspectionForModal(postTrip)} className="inline-flex items-center gap-0.5 text-[9px] bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 px-1.5 py-0.5 rounded font-black cursor-pointer"><Camera className="w-2.5 h-2.5" /> Post-Trip</button> : <span className="text-[9px] text-slate-400 italic">No Post</span>}
-                                </div></td>
+                              <tr key={b.invoice_no} className="hover:bg-[#111827]">
+                                <td className="p-3"><span className="font-extrabold text-white">{b.invoice_no}</span><span className="block text-[10px] text-[#9CA3AF] font-medium">Ref: {b.tour_reference}</span></td>
+                                <td className="p-3 font-bold text-white">{b.client_name}</td>
+                                <td className="p-3 text-[#9CA3AF] font-medium max-w-[160px]"><span className="truncate block">{b.route}</span></td>
+                                <td className="p-3"><span className="font-semibold block text-white">{new Date(b.start_date).toLocaleDateString()} →</span><span className="text-[10px] text-[#9CA3AF]">{new Date(b.end_date).toLocaleDateString()}</span></td>
+                                <td className="p-3 font-bold text-white">{drivers.find(d => d.driver_id === b.assigned_driver_id)?.name || b.assigned_driver_id}</td>
+                                <td className="p-3 font-bold text-white">{b.is_rented_vehicle ? `${b.rented_vehicle_model} (RENTED)` : b.assigned_vehicle_reg}</td>
+                                <td className="p-3">
+                                  <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase border ${
+                                    b.status === 'completed' ? 'bg-emerald-900/30 text-emerald-300 border-emerald-800' : 
+                                    b.status === 'cancelled' ? 'bg-rose-900/30 text-rose-300 border-rose-800' : 
+                                    b.status === 'closed' ? 'bg-slate-800 text-white border-slate-700' : 
+                                    b.status === 'returned' ? 'bg-indigo-900/30 text-indigo-300 border-indigo-800' : 
+                                    'bg-amber-900/30 text-amber-300 border-amber-800'
+                                  }`}>
+                                    {b.status}
+                                  </span>
+                                </td>
+                                <td className="p-3">
+                                  <div className="flex gap-1 flex-wrap">
+                                    {preTrip ? <button onClick={() => setSelectedInspectionForModal(preTrip)} className="inline-flex items-center gap-0.5 text-[9px] bg-emerald-900/30 text-emerald-300 border border-emerald-800 hover:bg-emerald-900/50 px-1.5 py-0.5 rounded font-black cursor-pointer"><Camera className="w-2.5 h-2.5" /> Pre-Trip</button> : <span className="text-[9px] text-[#9CA3AF] italic">No Pre</span>}
+                                    {postTrip ? <button onClick={() => setSelectedInspectionForModal(postTrip)} className="inline-flex items-center gap-0.5 text-[9px] bg-indigo-900/30 text-indigo-300 border border-indigo-800 hover:bg-indigo-900/50 px-1.5 py-0.5 rounded font-black cursor-pointer"><Camera className="w-2.5 h-2.5" /> Post-Trip</button> : <span className="text-[9px] text-[#9CA3AF] italic">No Post</span>}
+                                  </div>
+                                </td>
                               </tr>
                             );
                           })
@@ -1507,7 +1518,7 @@ const handleApproveRecon = (id: string, notes: string) => {
               </div>
             </div>
           )}
-
+          
           {/* ==================== FLEET TAB ==================== */}
           {activeTab === 'fleet' && (
             <div className="space-y-4">
