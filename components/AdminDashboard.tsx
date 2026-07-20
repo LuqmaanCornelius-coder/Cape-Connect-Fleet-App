@@ -1258,36 +1258,34 @@ const handleApproveRecon = (id: string, notes: string) => {
           </div>
         </aside>
         
-        {/* MAIN VIEWPORT */}
+             {/* MAIN VIEWPORT */}
         <div className="flex-1 flex flex-col min-w-0">
-
           {/* DESKTOP-ONLY TOP HEADER */}
-          <header className="hidden md:flex bg-slate-950 border-b border-slate-800 p-4 justify-between items-center z-10 sticky top-0">
+          <header className="hidden md:flex bg-[#0a1424] border-b border-[#1F2937] p-4 justify-between items-center z-10 sticky top-0">
             <div>
-              <h1 className="text-xs font-black tracking-widest text-slate-500">INYATHI ADMIN PORTAL</h1>
-              <p className="text-xs font-extrabold text-teal-400 uppercase mt-0.5">{activeTab.toUpperCase().replace('_', ' ')} VIEW</p>
+              <h1 className="text-xs font-black tracking-widest text-[#9CA3AF]">CAPE CONNECT ADMIN PORTAL</h1>
+              <p className="text-xs font-extrabold text-[#FFB81C] uppercase mt-0.5">{activeTab.toUpperCase().replace('_', ' ')} VIEW</p>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-[10px] font-bold bg-slate-900 px-3 py-1.5 rounded-full border border-slate-800 text-teal-400">
+              <span className="text-[10px] font-bold bg-[#1F2937] px-3 py-1.5 rounded-full border border-[#374151] text-[#FFB81C]">
                 {admin.name}
               </span>
             </div>
           </header>
 
         {/* Content View */}
-        <main className="flex-1 p-4 sm:p-6 overflow-y-auto bg-slate-50 min-w-0">
-
+        <main className="flex-1 p-4 sm:p-6 overflow-y-auto bg-[#111827] min-w-0">
           {/* ==================== DASHBOARD CALENDAR TAB ==================== */}
           {activeTab === 'dashboard' && (
             <div className="space-y-6">
-              <div className="flex justify-between items-center bg-white p-4 rounded-xl shadow-xs border border-slate-200">
+              <div className="flex justify-between items-center bg-[#1F2937] p-4 rounded-xl shadow-xs border border-[#374151]">
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900">Schedules Dispatch</h2>
-                  <p className="text-xs text-slate-500">Visual calendar of bookings and assignments compiled for {region}.</p>
+                  <h2 className="text-lg font-bold text-white">Schedules Dispatch</h2>
+                  <p className="text-xs text-[#9CA3AF]">Visual calendar of bookings and assignments compiled for {region}.</p>
                 </div>
                 <button
                   onClick={() => handleOpenNewBooking()}
-                  className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-colors flex items-center gap-1.5 shadow"
+                  className="bg-[#FFB81C] hover:bg-[#E6A000] text-black font-bold py-2 px-4 rounded-xl text-xs transition-colors flex items-center gap-1.5 shadow"
                 >
                   <Plus className="w-4 h-4" />
                   Dispatch New Booking
