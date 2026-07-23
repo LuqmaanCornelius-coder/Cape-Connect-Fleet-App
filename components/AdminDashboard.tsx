@@ -2694,13 +2694,13 @@ const handleApproveRecon = (id: string, notes: string) => {
           )}
 
           
-          {/* ==================== INCIDENT REPORTS TAB ==================== */}
+                   {/* ==================== INCIDENT REPORTS TAB ==================== */}
           {activeTab === 'incidents' && (
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h1 className="text-xl font-extrabold tracking-tight text-slate-900">Incident Reports Log</h1>
-                  <p className="text-xs text-slate-500 font-medium">Record, track, and download vehicle collisions, breakdowns, and damage incidents.</p>
+                  <h1 className="text-xl font-extrabold tracking-tight text-white">Incident Reports Log</h1>
+                  <p className="text-xs text-[#9CA3AF] font-medium">Record, track, and download vehicle collisions, breakdowns, and damage incidents.</p>
                 </div>
                 <button
                   type="button"
@@ -2713,33 +2713,33 @@ const handleApproveRecon = (id: string, notes: string) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {incidentReports.length === 0 ? (
-                  <p className="text-xs text-slate-400 italic bg-white p-6 border border-slate-200 rounded-xl text-center col-span-2">No accident incident records logged yet.</p>
+                  <p className="text-xs text-[#9CA3AF] italic bg-[#1F2937] p-6 border border-[#374151] rounded-xl text-center col-span-2">No accident incident records logged yet.</p>
                 ) : (
                   [...incidentReports]
                     .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                     .map(inc => (
-                    <div key={inc.id} className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs space-y-3">
+                    <div key={inc.id} className="bg-[#1F2937] border border-[#374151] p-4 rounded-xl shadow-xs space-y-3">
                       <div className="flex justify-between items-start">
                         <div>
-                          <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase bg-rose-50 text-rose-700 border border-rose-200`}>
+                          <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase bg-rose-900/40 text-rose-300 border border-rose-900/60`}>
                             {inc.incident_type}
                           </span>
-                          <h3 className="text-sm font-extrabold text-slate-900 mt-1.5">Vehicle: {inc.vehicle_reg} • Driver: {drivers.find(d => d.driver_id === inc.driver_id)?.name || inc.driver_id}</h3>
-                          <p className="text-xs text-slate-500 font-semibold">Location details: {inc.location}</p>
+                          <h3 className="text-sm font-extrabold text-white mt-1.5">Vehicle: {inc.vehicle_reg} • Driver: {drivers.find(d => d.driver_id === inc.driver_id)?.name || inc.driver_id}</h3>
+                          <p className="text-xs text-[#9CA3AF] font-semibold">Location details: {inc.location}</p>
                         </div>
                         <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded border ${
-                          inc.status === 'closed' ? 'bg-slate-100 text-slate-500 border-slate-200' : 'bg-rose-50 text-rose-600 border-rose-200'
+                          inc.status === 'closed' ? 'bg-slate-700 text-white border-slate-600' : 'bg-rose-900/40 text-rose-300 border-rose-900/60'
                         }`}>
                           {inc.status}
                         </span>
                       </div>
 
-                      <p className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-2.5 rounded border border-slate-150">
+                      <p className="text-xs text-[#9CA3AF] leading-relaxed bg-[#111827] p-2.5 rounded border border-[#374151]">
                         &quot;{inc.description}&quot;
                       </p>
 
                       {((inc.photo_urls && inc.photo_urls.length > 0) || (inc.document_urls && inc.document_urls.length > 0)) && (
-                        <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                        <div className="flex flex-wrap gap-2 pt-2 border-t border-[#374151]">
                           {inc.photo_urls?.filter(Boolean).map((url, idx) => (
                             <button
                               key={idx}
@@ -2747,9 +2747,9 @@ const handleApproveRecon = (id: string, notes: string) => {
                                 const signed = await getSignedUrlForView(url);
                                 window.open(signed, '_blank');
                               }}
-                              className="inline-flex items-center gap-1 text-[10px] text-teal-600 hover:underline font-extrabold bg-teal-50 px-2 py-0.5 rounded border border-teal-200"
+                              className="inline-flex items-center gap-1 text-[10px] text-[#FFB81C] hover:underline font-extrabold bg-[#1F2937] px-2 py-0.5 rounded border border-[#374151]"
                             >
-                              <Eye className="w-3 h-3 text-teal-500" /> Incident Photo #{idx + 1}
+                              <Eye className="w-3 h-3 text-[#FFB81C]" /> Incident Photo #{idx + 1}
                             </button>
                           ))}
                           {inc.document_urls?.filter(Boolean).map((url, idx) => (
@@ -2759,16 +2759,16 @@ const handleApproveRecon = (id: string, notes: string) => {
                                 const signed = await getSignedUrlForView(url);
                                 window.open(signed, '_blank');
                               }}
-                              className="inline-flex items-center gap-1 text-[10px] text-teal-600 hover:underline font-extrabold bg-teal-50 px-2 py-0.5 rounded border border-teal-200"
+                              className="inline-flex items-center gap-1 text-[10px] text-[#FFB81C] hover:underline font-extrabold bg-[#1F2937] px-2 py-0.5 rounded border border-[#374151]"
                             >
-                              <Eye className="w-3 h-3 text-teal-500" /> Incident Doc #{idx + 1}
+                              <Eye className="w-3 h-3 text-[#FFB81C]" /> Incident Doc #{idx + 1}
                             </button>
                           ))}
                         </div>
                       )}
 
-                      <div className="flex justify-between items-center pt-2 border-t border-slate-100 gap-2 flex-wrap">
-                        <span className="text-[10px] text-slate-400">Filed: {new Date(inc.created_at).toLocaleString()}</span>
+                      <div className="flex justify-between items-center pt-2 border-t border-[#374151] gap-2 flex-wrap">
+                        <span className="text-[10px] text-[#9CA3AF]">Filed: {new Date(inc.created_at).toLocaleString()}</span>
                         <div className="flex items-center gap-2">
                           <button
                             type="button"
@@ -2776,7 +2776,7 @@ const handleApproveRecon = (id: string, notes: string) => {
                               const driverName = (inc.driver_id && drivers.find(d => d.driver_id === inc.driver_id)?.name) || inc.driver_id || 'Admin';
                               downloadIncidentPDF(inc, driverName);
                             }}
-                            className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-1 px-3 rounded transition-colors border border-slate-300 cursor-pointer"
+                            className="bg-[#1F2937] hover:bg-[#374151] text-white text-xs font-bold py-1 px-3 rounded transition-colors border border-[#374151] cursor-pointer"
                           >
                             Download PDF
                           </button>
@@ -2786,7 +2786,7 @@ const handleApproveRecon = (id: string, notes: string) => {
                                 incidentsApi.saveIncident({ ...inc, status: 'closed' });
                                 refreshData();
                               }}
-                              className="bg-slate-900 text-white text-xs font-bold py-1 px-3 rounded hover:bg-slate-800 transition-colors cursor-pointer"
+                              className="bg-slate-700 text-white text-xs font-bold py-1 px-3 rounded hover:bg-slate-600 transition-colors cursor-pointer"
                             >
                               Close Incident Log
                             </button>
@@ -2800,6 +2800,7 @@ const handleApproveRecon = (id: string, notes: string) => {
             </div>
           )}
 
+          
           {/* ==================== COMPLIANCE & INSPECTIONS TAB ==================== */}
           {activeTab === 'inspections' && (() => {
             const regionInspections = inspections.filter(ins => {
