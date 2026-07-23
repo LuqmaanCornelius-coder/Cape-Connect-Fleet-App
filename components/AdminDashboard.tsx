@@ -2392,23 +2392,23 @@ const handleApproveRecon = (id: string, notes: string) => {
           )}
 
           
-          {/* ==================== TRAFFIC FINES TAB ==================== */}
+               {/* ==================== TRAFFIC FINES TAB ==================== */}
           {activeTab === 'fines' && (
             <div className="space-y-6">
-              
+             
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
+               
                 {/* Log new Fine form */}
-                <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs space-y-3">
-                  <h3 className="text-xs uppercase font-extrabold text-slate-800 tracking-wider">Log Traffic violation Fine</h3>
-                  
+                <div className="bg-[#1F2937] border border-[#374151] p-4 rounded-xl shadow-xs space-y-3">
+                  <h3 className="text-xs uppercase font-extrabold text-white tracking-wider">Log Traffic violation Fine</h3>
+                 
                   <form onSubmit={handleSaveFine} className="space-y-3 text-xs">
                     <div>
-                      <span className="text-slate-400 block mb-1">Vehicle Registration</span>
+                      <span className="text-[#9CA3AF] block mb-1">Vehicle Registration</span>
                       <select
                         value={fineForm.vehicle_reg}
                         onChange={(e) => setFineForm(prev => ({ ...prev, vehicle_reg: e.target.value }))}
-                        className="w-full bg-slate-50 border border-slate-200 p-1.5 rounded text-slate-800"
+                        className="w-full bg-[#111827] border border-[#374151] p-1.5 rounded text-white"
                       >
                         <option value="">Select Vehicle...</option>
                         {vehicles.map(v => (
@@ -2416,88 +2416,79 @@ const handleApproveRecon = (id: string, notes: string) => {
                         ))}
                       </select>
                     </div>
-
                     <div>
-                      <span className="text-slate-400 block mb-1">Violation Timestamp</span>
+                      <span className="text-[#9CA3AF] block mb-1">Violation Timestamp</span>
                       <input
                         type="datetime-local"
                         value={fineForm.fine_timestamp}
                         onChange={(e) => setFineForm(prev => ({ ...prev, fine_timestamp: e.target.value }))}
-                        className="w-full bg-slate-50 border border-slate-200 p-1.5 rounded text-slate-800"
+                        className="w-full bg-[#111827] border border-[#374151] p-1.5 rounded text-white"
                       />
                     </div>
-
                     {/* Lookup driver helper button */}
                     <button
                       type="button"
                       onClick={handleFineDriverLookup}
-                      className="w-full text-center bg-teal-50 hover:bg-teal-100 text-teal-700 py-1.5 rounded border border-teal-200 font-bold"
+                      className="w-full text-center bg-[#1F2937] hover:bg-[#374151] text-[#FFB81C] py-1.5 rounded border border-[#374151] font-bold"
                     >
                       🔍 Lookup driver by fine time
                     </button>
-
                     {fineAutofilledDriver && (
-                      <div className="bg-emerald-50 border border-emerald-100 rounded p-2.5 text-[11px] text-emerald-800 animate-scale-up space-y-0.5">
+                      <div className="bg-emerald-950/40 border border-emerald-900/60 rounded p-2.5 text-[11px] text-emerald-300 animate-scale-up space-y-0.5">
                         <p><strong>Auto-located Driver:</strong> {fineAutofilledDriver.name}</p>
                         <p><strong>Assigned Booking:</strong> {fineAutofilledDriver.bookingId}</p>
                       </div>
                     )}
-
                     <div>
-                      <span className="text-slate-400 block mb-1">Fine Reference Code</span>
+                      <span className="text-[#9CA3AF] block mb-1">Fine Reference Code</span>
                       <input
                         type="text" required placeholder="e.g. TX-9082-CT"
                         value={fineForm.fine_reference}
                         onChange={(e) => setFineForm(prev => ({ ...prev, fine_reference: e.target.value }))}
-                        className="w-full bg-slate-50 border border-slate-200 p-1.5 rounded text-slate-800"
+                        className="w-full bg-[#111827] border border-[#374151] p-1.5 rounded text-white"
                       />
                     </div>
-
                     <div>
-                      <span className="text-slate-400 block mb-1">ZAR Fine Amount</span>
+                      <span className="text-[#9CA3AF] block mb-1">ZAR Fine Amount</span>
                       <input
                         type="number" required placeholder="ZAR Cost"
                         value={fineForm.amount}
                         onChange={(e) => setFineForm(prev => ({ ...prev, amount: e.target.value }))}
-                        className="w-full bg-slate-50 border border-slate-200 p-1.5 rounded text-slate-800"
+                        className="w-full bg-[#111827] border border-[#374151] p-1.5 rounded text-white"
                       />
                     </div>
-
                     <div>
-                      <span className="text-slate-400 block mb-1">Location / Details</span>
+                      <span className="text-[#9CA3AF] block mb-1">Location / Details</span>
                       <input
                         type="text" placeholder="e.g. Speed lock camera N1 outbound"
                         value={fineForm.location}
                         onChange={(e) => setFineForm(prev => ({ ...prev, location: e.target.value }))}
-                        className="w-full bg-slate-50 border border-slate-200 p-1.5 rounded text-slate-800"
+                        className="w-full bg-[#111827] border border-[#374151] p-1.5 rounded text-white"
                       />
                     </div>
-
                     <div>
-                      <span className="text-slate-400 block mb-1">Notification Email</span>
+                      <span className="text-[#9CA3AF] block mb-1">Notification Email</span>
                       <input
                         type="email" required placeholder="driver@domain.co.za"
                         value={fineForm.notification_email}
                         onChange={(e) => setFineForm(prev => ({ ...prev, notification_email: e.target.value }))}
-                        className="w-full bg-slate-50 border border-slate-200 p-1.5 rounded text-slate-800"
+                        className="w-full bg-[#111827] border border-[#374151] p-1.5 rounded text-white"
                       />
                     </div>
-
                     <div>
-                      <span className="text-slate-400 block mb-1">Payment Status</span>
+                      <span className="text-[#9CA3AF] block mb-1">Payment Status</span>
                       <select
                         value={fineForm.status}
                         onChange={(e) => setFineForm(prev => ({ ...prev, status: e.target.value as 'paid' | 'pending' }))}
-                        className="w-full bg-slate-50 border border-slate-200 p-1.5 rounded text-slate-800"
+                        className="w-full bg-[#111827] border border-[#374151] p-1.5 rounded text-white"
                       >
                         <option value="pending">Pending / Unpaid</option>
                         <option value="paid">Paid</option>
                       </select>
                     </div>
-
                     <button
                       type="submit"
-                      className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 rounded-lg transition-colors shadow-xs"
+                      className="w-full bg-[#FFB81C] hover:bg-[#E6A000] text-black font-bold py-2 rounded-lg transition-colors shadow-xs"
                     >
                       Record Fine & Send alert
                     </button>
@@ -2505,93 +2496,93 @@ const handleApproveRecon = (id: string, notes: string) => {
                 </div>
 
                 {/* Fines table log */}
-                <div className="col-span-2 bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
-  <div className="overflow-x-auto">
-  <table className="w-full text-left text-xs min-w-[860px]">
-    <thead className="bg-slate-50 border-b border-slate-200 text-[10px] uppercase font-bold text-slate-500">
-      <tr>
-        <th className="p-3">Reference / Code</th>
-                        <th className="p-3">Vehicle / Driver</th>
-                        <th className="p-3">Violation Time</th>
-                        <th className="p-3">Location Details</th>
-                        <th className="p-3">Driver Notification</th>
-                        <th className="p-3">Status</th>
-                        <th className="p-3 text-right">Cost (ZAR)</th>
-                        <th className="p-3 text-center">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100">
-                      {trafficFines.length === 0 ? (
+                <div className="col-span-2 bg-[#1F2937] rounded-xl border border-[#374151] overflow-hidden shadow-xs">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs min-w-[860px]">
+                      <thead className="bg-[#111827] border-b border-[#374151] text-[10px] uppercase font-bold text-[#9CA3AF]">
                         <tr>
-                          <td colSpan={8} className="p-4 text-center text-slate-400 italic">No fines logged currently.</td>
+                          <th className="p-3">Reference / Code</th>
+                          <th className="p-3">Vehicle / Driver</th>
+                          <th className="p-3">Violation Time</th>
+                          <th className="p-3">Location Details</th>
+                          <th className="p-3">Driver Notification</th>
+                          <th className="p-3">Status</th>
+                          <th className="p-3 text-right">Cost (ZAR)</th>
+                          <th className="p-3 text-center">Action</th>
                         </tr>
-                      ) : (
-                        [...trafficFines]
-                          .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-                          .map(f => {
-                          const drv = drivers.find(d => d.driver_id === f.driver_id);
-                          const driverName = drv ? drv.name : f.driver_id;
-                          return (
-                            <tr key={f.id} className="hover:bg-slate-50/50">
-                              <td className="p-3">
-                                <span className="font-extrabold text-slate-800 block">{f.fine_reference}</span>
-                                {f.description && <span className="text-[10px] text-slate-400 block mt-0.5">{f.description}</span>}
-                              </td>
-                              <td className="p-3">
-                                <span className="font-bold text-slate-900 block">{f.vehicle_reg}</span>
-                                <span className="text-[10px] text-teal-600 font-medium">{driverName}</span>
-                              </td>
-                              <td className="p-3 text-slate-600">{new Date(f.fine_timestamp).toLocaleString()}</td>
-                              <td className="p-3 text-slate-500 font-medium max-w-[150px] truncate">{f.location}</td>
-                              <td className="p-3">
-                                <span className="text-slate-700 font-mono text-[11px] block">{f.notification_email}</span>
-                                {f.email_sent ? (
-                                  <div className="flex items-center gap-1 mt-0.5">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                    <span className="text-[9px] text-emerald-600">
-                                      Notified {f.email_sent_at ? new Date(f.email_sent_at).toLocaleDateString() : ''}
-                                    </span>
-                                    <button 
-                                      onClick={() => handleResendFineEmail(f)}
-                                      className="text-[9px] text-teal-600 hover:underline ml-1.5 font-bold"
-                                    >
-                                      Resend
-                                    </button>
-                                  </div>
-                                ) : (
-                                  <span className="text-[9px] text-amber-500 font-medium mt-0.5 block">Not notified yet</span>
-                                )}
-                              </td>
-                              <td className="p-3">
-                                <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-extrabold ${
-                                  f.status === 'paid' 
-                                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' 
-                                    : 'bg-amber-50 text-amber-700 border border-amber-100 animate-pulse'
-                                }`}>
-                                  {f.status === 'paid' ? 'Paid' : 'Pending'}
-                                </span>
-                              </td>
-                              <td className="p-3 text-right font-bold text-rose-600">R {f.amount}</td>
-                              <td className="p-3 text-center">
-                                <button
-                                  onClick={() => handleToggleFineStatus(f.id, f.status)}
-                                  className={`px-2 py-1 rounded text-[10px] font-bold border transition-colors ${
+                      </thead>
+                      <tbody className="divide-y divide-[#374151]">
+                        {trafficFines.length === 0 ? (
+                          <tr>
+                            <td colSpan={8} className="p-4 text-center text-[#9CA3AF] italic">No fines logged currently.</td>
+                          </tr>
+                        ) : (
+                          [...trafficFines]
+                            .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                            .map(f => {
+                            const drv = drivers.find(d => d.driver_id === f.driver_id);
+                            const driverName = drv ? drv.name : f.driver_id;
+                            return (
+                              <tr key={f.id} className="hover:bg-[#111827]">
+                                <td className="p-3">
+                                  <span className="font-extrabold text-white block">{f.fine_reference}</span>
+                                  {f.description && <span className="text-[10px] text-[#9CA3AF] block mt-0.5">{f.description}</span>}
+                                </td>
+                                <td className="p-3">
+                                  <span className="font-bold text-white block">{f.vehicle_reg}</span>
+                                  <span className="text-[10px] text-[#FFB81C] font-medium">{driverName}</span>
+                                </td>
+                                <td className="p-3 text-white">{new Date(f.fine_timestamp).toLocaleString()}</td>
+                                <td className="p-3 text-[#9CA3AF] font-medium max-w-[150px] truncate">{f.location}</td>
+                                <td className="p-3">
+                                  <span className="text-white font-mono text-[11px] block">{f.notification_email}</span>
+                                  {f.email_sent ? (
+                                    <div className="flex items-center gap-1 mt-0.5">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                      <span className="text-[9px] text-emerald-400">
+                                        Notified {f.email_sent_at ? new Date(f.email_sent_at).toLocaleDateString() : ''}
+                                      </span>
+                                      <button
+                                        onClick={() => handleResendFineEmail(f)}
+                                        className="text-[9px] text-[#FFB81C] hover:underline ml-1.5 font-bold"
+                                      >
+                                        Resend
+                                      </button>
+                                    </div>
+                                  ) : (
+                                    <span className="text-[9px] text-amber-400 font-medium mt-0.5 block">Not notified yet</span>
+                                  )}
+                                </td>
+                                <td className="p-3">
+                                  <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-extrabold ${
                                     f.status === 'paid'
-                                      ? 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
-                                      : 'bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100'
-                                  }`}
-                                >
-                                  {f.status === 'paid' ? 'Mark Unpaid' : 'Mark Paid'}
-                                </button>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      )}
-                    </tbody>
-                  </table>
+                                      ? 'bg-emerald-900/40 text-emerald-300 border border-emerald-900/60'
+                                      : 'bg-amber-900/40 text-amber-300 border border-amber-900/60 animate-pulse'
+                                  }`}>
+                                    {f.status === 'paid' ? 'Paid' : 'Pending'}
+                                  </span>
+                                </td>
+                                <td className="p-3 text-right font-bold text-rose-400">R {f.amount}</td>
+                                <td className="p-3 text-center">
+                                  <button
+                                    onClick={() => handleToggleFineStatus(f.id, f.status)}
+                                    className={`px-2 py-1 rounded text-[10px] font-bold border transition-colors ${
+                                      f.status === 'paid'
+                                        ? 'bg-[#1F2937] border-[#374151] text-white hover:bg-[#374151]'
+                                        : 'bg-emerald-900/40 border-emerald-900/60 text-emerald-300 hover:bg-emerald-900/60'
+                                    }`}
+                                  >
+                                    {f.status === 'paid' ? 'Mark Unpaid' : 'Mark Paid'}
+                                  </button>
+                                </td>
+                              </tr>
+                            );
+                          })
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-</div>
               </div>
             </div>
           )}
