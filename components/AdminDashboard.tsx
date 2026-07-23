@@ -2300,15 +2300,15 @@ const handleApproveRecon = (id: string, notes: string) => {
             </div>
           )}
 
-          {/* ==================== WAGES & PAYROLL TAB ==================== */}
+                   {/* ==================== WAGES & PAYROLL TAB ==================== */}
           {activeTab === 'wages' && (
             <div className="space-y-6">
-              
-              <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs space-y-4">
+             
+              <div className="bg-[#1F2937] border border-[#374151] p-4 rounded-xl shadow-xs space-y-4">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h2 className="text-base font-bold text-slate-900">Wages Reconciliation and Payroll Compiler</h2>
-                    <p className="text-xs text-slate-500">Compiles both Trip wage rates and completed passenger transfers rate payouts across dates for {region}.</p>
+                    <h2 className="text-base font-bold text-white">Wages Reconciliation and Payroll Compiler</h2>
+                    <p className="text-xs text-[#9CA3AF]">Compiles both Trip wage rates and completed passenger transfers rate payouts across dates for {region}.</p>
                   </div>
                   <button
                     onClick={() => {
@@ -2324,7 +2324,7 @@ const handleApproveRecon = (id: string, notes: string) => {
                       }));
                       downloadCSV(payrollData, `compiled_payroll_${region.replace(' ', '_')}_${wageStartDate}_to_${wageEndDate}.csv`);
                     }}
-                    className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-1.5 px-3 rounded-lg border border-slate-300 flex items-center gap-1.5 transition-colors whitespace-nowrap"
+                    className="bg-[#1F2937] hover:bg-[#374151] text-white text-xs font-bold py-1.5 px-3 rounded-lg border border-[#374151] flex items-center gap-1.5 transition-colors whitespace-nowrap"
                   >
                     <Download className="w-4 h-4" /> Export Payroll Sheet
                   </button>
@@ -2332,30 +2332,30 @@ const handleApproveRecon = (id: string, notes: string) => {
 
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div>
-                    <span className="text-slate-400 block mb-1">Period Start date</span>
+                    <span className="text-[#9CA3AF] block mb-1">Period Start date</span>
                     <input
                       type="date"
                       value={wageStartDate}
                       onChange={(e) => setWageStartDate(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 p-1.5 rounded text-slate-800"
+                      className="w-full bg-[#111827] border border-[#374151] p-1.5 rounded text-white"
                     />
                   </div>
                   <div>
-                    <span className="text-slate-400 block mb-1">Period End date</span>
+                    <span className="text-[#9CA3AF] block mb-1">Period End date</span>
                     <input
                       type="date"
                       value={wageEndDate}
                       onChange={(e) => setWageEndDate(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 p-1.5 rounded text-slate-800"
+                      className="w-full bg-[#111827] border border-[#374151] p-1.5 rounded text-white"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Compiled Payroll Table */}
-              <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
+              <div className="bg-[#1F2937] rounded-xl border border-[#374151] overflow-hidden shadow-xs">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-50 border-b border-slate-200 text-[10px] uppercase font-bold text-slate-500">
+                  <thead className="bg-[#111827] border-b border-[#374151] text-[10px] uppercase font-bold text-[#9CA3AF]">
                     <tr>
                       <th className="p-3">Driver Name Details</th>
                       <th className="p-3">Reviewed Sheets</th>
@@ -2364,22 +2364,22 @@ const handleApproveRecon = (id: string, notes: string) => {
                       <th className="p-3 text-right">TOTAL NET PAYOUT (ZAR)</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-[#374151]">
                     {getCompiledWages().length === 0 ? (
                       <tr>
-                        <td colSpan={5} className="p-6 text-center text-slate-400 italic">No approved weekly recons listed within this date range.</td>
+                        <td colSpan={5} className="p-6 text-center text-[#9CA3AF] italic">No approved weekly recons listed within this date range.</td>
                       </tr>
                     ) : (
                       getCompiledWages().map(([driverId, details]) => (
-                        <tr key={driverId} className="hover:bg-slate-50/50">
+                        <tr key={driverId} className="hover:bg-[#111827]">
                           <td className="p-3">
-                            <span className="font-extrabold text-slate-900 block">{details.driverName}</span>
-                            <span className="text-[10px] text-slate-400">ID: {driverId}</span>
+                            <span className="font-extrabold text-white block">{details.driverName}</span>
+                            <span className="text-[10px] text-[#9CA3AF]">ID: {driverId}</span>
                           </td>
-                          <td className="p-3 font-semibold text-slate-600">{details.sheetsCount} sheets signed off</td>
-                          <td className="p-3 font-bold text-slate-800">R {Number(details.tripReconsAmount || 0).toFixed(2)}</td>
-                          <td className="p-3 font-bold text-slate-800">R {Number(details.transfersAmount || 0).toFixed(2)}</td>
-                          <td className="p-3 text-right font-black text-teal-600 text-sm">
+                          <td className="p-3 font-semibold text-white">{details.sheetsCount} sheets signed off</td>
+                          <td className="p-3 font-bold text-white">R {Number(details.tripReconsAmount || 0).toFixed(2)}</td>
+                          <td className="p-3 font-bold text-white">R {Number(details.transfersAmount || 0).toFixed(2)}</td>
+                          <td className="p-3 text-right font-black text-[#FFB81C] text-sm">
                             R {Number(details.total || 0).toFixed(2)}
                           </td>
                         </tr>
@@ -2391,6 +2391,7 @@ const handleApproveRecon = (id: string, notes: string) => {
             </div>
           )}
 
+          
           {/* ==================== TRAFFIC FINES TAB ==================== */}
           {activeTab === 'fines' && (
             <div className="space-y-6">
