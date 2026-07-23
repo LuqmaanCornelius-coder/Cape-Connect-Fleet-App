@@ -2587,35 +2587,35 @@ const handleApproveRecon = (id: string, notes: string) => {
             </div>
           )}
 
-          {/* ==================== EXPENSES LOG TAB ==================== */}
+                 {/* ==================== EXPENSES LOG TAB ==================== */}
           {activeTab === 'expenses' && (
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                 <div>
-                  <h1 className="text-xl font-extrabold tracking-tight text-slate-900">Vehicle Expenses & Damages Ledger</h1>
-                  <p className="text-xs text-slate-500 font-medium">Approve driver receipts, log direct operational maintenance expenses, and download formal expense sheets.</p>
+                  <h1 className="text-xl font-extrabold tracking-tight text-white">Vehicle Expenses & Damages Ledger</h1>
+                  <p className="text-xs text-[#9CA3AF] font-medium">Approve driver receipts, log direct operational maintenance expenses, and download formal expense sheets.</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => downloadCSV(vehicleExpenses, 'vehicle_expenses_log.csv')}
-                    className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2 px-3.5 rounded-xl border border-slate-300 flex items-center gap-1 transition-colors cursor-pointer"
+                    className="bg-[#1F2937] hover:bg-[#374151] text-white text-xs font-bold py-2 px-3.5 rounded-xl border border-[#374151] flex items-center gap-1 transition-colors cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5" /> Export CSV
                   </button>
                   <button
                     type="button"
                     onClick={() => setShowLogExpenseModal(true)}
-                    className="px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold rounded-xl shadow transition-colors shrink-0 cursor-pointer"
+                    className="px-4 py-2 bg-[#FFB81C] hover:bg-[#E6A000] text-black text-xs font-bold rounded-xl shadow transition-colors shrink-0 cursor-pointer"
                   >
                     ➕ Log Expense / Damage
                   </button>
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
+              <div className="bg-[#1F2937] rounded-xl border border-[#374151] overflow-hidden shadow-xs">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-50 border-b border-slate-200 text-[10px] uppercase font-bold text-slate-500">
+                  <thead className="bg-[#111827] border-b border-[#374151] text-[10px] uppercase font-bold text-[#9CA3AF]">
                     <tr>
                       <th className="p-3">Receipt / Details</th>
                       <th className="p-3">Vehicle</th>
@@ -2626,19 +2626,19 @@ const handleApproveRecon = (id: string, notes: string) => {
                       <th className="p-3 text-right">Action approvals</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-[#374151]">
                     {vehicleExpenses.length === 0 ? (
                       <tr>
-                        <td colSpan={7} className="p-4 text-center text-slate-400 italic">No receipts reported by drivers currently.</td>
+                        <td colSpan={7} className="p-4 text-center text-[#9CA3AF] italic">No receipts reported by drivers currently.</td>
                       </tr>
                     ) : (
                       [...vehicleExpenses]
                         .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
                         .map(exp => (
-                        <tr key={exp.id} className="hover:bg-slate-50/50">
+                        <tr key={exp.id} className="hover:bg-[#111827]">
                           <td className="p-3">
-                            <span className="font-bold text-slate-900 block">{exp.description}</span>
-                            <span className="text-[10px] text-slate-400 block">Logged by: {drivers.find(d => d.driver_id === exp.driver_id)?.name || exp.driver_id}</span>
+                            <span className="font-bold text-white block">{exp.description}</span>
+                            <span className="text-[10px] text-[#9CA3AF] block">Logged by: {drivers.find(d => d.driver_id === exp.driver_id)?.name || exp.driver_id}</span>
                             {((exp.document_urls && exp.document_urls.length > 0) || (exp.photo_urls && exp.photo_urls.length > 0)) && (
                               <button
                                 onClick={async () => {
@@ -2648,42 +2648,42 @@ const handleApproveRecon = (id: string, notes: string) => {
                                     window.open(signed, '_blank');
                                   }
                                 }}
-                                className="inline-flex items-center gap-1 text-[10px] text-teal-600 hover:underline font-extrabold mt-1"
+                                className="inline-flex items-center gap-1 text-[10px] text-[#FFB81C] hover:underline font-extrabold mt-1"
                               >
                                 <Eye className="w-3 h-3" /> View Receipt Slip
                               </button>
                             )}
                           </td>
-                          <td className="p-3 font-bold text-slate-700">{exp.vehicle_reg}</td>
-                          <td className="p-3 text-slate-600 font-semibold">{exp.expense_type}</td>
-                          <td className="p-3 text-slate-500">{exp.expense_date}</td>
-                          <td className="p-3 font-bold text-slate-800">R {exp.amount}</td>
+                          <td className="p-3 font-bold text-white">{exp.vehicle_reg}</td>
+                          <td className="p-3 text-[#9CA3AF] font-semibold">{exp.expense_type}</td>
+                          <td className="p-3 text-[#9CA3AF]">{exp.expense_date}</td>
+                          <td className="p-3 font-bold text-white">R {exp.amount}</td>
                           <td className="p-3">
                             <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase border ${
-                              exp.status === 'approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200'
+                              exp.status === 'approved' ? 'bg-emerald-900/40 text-emerald-300 border-emerald-900/60' : 'bg-amber-900/40 text-amber-300 border-amber-900/60'
                             }`}>
                               {exp.status}
                             </span>
                           </td>
                           <td className="p-3 text-right flex gap-1.5 justify-end items-center">
-  <button
-    type="button"
-    onClick={() => setSelectedExpenseForModal(exp)}
-    className="inline-flex items-center gap-1 px-2 py-0.5 border border-teal-200 bg-teal-50 text-teal-700 text-[10px] font-bold rounded hover:bg-teal-100 transition-colors cursor-pointer"
-  >
-    <Eye className="w-3 h-3" /> View
-  </button>
-  <button
-    type="button"
-    onClick={() => {
-      const driverName = (exp.driver_id && drivers.find(d => d.driver_id === exp.driver_id)?.name) || exp.driver_id || 'Admin';
-      downloadExpensePDF(exp, driverName);
-    }}
-    className="px-2 py-0.5 border border-slate-200 bg-slate-50 text-slate-700 text-[10px] font-bold rounded hover:bg-slate-100 transition-colors cursor-pointer"
-  >
-    PDF
-  </button>
-</td>
+                            <button
+                              type="button"
+                              onClick={() => setSelectedExpenseForModal(exp)}
+                              className="inline-flex items-center gap-1 px-2 py-0.5 border border-[#374151] bg-[#1F2937] text-[#FFB81C] text-[10px] font-bold rounded hover:bg-[#374151] transition-colors cursor-pointer"
+                            >
+                              <Eye className="w-3 h-3" /> View
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const driverName = (exp.driver_id && drivers.find(d => d.driver_id === exp.driver_id)?.name) || exp.driver_id || 'Admin';
+                                downloadExpensePDF(exp, driverName);
+                              }}
+                              className="px-2 py-0.5 border border-[#374151] bg-[#1F2937] text-white text-[10px] font-bold rounded hover:bg-[#374151] transition-colors cursor-pointer"
+                            >
+                              PDF
+                            </button>
+                          </td>
                         </tr>
                       ))
                     )}
@@ -2693,6 +2693,7 @@ const handleApproveRecon = (id: string, notes: string) => {
             </div>
           )}
 
+          
           {/* ==================== INCIDENT REPORTS TAB ==================== */}
           {activeTab === 'incidents' && (
             <div className="space-y-4">
