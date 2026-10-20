@@ -2358,525 +2358,130 @@ if (combined.length > 0 && !checklistForm.vehicle_reg) {
           );
         })()}
 
-
-        {/* ==================== VEHICLE CHECKLISTS TAB ==================== */}
+{/* ==================== VEHICLE CHECKLISTS TAB ==================== */}
 {activeTab === 'checklists' && (
-  <div className="space-y-5 text-xs">
-    {/* Header */}
-    <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
-            <ClipboardCheck className="w-5 h-5 text-[#FFB81C]" />
-            RENTAL INSPECTION SHEET
-          </h2>
-          <p className="text-[10px] text-[#9CA3AF] mt-1">
-            Weekly Vehicle Checklist Audit • Compliance Record
-          </p>
-        </div>
-        <div className="text-right text-[10px] text-[#9CA3AF] leading-tight">
-          <div className="font-bold text-white">INYATHI SAFARIS & TOURS</div>
-          <div>Co Reg: 2022/803911/07</div>
-        </div>
-      </div>
+  <div className="space-y-4">
+    <div className="flex items-center justify-between">
+      <h2 className="text-base font-bold flex items-center gap-1.5">
+        <ClipboardCheck className="w-5 h-5 text-[#FFB81C] animate-pulse" />
+        Weekly Vehicle Checklist Audit
+      </h2>
     </div>
 
-    <form onSubmit={submitPeriodicChecklist} className="space-y-5">
-      {/* Client + Vehicle Info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Client Information */}
-        <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 space-y-3">
-          <h3 className="text-[11px] font-bold text-[#FFB81C] uppercase border-b border-[#374151] pb-1.5">
-            Client Information
-          </h3>
-          <div className="space-y-2">
-            <div>
-              <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Company Name</label>
-              <input
-                type="text"
-                className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-                value={checklistForm.company_name || ''}
-                onChange={(e) => setChecklistForm(prev => ({ ...prev, company_name: e.target.value }))}
-              />
-            </div>
-            <div>
-              <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Person Collecting Vehicle</label>
-              <input
-                type="text"
-                className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-                value={checklistForm.person_collecting || ''}
-                onChange={(e) => setChecklistForm(prev => ({ ...prev, person_collecting: e.target.value }))}
-              />
-            </div>
-            <div>
-              <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Contact Nr</label>
-              <input
-                type="text"
-                className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-                value={checklistForm.contact_nr || ''}
-                onChange={(e) => setChecklistForm(prev => ({ ...prev, contact_nr: e.target.value }))}
-              />
-            </div>
-            <div>
-              <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Invoice / Ref Number</label>
-              <input
-                type="text"
-                className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-                value={checklistForm.invoice_ref || ''}
-                onChange={(e) => setChecklistForm(prev => ({ ...prev, invoice_ref: e.target.value }))}
-              />
-            </div>
-          </div>
-        </div>
+    <p className="text-[10px] text-[#9CA3AF]">
+      Submit your standard 12-point weekly safety checklist audit for compliance records. Use OK or WARN (Action Required) to log actual condition.
+    </p>
 
-        {/* Vehicle Information */}
-        <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 space-y-3">
-          <h3 className="text-[11px] font-bold text-[#FFB81C] uppercase border-b border-[#374151] pb-1.5">
-            Vehicle Information
-          </h3>
-          <div className="space-y-2">
-            <div>
-              <label className="text-[10px] text-[#9CA3AF] block mb-0.5">
-                Vehicle Reg <span className="text-rose-400">*</span>
-              </label>
-              <select
-                required
-                value={checklistForm.vehicle_reg || ''}
-                onChange={(e) => setChecklistForm(prev => ({ ...prev, vehicle_reg: e.target.value }))}
-                className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-              >
-                <option value="" disabled>Select a vehicle...</option>
-                {checklistVehicleOptions.map(opt => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Make of Vehicle</label>
-              <input
-                type="text"
-                className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-                value={checklistForm.make || ''}
-                onChange={(e) => setChecklistForm(prev => ({ ...prev, make: e.target.value }))}
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <label className="text-[10px] text-[#9CA3AF] block mb-0.5">License Expiry</label>
-                <input
-                  type="date"
-                  className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-                  value={checklistForm.license_expiry || ''}
-                  onChange={(e) => setChecklistForm(prev => ({ ...prev, license_expiry: e.target.value }))}
-                />
-              </div>
-              <div>
-                <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Roadworthy Expiry</label>
-                <input
-                  type="date"
-                  className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-                  value={checklistForm.roadworthy_expiry || ''}
-                  onChange={(e) => setChecklistForm(prev => ({ ...prev, roadworthy_expiry: e.target.value }))}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    {/* Vehicle Selection */}
+    <div>
+      <span className="text-[10px] text-[#9CA3AF] block mb-1">
+        Vehicle <span className="text-rose-400">*</span>
+      </span>
+      <select
+        required
+        value={checklistForm.vehicle_reg || ''}
+        onChange={(e) => setChecklistForm(prev => ({ ...prev, vehicle_reg: e.target.value }))}
+        className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-xs text-white"
+      >
+        <option value="" disabled>Select a vehicle...</option>
+        {checklistVehicleOptions.map(opt => (
+          <option key={opt.value} value={opt.value}>{opt.label}</option>
+        ))}
+      </select>
+    </div>
 
-      {/* Dates & Odometer */}
-      <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4 shadow-lg space-y-3">
+      <form onSubmit={submitPeriodicChecklist} className="space-y-3 text-xs">
+        {/* Mileage + Date */}
+        <div className="grid grid-cols-2 gap-2 bg-[#111827] p-2.5 rounded-lg border border-[#374151]">
           <div>
-            <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Date Out</label>
-            <input
-              type="date"
-              className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-              value={checklistForm.date_out || ''}
-              onChange={(e) => setChecklistForm(prev => ({ ...prev, date_out: e.target.value }))}
-            />
-          </div>
-          <div>
-            <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Time Out</label>
-            <input
-              type="time"
-              className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-              value={checklistForm.time_out || ''}
-              onChange={(e) => setChecklistForm(prev => ({ ...prev, time_out: e.target.value }))}
-            />
-          </div>
-          <div>
-            <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Odo Out (km)</label>
-            <input
-              type="number"
-              className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-              value={checklistForm.odo_out || ''}
-              onChange={(e) => setChecklistForm(prev => ({ ...prev, odo_out: Number(e.target.value) }))}
-            />
-          </div>
-          <div>
-            <label className="text-[10px] text-[#9CA3AF] block mb-0.5">Current Mileage (km)</label>
+            <span className="text-[10px] text-[#9CA3AF] block mb-1">Current Mileage (km)</span>
             <input
               type="number"
               required
               placeholder="e.g. 124000"
-              className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
               value={checklistForm.mileage || ''}
               onChange={(e) => setChecklistForm(prev => ({ ...prev, mileage: Number(e.target.value) }))}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Documents */}
-      <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-        <h3 className="text-[11px] font-bold text-[#FFB81C] uppercase border-b border-[#374151] pb-1.5 mb-3">
-          Documents in Vehicle File
-        </h3>
-        <div className="space-y-1.5">
-          {[
-            'Tourism Permit',
-            'Passenger Liability Insurance',
-            'RCI (Natis Document)',
-            'Cross Border Permit',
-            'Vehicle File Present'
-          ].map((item) => (
-            <div key={item} className="flex items-center justify-between py-1 border-b border-[#111827] last:border-0">
-              <span className="text-white text-[10px]">{item}</span>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-1 text-[9px] text-[#9CA3AF]">
-                  <input
-                    type="checkbox"
-                    className="accent-[#FFB81C] w-3.5 h-3.5"
-                    checked={!!(checklistForm.checklist_data as any)?.[`doc_${item}_out`]}
-                    onChange={(e) =>
-                      setChecklistForm(prev => ({
-                        ...prev,
-                        checklist_data: {
-                          ...(prev.checklist_data || {}),
-                          [`doc_${item}_out`]: e.target.checked
-                        }
-                      }))
-                    }
-                  />
-                  OUT
-                </label>
-                <label className="flex items-center gap-1 text-[9px] text-[#9CA3AF]">
-                  <input
-                    type="checkbox"
-                    className="accent-[#FFB81C] w-3.5 h-3.5"
-                    checked={!!(checklistForm.checklist_data as any)?.[`doc_${item}_in`]}
-                    onChange={(e) =>
-                      setChecklistForm(prev => ({
-                        ...prev,
-                        checklist_data: {
-                          ...(prev.checklist_data || {}),
-                          [`doc_${item}_in`]: e.target.checked
-                        }
-                      }))
-                    }
-                  />
-                  IN
-                </label>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Photos */}
-      <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-        <h3 className="text-[11px] font-bold text-[#FFB81C] uppercase border-b border-[#374151] pb-1.5 mb-3">
-          Important Photos Taken
-        </h3>
-        <div className="space-y-1.5">
-          {[
-            'Left Front Tyre', 'Left Back Tyre',
-            'Right Front Tyre', 'Right Back Tyre',
-            'Spare Wheel + Rim', 'Front View',
-            'Back View', 'Left Side View', 'Right Side View'
-          ].map((item) => (
-            <div key={item} className="flex items-center justify-between py-1 border-b border-[#111827] last:border-0">
-              <span className="text-white text-[10px]">{item}</span>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-1 text-[9px] text-[#9CA3AF]">
-                  <input
-                    type="checkbox"
-                    className="accent-[#FFB81C] w-3.5 h-3.5"
-                    checked={!!(checklistForm.checklist_data as any)?.[`photo_${item}_out`]}
-                    onChange={(e) =>
-                      setChecklistForm(prev => ({
-                        ...prev,
-                        checklist_data: {
-                          ...(prev.checklist_data || {}),
-                          [`photo_${item}_out`]: e.target.checked
-                        }
-                      }))
-                    }
-                  />
-                  OUT
-                </label>
-                <label className="flex items-center gap-1 text-[9px] text-[#9CA3AF]">
-                  <input
-                    type="checkbox"
-                    className="accent-[#FFB81C] w-3.5 h-3.5"
-                    checked={!!(checklistForm.checklist_data as any)?.[`photo_${item}_in`]}
-                    onChange={(e) =>
-                      setChecklistForm(prev => ({
-                        ...prev,
-                        checklist_data: {
-                          ...(prev.checklist_data || {}),
-                          [`photo_${item}_in`]: e.target.checked
-                        }
-                      }))
-                    }
-                  />
-                  IN
-                </label>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Interior + Exterior */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Interior */}
-        <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-          <h3 className="text-[11px] font-bold text-[#FFB81C] uppercase border-b border-[#374151] pb-1.5 mb-3">
-            Interior Condition
-          </h3>
-          <div className="space-y-1.5">
-            {[
-              'Seats and Seatbelts', 'Dashboard', 'Aircon',
-              'Radio', 'Interior Cleanliness', 'Warning Lights',
-              'Windows', 'Foot Mats'
-            ].map((item) => (
-              <div key={item} className="flex items-center justify-between py-1 border-b border-[#111827] last:border-0">
-                <span className="text-white text-[10px]">{item}</span>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-1 text-[9px] text-[#9CA3AF]">
-                    <input
-                      type="checkbox"
-                      className="accent-[#FFB81C] w-3.5 h-3.5"
-                      checked={!!(checklistForm.checklist_data as any)?.[`int_${item}_out`]}
-                      onChange={(e) =>
-                        setChecklistForm(prev => ({
-                          ...prev,
-                          checklist_data: {
-                            ...(prev.checklist_data || {}),
-                            [`int_${item}_out`]: e.target.checked
-                          }
-                        }))
-                      }
-                    />
-                    OUT
-                  </label>
-                  <label className="flex items-center gap-1 text-[9px] text-[#9CA3AF]">
-                    <input
-                      type="checkbox"
-                      className="accent-[#FFB81C] w-3.5 h-3.5"
-                      checked={!!(checklistForm.checklist_data as any)?.[`int_${item}_in`]}
-                      onChange={(e) =>
-                        setChecklistForm(prev => ({
-                          ...prev,
-                          checklist_data: {
-                            ...(prev.checklist_data || {}),
-                            [`int_${item}_in`]: e.target.checked
-                          }
-                        }))
-                      }
-                    />
-                    IN
-                  </label>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Exterior */}
-        <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-          <h3 className="text-[11px] font-bold text-[#FFB81C] uppercase border-b border-[#374151] pb-1.5 mb-3">
-            Exterior Condition
-          </h3>
-          <div className="space-y-1.5">
-            {[
-              'Tyre & Rim Conditions', 'Windscreen', 'Headlights',
-              'Brake Lights', 'Reverse Lights', 'Indicators',
-              'Windscreen Wipers', 'Arial', 'Mud Guards', 'Tow Bar'
-            ].map((item) => (
-              <div key={item} className="flex items-center justify-between py-1 border-b border-[#111827] last:border-0">
-                <span className="text-white text-[10px]">{item}</span>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-1 text-[9px] text-[#9CA3AF]">
-                    <input
-                      type="checkbox"
-                      className="accent-[#FFB81C] w-3.5 h-3.5"
-                      checked={!!(checklistForm.checklist_data as any)?.[`ext_${item}_out`]}
-                      onChange={(e) =>
-                        setChecklistForm(prev => ({
-                          ...prev,
-                          checklist_data: {
-                            ...(prev.checklist_data || {}),
-                            [`ext_${item}_out`]: e.target.checked
-                          }
-                        }))
-                      }
-                    />
-                    OUT
-                  </label>
-                  <label className="flex items-center gap-1 text-[9px] text-[#9CA3AF]">
-                    <input
-                      type="checkbox"
-                      className="accent-[#FFB81C] w-3.5 h-3.5"
-                      checked={!!(checklistForm.checklist_data as any)?.[`ext_${item}_in`]}
-                      onChange={(e) =>
-                        setChecklistForm(prev => ({
-                          ...prev,
-                          checklist_data: {
-                            ...(prev.checklist_data || {}),
-                            [`ext_${item}_in`]: e.target.checked
-                          }
-                        }))
-                      }
-                    />
-                    IN
-                  </label>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Fuel Level */}
-      <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-        <h3 className="text-[11px] font-bold text-[#FFB81C] uppercase border-b border-[#374151] pb-1.5 mb-3">
-          Fuel Level
-        </h3>
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <p className="text-[10px] text-[#9CA3AF] mb-2 text-center">Fuel Level – OUT</p>
-            <div className="flex justify-between text-[9px] text-[#9CA3AF] mb-1 px-1">
-              <span>E</span><span>¼</span><span>½</span><span>¾</span><span>F</span>
-            </div>
-            <input
-              type="range"
-              min="0"
-              max="4"
-              step="1"
-              className="w-full accent-[#FFB81C]"
-              value={checklistForm.fuel_out ?? 2}
-              onChange={(e) => setChecklistForm(prev => ({ ...prev, fuel_out: Number(e.target.value) }))}
+              className="w-full bg-[#0a1424] border border-[#374151] rounded p-1 text-xs text-white"
             />
           </div>
           <div>
-            <p className="text-[10px] text-[#9CA3AF] mb-2 text-center">Fuel Level – IN</p>
-            <div className="flex justify-between text-[9px] text-[#9CA3AF] mb-1 px-1">
-              <span>E</span><span>¼</span><span>½</span><span>¾</span><span>F</span>
-            </div>
+            <span className="text-[10px] text-[#9CA3AF] block mb-1">Start Date</span>
             <input
-              type="range"
-              min="0"
-              max="4"
-              step="1"
-              className="w-full accent-[#FFB81C]"
-              value={checklistForm.fuel_in ?? 2}
-              onChange={(e) => setChecklistForm(prev => ({ ...prev, fuel_in: Number(e.target.value) }))}
+              type="date"
+              value={checklistForm.week_start || ''}
+              onChange={(e) => setChecklistForm(prev => ({ ...prev, week_start: e.target.value }))}
+              className="w-full bg-[#0a1424] border border-[#374151] rounded p-1 text-xs text-white"
             />
           </div>
         </div>
-      </div>
 
-      {/* Damage Diagrams */}
-      <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-        <h3 className="text-[11px] font-bold text-[#FFB81C] uppercase border-b border-[#374151] pb-1.5 mb-3">
-          Record any scratches, dents or damages
-        </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {['FRONT', 'RIGHT', 'BACK', 'LEFT'].map((side) => (
-            <div
-              key={side}
-              className="bg-[#111827] border border-[#374151] rounded-lg p-3 min-h-[90px] flex flex-col items-center justify-center"
-            >
-              <div className="text-[10px] font-bold text-white mb-1">{side}</div>
-              <div className="text-[9px] text-[#6B7280]">Mark damage here</div>
-            </div>
-          ))}
+        {/* 12 Check Points */}
+        <div className="space-y-1.5 border border-[#374151] rounded bg-[#111827] p-2">
+          <p className="text-[9px] uppercase font-bold text-[#9CA3AF] border-b border-[#374151] pb-1 mb-1.5">
+            Rating Audit
+          </p>
+
+          {Object.keys(checklistForm.checklist_data || {}).map((key) => {
+            const cleanKey = key.replace(/_/g, ' ');
+            const ratingValue = (checklistForm.checklist_data as any)[key];
+            const isOk = ratingValue === 'ok';
+
+            return (
+              <div
+                key={key}
+                className="flex justify-between items-center text-[10px] py-1 border-b border-[#111827] last:border-0"
+              >
+                <span className="text-white capitalize">{cleanKey}</span>
+                <div className="flex gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => handleChecklistValueChange(key, 'ok')}
+                    className={`px-1.5 py-0.5 rounded text-[8px] font-extrabold cursor-pointer ${
+                      isOk ? 'bg-emerald-600 text-white' : 'bg-[#374151] text-[#9CA3AF]'
+                    }`}
+                  >
+                    OK
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleChecklistValueChange(
+                        key,
+                        key.includes('tyre') || key.includes('light') ? 'action' : 'low'
+                      )
+                    }
+                    className={`px-1.5 py-0.5 rounded text-[8px] font-extrabold cursor-pointer ${
+                      !isOk ? 'bg-amber-600 text-white' : 'bg-[#374151] text-[#9CA3AF]'
+                    }`}
+                  >
+                    WARN
+                  </button>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </div>
 
-      {/* Notes */}
-      <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-        <label className="text-[11px] font-bold text-[#FFB81C] uppercase block mb-2">
-          Any Additional Comments
-        </label>
+        {/* Notes */}
         <textarea
-          rows={3}
-          placeholder="Notes / Issues noticed during inspection..."
+          placeholder="Notes / Issues noticed during audit checklist"
           value={checklistForm.notes || ''}
           onChange={(e) => setChecklistForm(prev => ({ ...prev, notes: e.target.value }))}
-          className="w-full bg-[#111827] border border-[#374151] rounded p-2 text-white"
+          className="w-full bg-[#111827] border border-[#374151] rounded p-2 text-white h-12"
         />
-      </div>
 
-      {/* Signatures */}
-      <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="text-[10px] text-[#9CA3AF] block mb-1">Client Signature – OUT</label>
-            <input
-              type="text"
-              placeholder="Type name"
-              className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-              value={checklistForm.client_sig_out || ''}
-              onChange={(e) => setChecklistForm(prev => ({ ...prev, client_sig_out: e.target.value }))}
-            />
-          </div>
-          <div>
-            <label className="text-[10px] text-[#9CA3AF] block mb-1">Client Signature – IN</label>
-            <input
-              type="text"
-              placeholder="Type name"
-              className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-              value={checklistForm.client_sig_in || ''}
-              onChange={(e) => setChecklistForm(prev => ({ ...prev, client_sig_in: e.target.value }))}
-            />
-          </div>
-          <div>
-            <label className="text-[10px] text-[#9CA3AF] block mb-1">Staff Signature – OUT</label>
-            <input
-              type="text"
-              placeholder="Type name"
-              className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-              value={checklistForm.staff_sig_out || ''}
-              onChange={(e) => setChecklistForm(prev => ({ ...prev, staff_sig_out: e.target.value }))}
-            />
-          </div>
-          <div>
-            <label className="text-[10px] text-[#9CA3AF] block mb-1">Staff Signature – IN</label>
-            <input
-              type="text"
-              placeholder="Type name"
-              className="w-full bg-[#111827] border border-[#374151] rounded p-1.5 text-white"
-              value={checklistForm.staff_sig_in || ''}
-              onChange={(e) => setChecklistForm(prev => ({ ...prev, staff_sig_in: e.target.value }))}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Submit */}
-      <button
-        type="submit"
-        className="w-full bg-[#FFB81C] hover:bg-[#E6A000] text-black font-bold py-3 rounded-lg text-sm transition-colors"
-      >
-        File Inspection Sheet
-      </button>
-    </form>
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full bg-[#FFB81C] hover:bg-[#E6A000] text-black font-bold py-2 rounded-lg text-xs transition-colors cursor-pointer shadow"
+        >
+          File Checklist
+        </button>
+      </form>
+    </div>
   </div>
-)}  
+)}
           
        
 
